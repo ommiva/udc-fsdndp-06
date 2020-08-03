@@ -1,6 +1,6 @@
 
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column, String, Integer, Date
+from sqlalchemy import Column, String, Integer, Date, ForeignKey
 
 import json
 import os
@@ -97,3 +97,20 @@ class Actor(db.Model):
   
   def __repr__(self):
     return f'<Actor {self.id} "{self.name}" [a:{self.age}, g:{self.gender}]>'
+
+
+class Cast(db.Model):
+  '''
+  Actors assigned to Movies
+  '''
+
+  __tablename__ = 'movie_cast'
+
+  id = Column(Integer, primary_key=True)
+  actor_id = Column(Integer, ForeignKey('actors.id'), nullable=False)
+  movie_id = Column(Integer, ForeignKey('movies.id'), nullable=False)
+
+  def __repr__(self):
+    return f'<Cast {self.id} actor: {self.actor_id} movie: {self.movie_id}>'
+
+
