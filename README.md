@@ -1,7 +1,10 @@
 # Casting agency
 
 ## Introduction
+Casting Agency application.
 
+Simplify and streamline agency creation of movies and managing and assigning
+actors to those movies.
 
 
 ## Getting started
