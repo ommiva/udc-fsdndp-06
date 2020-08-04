@@ -21,7 +21,8 @@ To create the database, first set DATABASE_URL environment variable
 export DATABASE_URL=postgres://postgres@[host]:5432/[database_name]
 ```
 
-Example:
+(TODO: Remove example)
+Example:   
 ```bash
 export DATABASE_URL=postgres://postgres@localhost:5432/casting_agency
 ```
@@ -36,3 +37,29 @@ To create (or update) tables, run
 python manage.py db migrate
 python manage.py db upgrade
 ```
+
+
+
+-------------------------------
+TODO: Remove debug
+-------------------------------
+### DEBUG
+* To install the application
+```bash
+$ pip install -r requirements.txt
+```
+
+* To run the application run the following command
+```bash
+export FLASK_APP=app.py
+export FLASK_ENV=development
+flask run
+```
+or
+```bash
+$ FLASK_APP=flaskr FLASKNV=development flask run
+```
+
+The API is run on http://127.0.0.1:5000/ by default.
+===============================
+
