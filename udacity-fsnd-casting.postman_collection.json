@@ -1,0 +1,108 @@
+{
+	"info": {
+		"_postman_id": "19810fe5-c7b7-4c99-ab29-20250f946dee",
+		"name": "udacity-fsnd-casting",
+		"description": "Casting Agency\n\nEndpoints:\nGET actors and movies\nDELETE actors and movies\nPOST actors and movies and\nPATCH actors and movies\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "public",
+			"item": [],
+			"description": "Remove\n\nThere is no public access.  For debug only",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "d816a24c-59b1-48b8-8260-c0eea1ab5ffe",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "b2d35f9a-4c99-46df-b22d-cd1e4c8d16d6",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Casting assistant",
+			"item": [],
+			"description": "Casting assistant access",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Casting director",
+			"item": [],
+			"description": "Casting director access",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "65393ba3-2429-411c-9ab9-2c50260d61fd",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "52d3b31d-20dc-47a1-a4cc-362474ada28d",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Executive Producer",
+			"item": [],
+			"description": "Executive producer access",
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "a0b1a496-edf0-4d86-bf6c-1b2625d1ddb3",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "592d0068-ff2b-418b-8c30-bcf7448977e7",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "3fab0cad-035a-4776-880c-76acfc1e48be",
+			"key": "host",
+			"value": "localhost:5000"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
