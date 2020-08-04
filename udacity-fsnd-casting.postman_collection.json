@@ -8,7 +8,25 @@
 	"item": [
 		{
 			"name": "public",
-			"item": [],
+			"item": [
+				{
+					"name": "Get default",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
 			"description": "Remove\n\nThere is no public access.  For debug only",
 			"event": [
 				{
@@ -36,13 +54,151 @@
 		},
 		{
 			"name": "Casting assistant",
-			"item": [],
+			"item": [
+				{
+					"name": "List actors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors-detail",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors-detail"
+							]
+						},
+						"description": "Retireve actors list"
+					},
+					"response": []
+				},
+				{
+					"name": "List movies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies-detail",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies-detail"
+							]
+						}
+					},
+					"response": []
+				}
+			],
 			"description": "Casting assistant access",
 			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Casting director",
-			"item": [],
+			"item": [
+				{
+					"name": "Add actor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2942a59c-21c5-4aca-ae5f-97f998d70d4a",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Clint Eastwood\",\n    \"age\": 90,\n    \"gender\": \"M\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/actors",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors"
+							]
+						},
+						"description": "Add a new actor"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete actor",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"1"
+							]
+						},
+						"description": "Removes actor with id 1 from database"
+					},
+					"response": []
+				},
+				{
+					"name": "Updates actor",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"age\": 45,\n}"
+						},
+						"url": {
+							"raw": "{{host}}/actors/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"2"
+							]
+						},
+						"description": "Updates actor age with id 2 from database"
+					},
+					"response": []
+				},
+				{
+					"name": "Updates movie",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"release_date\": \"05/07/2020\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/movies/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"2"
+							]
+						},
+						"description": "Updates release date for movie with id 2"
+					},
+					"response": []
+				}
+			],
 			"description": "Casting director access",
 			"event": [
 				{
@@ -70,7 +226,63 @@
 		},
 		{
 			"name": "Executive Producer",
-			"item": [],
+			"item": [
+				{
+					"name": "Add movie",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "60989460-fd05-421c-950d-0b2acede6d9f",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Clint Eastwood\",\n    \"release_date\": \"The Good, the Bad and the Ugly\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/movies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies"
+							]
+						},
+						"description": "Adds a new movie"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete movie",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"1"
+							]
+						},
+						"description": "Deletes movie with id 1 from database"
+					},
+					"response": []
+				}
+			],
 			"description": "Executive producer access",
 			"protocolProfileBehavior": {}
 		}
@@ -99,7 +311,7 @@
 	],
 	"variable": [
 		{
-			"id": "3fab0cad-035a-4776-880c-76acfc1e48be",
+			"id": "19f8babc-c2ed-48b8-a6b2-31aca5e34866",
 			"key": "host",
 			"value": "localhost:5000"
 		}
