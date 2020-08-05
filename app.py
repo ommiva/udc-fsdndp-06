@@ -91,6 +91,26 @@ def delete_movie(movie_id):
   })
 
 
+# Error Handling
+
+@APP.errorhandler(422)
+def unprocessable(error):
+  return jsonify({
+            "success": False,
+            "error": 422,
+            "message": "Unprocessable"
+          }), 422
+
+@APP.errorhandler(404)
+def not_found(error):
+  return jsonify({
+            "success": False,
+            "error": 404,
+            "message": "Resource not found"            
+          })
+
+
+# ------------------------------------------------
 
 if __name__ == '__main__':
     APP.run(host='0.0.0.0', port=8080, debug=True)
