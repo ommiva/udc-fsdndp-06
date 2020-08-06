@@ -63,3 +63,12 @@ $ FLASK_APP=flaskr FLASKNV=development flask run
 The API is run on http://127.0.0.1:5000/ by default.
 ===============================
 
+
+## Testing
+To run tests, run 
+```bash
+dropdb casting_agency_test
+createdb casting_agency_test
+psql casting_agency_test < casting.sql
+python test_app.py
+```
