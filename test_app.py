@@ -42,12 +42,62 @@ class MoviesTestCase(unittest.TestCase):
         """ Execute after reach test """
         pass
 
+    # Test definitions
+    # Dummy >>>>>>>>>>>>>>>>>>>>>>>>>>
     def test_default(self):
         res = self.client().get("/")
         # data = res.get_json(res.data)
 
         self.assertEqual(res.status_code, 200)
+    # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
+    def test_get_all_actors(self):
+        res = self.client().get("/actors-detail")
+        data = res.get_json(res.data)
+
+        self.assertEqual(res.status_code, 200)
+        self.assertTrue(data["actors"])
+    
+    # TODO: test for fail get /actors-detail
+
+    def test_get_all_movies(self):
+        res = self.client().get("/movies-detail")
+        data = res.get_json(res.data)
+
+        self.assertEqual(res.status_code, 200)
+        self.assertTrue(data["movies"])
+    
+    # TODO: test for fail get /movies-detail
+
+    def test_add_new_actor(self):
+        res = self.client().post("/actors", json=self.new_actor)
+
+        self.assertEqual(res.status_code, 200)
+    
+    def test_add_new_movie(self):
+        res = self.client().post("/movies", json=self.new_movie)
+
+        self.assertEqual(res.status_code, 200)
+    
+    def test_update_actor(self):
+        res = self.client().patch("/actors/2", json={"name": "Kurt Russell"})
+
+        self.assertEqual(res.status_code, 200)
+    
+    def test_update_movie(self):
+        res = self.client().patch("/movies/2", json={"title": "Jaws 3"})
+
+        self.assertEqual(res.status_code, 200)
+
+    def test_delete_actor(self):
+        res = self.client().delete("/actors/1")
+
+        self.assertEqual(res.status_code, 200)
+    
+    def test_delete_movie(self):
+        res = self.client().delete("/movies/1")
+
+        self.assertEqual(res.status_code, 200)
 
 def setUp_deleted():
     """ Updates database ton include deleted data """

@@ -52,7 +52,7 @@ class Movie(db.Model):
         return {
             'id': self.id,
             'title': self.title,
-            'release_date': self.release_date
+            'release_date': self.release_date.strftime('%m/%d/%Y')
         }
 
     def __repr__(self):
@@ -114,3 +114,14 @@ class Cast(db.Model):
     def __repr__(self):
         return
         f'<Cast {self.id} actor: {self.actor_id} movie: {self.movie_id}>'
+
+# Auxiliars
+"""
+def format_datetime(value, format='medium'):
+  date = dateutil.parser.parse(value)
+  if format == 'full':
+      format=" MM/dd/yyyy h:mma"
+  elif format == 'medium':
+      format="MM/dd/yyyy"
+  return babel.dates.format_datetime(date, format)
+"""
