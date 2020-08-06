@@ -25,7 +25,7 @@ class MoviesTestCase(unittest.TestCase):
             self.db.init_app(self.app)
             self.db.create_all()
 
-            self.setUp_deleted
+            setUp_deleted()
 
         self.new_actor = {
             "name": "Goldie Hawn",
@@ -42,34 +42,35 @@ class MoviesTestCase(unittest.TestCase):
         """ Execute after reach test """
         pass
 
-    def setUp_deleted():
-        """ Updates database ton include deleted data """
-        print("Restore deleted rows")
-
-        deleted_actor = Actor.query\
-            .filter(Actor.id == 1)\
-            .one_or_none()
-        if deleted_actor is None:
-            actor = Actor(name="Harrison Ford",
-                          age=78,
-                          gender="Male")
-            actor.id = 1
-            actor.insert()
-
-        deleted_movie = Movie.query\
-            .filter(Movie.id == 1)\
-            .one_or_none()
-        if deleted_movie is None:
-            movie = Movie(title="The Dark Knight ",
-                          release_date="07/14/2008")
-            movie.id = 1
-            movie.insert()
-
     def test_default(self):
         res = self.client().get("/")
         # data = res.get_json(res.data)
 
         self.assertEqual(res.status_code, 200)
+
+
+def setUp_deleted():
+    """ Updates database ton include deleted data """
+    print("Restore deleted rows")
+
+    deleted_actor = Actor.query\
+        .filter(Actor.id == 1)\
+        .one_or_none()
+    if deleted_actor is None:
+        actor = Actor(name="Harrison Ford",
+                      age=78,
+                      gender="Male")
+        actor.id = 1
+        actor.insert()
+
+    deleted_movie = Movie.query\
+        .filter(Movie.id == 1)\
+        .one_or_none()
+    if deleted_movie is None:
+        movie = Movie(title="The Dark Knight ",
+                      release_date="07/14/2008")
+        movie.id = 1
+        movie.insert()
 
 
 # Mtext executable
