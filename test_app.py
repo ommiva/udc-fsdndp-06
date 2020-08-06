@@ -57,7 +57,7 @@ class MoviesTestCase(unittest.TestCase):
 
         self.assertEqual(res.status_code, 200)
         self.assertTrue(data["actors"])
-    
+
     # TODO: test for fail get /actors-detail
 
     def test_get_all_movies(self):
@@ -66,24 +66,24 @@ class MoviesTestCase(unittest.TestCase):
 
         self.assertEqual(res.status_code, 200)
         self.assertTrue(data["movies"])
-    
+
     # TODO: test for fail get /movies-detail
 
     def test_add_new_actor(self):
         res = self.client().post("/actors", json=self.new_actor)
 
         self.assertEqual(res.status_code, 200)
-    
+
     def test_add_new_movie(self):
         res = self.client().post("/movies", json=self.new_movie)
 
         self.assertEqual(res.status_code, 200)
-    
+
     def test_update_actor(self):
         res = self.client().patch("/actors/2", json={"name": "Kurt Russell"})
 
         self.assertEqual(res.status_code, 200)
-    
+
     def test_update_movie(self):
         res = self.client().patch("/movies/2", json={"title": "Jaws 3"})
 
@@ -91,13 +91,40 @@ class MoviesTestCase(unittest.TestCase):
 
     def test_delete_actor(self):
         res = self.client().delete("/actors/1")
+        data = res.get_json(res.data)
+
+        actor = Actor.query.filter(Actor.id == 1).one_or_none()
 
         self.assertEqual(res.status_code, 200)
-    
+        self.assertEqual(data["success"], True)
+        self.assertEqual(actor, None)
+
+    def test_422_if_delete_actor_does_not_exist(self):
+        res = self.client().delete("/actors/10000")
+        data = res.get_json(res.data)
+
+        self.assertEqual(res.status_code, 422)
+        self.assertEqual(data["success"], False)
+        self.assertEqual(data["message"], "Unprocessable")
+
     def test_delete_movie(self):
         res = self.client().delete("/movies/1")
+        data = res.get_json(res.data)
+
+        movie = Movie.query.filter(Movie.id == 1).one_or_none()
 
         self.assertEqual(res.status_code, 200)
+        self.assertEqual(data["success"], True)
+        self.assertEqual(movie, None)
+
+    def test_422_if_delete_movie_does_not_exist(self):
+        res = self.client().delete("/movies/10000")
+        data = res.get_json(res.data)
+
+        self.assertEqual(res.status_code, 422)
+        self.assertEqual(data["success"], False)
+        self.assertEqual(data["message"], "Unprocessable")
+
 
 def setUp_deleted():
     """ Updates database ton include deleted data """

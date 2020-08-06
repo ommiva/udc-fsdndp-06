@@ -37,7 +37,7 @@ def create_app(test_config=None):
             actors = Actor.query\
                 .order_by(Actor.name)\
                 .all()
-            
+
             current_actors = [actor.format() for actor in actors]
 
             return jsonify({
@@ -57,9 +57,23 @@ def create_app(test_config=None):
     @app.route('/actors/<int:actor_id>', methods=["DELETE"])
     def delete_actor(actor_id):
         print("DELETE actor")
-        return jsonify({
-            "success": True
-        })
+
+        try:
+            actor = Actor.query.filter_by(id=actor_id).one_or_none()
+
+            if actor is None:
+                abort(404)
+            else:
+                actor.delete()
+
+                return jsonify({
+                    "success": True,
+                    "delete": actor_id
+                })
+
+        except Exception as e:
+            print(sys.exc_info())
+            abort(422)
 
     @app.route('/movies', methods=["POST"])
     def new_movie():
@@ -75,7 +89,7 @@ def create_app(test_config=None):
             movies = Movie.query\
                 .order_by(Movie.title)\
                 .all()
-            
+
             current_movies = [movie.format() for movie in movies]
 
             return jsonify({
@@ -95,9 +109,23 @@ def create_app(test_config=None):
     @app.route('/movies/<int:movie_id>', methods=["DELETE"])
     def delete_movie(movie_id):
         print("DELETE movie")
-        return jsonify({
-            "success": True
-        })
+
+        try:
+            movie = Movie.query.filter_by(id=movie_id).one_or_none()
+
+            if movie is None:
+                abort(404)
+            else:
+                movie.delete()
+
+                return jsonify({
+                    "success": True,
+                    "delete": movie_id
+                })
+
+        except Exception as e:
+            print(sys.exc_info())
+            abort(422)
 
     # Error Handling
 
