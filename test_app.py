@@ -74,13 +74,42 @@ class MoviesTestCase(unittest.TestCase):
 
     def test_add_new_actor(self):
         res = self.client().post("/actors", json=self.new_actor)
+        data = res.get_json(res.data)
 
-        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.status_code, 201)
+        self.assertEqual(data["success"], True)
+        self.assertIsNotNone(data["actor"])
+
+    def test_422_if_new_actor_has_no_name(self):
+        new_actor = {
+            "age": 74,
+            "gender": "Female"
+        }
+        res = self.client().post("/actors", json=new_actor)
+        data = res.get_json(res.data)
+
+        self.assertEqual(res.status_code, 422)
+        self.assertEqual(data["success"], False)
+        self.assertEqual(data["message"], "Unprocessable")
 
     def test_add_new_movie(self):
         res = self.client().post("/movies", json=self.new_movie)
+        data = res.get_json(res.data)
 
-        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.status_code, 201)
+        self.assertEqual(data["success"], True)
+        self.assertIsNotNone(data["movie"])
+
+    def test_422_if_new_movie_has_no_title(self):
+        new_movie = {
+            "release_date": ""
+        }
+        res = self.client().post("/movies", json=new_movie)
+        data = res.get_json(res.data)
+
+        self.assertEqual(res.status_code, 422)
+        self.assertEqual(data["success"], False)
+        self.assertEqual(data["message"], "Unprocessable")
 
     def test_update_actor(self):
         res = self.client().patch(

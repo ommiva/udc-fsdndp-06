@@ -6,6 +6,7 @@ from models import setup_db, Actor, Movie, Cast
 
 import os
 import sys
+import datetime
 
 
 def create_app(test_config=None):
@@ -25,9 +26,32 @@ def create_app(test_config=None):
     @app.route('/actors', methods=["POST"])
     def new_actor():
         print("NEW actor")
-        return jsonify({
-            "success": True
-        })
+
+        body = request.get_json()
+        try:
+            new_name = body.get('name', None)
+            new_age = body.get('age', 0)
+            new_gender = body.get('gender', None)
+
+            if new_name is None:
+                abort(400)
+
+            actor = Actor(
+                name=new_name,
+                age=new_age,
+                gender=new_gender
+            )
+
+            actor.insert()
+
+            return jsonify({
+                "success": True,
+                "actor": actor.format()
+            }), 201
+
+        except Exception as e:
+            print(sys.exc_info())
+            abort(422)
 
     @app.route('/actors-detail', methods=["GET"])
     def list_actors():
@@ -104,9 +128,37 @@ def create_app(test_config=None):
     @app.route('/movies', methods=["POST"])
     def new_movie():
         print("NEW movie")
-        return jsonify({
-            "success": True
-        })
+
+        body = request.get_json()
+        print("POST /movies | ", body)
+        try:
+            new_title = body.get('title', None)
+            new_release = body.get('release_date', None)
+
+            if new_title is None:
+                abort(400)
+
+            if new_release is not None:
+                new_release = datetime.datetime.strptime(
+                    new_release,
+                    '%m/%d/%Y'
+                )
+
+            movie = Movie(
+                title=new_title,
+                release_date=new_release
+            )
+
+            movie.insert()
+
+            return jsonify({
+                "success": True,
+                "movie": movie.format()
+            }), 201
+
+        except Exception as e:
+            print(sys.exc_info())
+            abort(422)
 
     @app.route('/movies-detail', methods=["GET"])
     def list_movies():
@@ -194,6 +246,14 @@ def create_app(test_config=None):
                     "error": 404,
                     "message": "Resource not found"
                 }), 404
+
+    @app.errorhandler(400)
+    def bad_request(error):
+        return jsonify({
+                    "success": False,
+                    "error": 400,
+                    "message": "Bad Request"
+                }), 400
 
     return app
 

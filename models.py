@@ -49,10 +49,14 @@ class Movie(db.Model):
         db.session.commit()
 
     def format(self):
+        release = None
+        if self.release_date is not None:
+            release = self.release_date.strftime('%m/%d/%Y')
+
         return {
             'id': self.id,
             'title': self.title,
-            'release_date': self.release_date.strftime('%m/%d/%Y')
+            'release_date': release
         }
 
     def __repr__(self):
