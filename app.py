@@ -50,9 +50,35 @@ def create_app(test_config=None):
     @app.route('/actors/<int:actor_id>', methods=["PATCH"])
     def update_actor(actor_id):
         print("UPDATE actor")
-        return jsonify({
-            "success": True
-        })
+        body = request.get_json()
+
+        try:
+            actor = Actor.query.filter(Actor.id == actor_id).one_or_none()
+
+            if actor is None:
+                abort(404)
+
+            else:
+
+                if 'name' in body:
+                    actor.name = body.get('name')
+
+                if 'age' in body:
+                    actor.age = body.get('age')
+
+                if 'gender' in body:
+                    actor.gender = body.get('gender')
+
+                actor.update()
+
+                return jsonify({
+                    "success": True,
+                    "actor": actor.format()
+                })
+
+        except Exception as e:
+            print(sys.exc_info())
+            abort(422)
 
     @app.route('/actors/<int:actor_id>', methods=["DELETE"])
     def delete_actor(actor_id):
@@ -102,9 +128,33 @@ def create_app(test_config=None):
     @app.route('/movies/<int:movie_id>', methods=["PATCH"])
     def update_movie(movie_id):
         print("UPDATE movie")
-        return jsonify({
-            "success": True
-        })
+        body = request.get_json()
+
+        try:
+            movie = Movie.query.filter(Movie.id == movie_id).one_or_none()
+
+            if movie is None:
+                abort(404)
+
+            else:
+                if 'title' in body:
+                    movie.title = body.get('title')
+
+                if 'release_date' in body:
+
+                    movie.release_date = format_datetime(
+                        body.get('release_date'))
+
+            movie.update()
+
+            return jsonify({
+                "success": True,
+                "movie": movie.format()
+            })
+
+        except Exception as e:
+            print(sys.exc_info())
+            abort(422)
 
     @app.route('/movies/<int:movie_id>', methods=["DELETE"])
     def delete_movie(movie_id):
@@ -143,9 +193,21 @@ def create_app(test_config=None):
                     "success": False,
                     "error": 404,
                     "message": "Resource not found"
-                })
+                }), 404
 
     return app
+
+
+# Auxiliars
+
+
+def format_datetime(value, format='medium'):
+    date = dateutil.parser.parse(value)
+    if format == 'full':
+        format = " MM/dd/yyyy h:mma"
+    elif format == 'medium':
+        format = "MM/dd/yyyy"
+    return babel.dates.format_datetime(date, format)
 
 # ------------------------------------------------
 

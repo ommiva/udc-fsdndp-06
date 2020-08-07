@@ -38,6 +38,9 @@ class MoviesTestCase(unittest.TestCase):
             "release_date": "09/12/1997"
         }
 
+        self.update_actor_data = "Kurt Russell"
+        self.update_movie_data = "Jaws 3"
+
     def tearDown(self):
         """ Execute after reach test """
         pass
@@ -80,14 +83,48 @@ class MoviesTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
 
     def test_update_actor(self):
-        res = self.client().patch("/actors/2", json={"name": "Kurt Russell"})
+        res = self.client().patch(
+            "/actors/2",
+            json={"name": self.update_actor_data})
+        data = res.get_json(res.data)
+
+        actor = Actor.query.filter(Actor.id == 2).one_or_none()
 
         self.assertEqual(res.status_code, 200)
+        self.assertEqual(data["success"], True)
+        self.assertEqual(actor.name, data["actor"]["name"])
+
+    def test_422_if_update_actor_does_not_exist(self):
+        res = self.client().patch(
+            "/actors/10000",
+            json={"gender": "Female"})
+        data = res.get_json(res.data)
+
+        self.assertEqual(res.status_code, 422)
+        self.assertEqual(data["success"], False)
+        self.assertEqual(data["message"], "Unprocessable")
 
     def test_update_movie(self):
-        res = self.client().patch("/movies/2", json={"title": "Jaws 3"})
+        res = self.client().patch(
+            "/movies/2",
+            json={"title": self.update_movie_data})
+        data = res.get_json(res.data)
+
+        movie = Movie.query.filter(Movie.id == 2).one_or_none()
 
         self.assertEqual(res.status_code, 200)
+        self.assertEqual(data["success"], True)
+        self.assertEqual(movie.title, data["movie"]["title"])
+
+    def test_422_if_update_movie_does_not_exist(self):
+        res = self.client().patch(
+            "/movies/10000",
+            json={"release_date": "01/01/0001"})
+        data = res.get_json(res.data)
+
+        self.assertEqual(res.status_code, 422)
+        self.assertEqual(data["success"], False)
+        self.assertEqual(data["message"], "Unprocessable")
 
     def test_delete_actor(self):
         res = self.client().delete("/actors/1")
