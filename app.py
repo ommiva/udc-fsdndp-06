@@ -3,10 +3,16 @@ from flask import Flask, request, abort, jsonify
 from flask_cors import CORS
 
 from models import setup_db, Actor, Movie, Cast
+from auth.auth import AuthError, requires_auth
+from datetime import datetime
+from babel import Locale
+from babel.dates import format_datetime
+from werkzeug import exceptions
 
 import os
 import sys
-import datetime
+import dateutil.parser
+import babel
 
 
 def create_app(test_config=None):
@@ -24,10 +30,12 @@ def create_app(test_config=None):
         })
 
     @app.route('/actors', methods=["POST"])
+    @requires_auth('post:actors')
     def new_actor():
         print("NEW actor")
 
         body = request.get_json()
+        print("POST /actors | ", body)
         try:
             new_name = body.get('name', None)
             new_age = body.get('age', 0)
@@ -48,12 +56,16 @@ def create_app(test_config=None):
                 "success": True,
                 "actor": actor.format()
             }), 201
-
+                
+        except exceptions.HTTPException as httpe:
+            print("Error HTTP > ", httpe)
+            raise
         except Exception as e:
             print(sys.exc_info())
             abort(422)
 
     @app.route('/actors-detail', methods=["GET"])
+    @requires_auth('get:actors-detail')
     def list_actors():
         print("Actors list")
 
@@ -72,6 +84,7 @@ def create_app(test_config=None):
             abort(422)
 
     @app.route('/actors/<int:actor_id>', methods=["PATCH"])
+    @requires_auth('patch:actors')
     def update_actor(actor_id):
         print("UPDATE actor")
         body = request.get_json()
@@ -99,12 +112,16 @@ def create_app(test_config=None):
                     "success": True,
                     "actor": actor.format()
                 })
-
+                
+        except exceptions.HTTPException as httpe:
+            print("Error HTTP > ", httpe)
+            raise
         except Exception as e:
             print(sys.exc_info())
             abort(422)
 
     @app.route('/actors/<int:actor_id>', methods=["DELETE"])
+    @requires_auth('delete:actors')
     def delete_actor(actor_id):
         print("DELETE actor")
 
@@ -120,12 +137,16 @@ def create_app(test_config=None):
                     "success": True,
                     "delete": actor_id
                 })
-
+                
+        except exceptions.HTTPException as httpe:
+            print("Error HTTP > ", httpe)
+            raise
         except Exception as e:
             print(sys.exc_info())
             abort(422)
 
     @app.route('/movies', methods=["POST"])
+    @requires_auth('post:movies')
     def new_movie():
         print("NEW movie")
 
@@ -139,7 +160,7 @@ def create_app(test_config=None):
                 abort(400)
 
             if new_release is not None:
-                new_release = datetime.datetime.strptime(
+                new_release = datetime.strptime(
                     new_release,
                     '%m/%d/%Y'
                 )
@@ -155,12 +176,17 @@ def create_app(test_config=None):
                 "success": True,
                 "movie": movie.format()
             }), 201
-
+                
+        except exceptions.HTTPException as httpe:
+            print("Error HTTP > ", httpe)
+            raise
         except Exception as e:
+            print("Error > ",e)
             print(sys.exc_info())
             abort(422)
 
     @app.route('/movies-detail', methods=["GET"])
+    @requires_auth('get:movies-detail')
     def list_movies():
         print("Movies list")
         try:
@@ -178,6 +204,7 @@ def create_app(test_config=None):
             abort(422)
 
     @app.route('/movies/<int:movie_id>', methods=["PATCH"])
+    @requires_auth('patch:movies')
     def update_movie(movie_id):
         print("UPDATE movie")
         body = request.get_json()
@@ -203,12 +230,16 @@ def create_app(test_config=None):
                 "success": True,
                 "movie": movie.format()
             })
-
+ 
+        except exceptions.HTTPException as httpe:
+            print("Error HTTP > ", httpe)
+            raise
         except Exception as e:
             print(sys.exc_info())
             abort(422)
 
     @app.route('/movies/<int:movie_id>', methods=["DELETE"])
+    @requires_auth('delete:movies')
     def delete_movie(movie_id):
         print("DELETE movie")
 
@@ -224,7 +255,10 @@ def create_app(test_config=None):
                     "success": True,
                     "delete": movie_id
                 })
-
+                
+        except exceptions.HTTPException as httpe:
+            print("Error HTTP > ", httpe)
+            raise
         except Exception as e:
             print(sys.exc_info())
             abort(422)
@@ -233,6 +267,7 @@ def create_app(test_config=None):
 
     @app.errorhandler(422)
     def unprocessable(error):
+        print(" <<<< Error 422 - ", error)
         return jsonify({
                     "success": False,
                     "error": 422,
@@ -241,6 +276,7 @@ def create_app(test_config=None):
 
     @app.errorhandler(404)
     def not_found(error):
+        print(" <<<< Error 404 - ", error)
         return jsonify({
                     "success": False,
                     "error": 404,
@@ -249,11 +285,25 @@ def create_app(test_config=None):
 
     @app.errorhandler(400)
     def bad_request(error):
+        print(" <<<< Error 400 - ", error)
         return jsonify({
                     "success": False,
                     "error": 400,
                     "message": "Bad Request"
                 }), 400
+    
+    @app.errorhandler(AuthError)
+    def authentication_error(error):
+        """
+        Implements error handler for AuthError
+        """
+        print(" <<<< Error AuthError - ", error)
+        return jsonify({
+                    "success": False,
+                    "error": error.status_code,
+                    "message": error.error["description"]
+                }), error.status_code
+
 
     return app
 
@@ -267,7 +317,7 @@ def format_datetime(value, format='medium'):
         format = " MM/dd/yyyy h:mma"
     elif format == 'medium':
         format = "MM/dd/yyyy"
-    return babel.dates.format_datetime(date, format)
+    return babel.dates.format_datetime(date, format=format, locale=Locale('en', 'US'))
 
 # ------------------------------------------------
 

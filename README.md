@@ -72,3 +72,4 @@ createdb casting_agency_test
 psql casting_agency_test < casting.sql
 python test_app.py
 ```
+

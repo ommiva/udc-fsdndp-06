@@ -165,6 +165,12 @@ ALTER TABLE ONLY public.movies ALTER COLUMN id SET DEFAULT nextval('public.movie
 COPY public.actors (id, name, age, gender) FROM stdin;
 1	Harrison Ford	78	Male
 2	Russell Crowe	53	Male
+3	Lucy Liu	51	Female
+4	Emma Watson	30	Female
+5	Samuel L. Jackson	71	Male
+6	Lynda Carter	69	Female
+7	Ian McKellen	81	Male
+8	Jodie Foster	57	Female
 \.
 
 
@@ -191,6 +197,11 @@ COPY public.movie_cast (id, actor_id, movie_id) FROM stdin;
 COPY public.movies (id, title, release_date) FROM stdin;
 1	The Dark Knight	2008-07-14
 2	Krull	1983-07-29
+3	Pulp Fiction	1994-10-14
+4	Little Women	2019-12-07
+5	the silence of the lambs	1991-01-30
+6	Kill Bill: Volume 1	2003-11-28
+7	Last Action Hero	1993-06-18
 \.
 
 
@@ -198,7 +209,7 @@ COPY public.movies (id, title, release_date) FROM stdin;
 -- Name: actors_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ommi
 --
 
-SELECT pg_catalog.setval('public.actors_id_seq', 2, true);
+SELECT pg_catalog.setval('public.actors_id_seq', 8, true);
 
 
 --
@@ -212,7 +223,7 @@ SELECT pg_catalog.setval('public.movie_cast_id_seq', 1, false);
 -- Name: movies_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ommi
 --
 
-SELECT pg_catalog.setval('public.movies_id_seq', 2, true);
+SELECT pg_catalog.setval('public.movies_id_seq', 7, true);
 
 
 --

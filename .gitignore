@@ -14,3 +14,7 @@ Thumbs.db
 
 */node_modules
 .python-version
+
+#    Project files   #
+######################
+*[Bb][Cc][Kk]*

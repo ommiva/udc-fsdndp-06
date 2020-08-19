@@ -11,6 +11,20 @@
 			"item": [
 				{
 					"name": "Get default",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5d083be1-4efb-4ca4-b2c8-40ebe215e261",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -23,6 +37,301 @@
 								""
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "List actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0f758d06-391e-44dd-843e-17252650ca49",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors-detail",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors-detail"
+							]
+						},
+						"description": "Retireve actors list"
+					},
+					"response": []
+				},
+				{
+					"name": "List movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "41731c81-bf41-47f1-9c57-f6627dc2262a",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies-detail",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies-detail"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add actor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f12058c8-8a36-4c8e-9d08-a332d7fe722c",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Tobey Maguire\",\n    \"age\": 45,\n    \"gender\": \"Male\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors"
+							]
+						},
+						"description": "Add a new actor"
+					},
+					"response": []
+				},
+				{
+					"name": "Updates actor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b139b06a-bff1-4f64-af9b-c9dcf207207d",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"age\": 56\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"2"
+							]
+						},
+						"description": "Updates actor age with id 2 from database"
+					},
+					"response": []
+				},
+				{
+					"name": "Updates movie",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c74fbdd9-82ef-43af-849e-6ad63d7df6c3",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"release_date\": \"05/07/2020\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"2"
+							]
+						},
+						"description": "Updates release date for movie with id 2"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete actor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "16bcb9b9-41ec-4a4c-aee3-6dc0cfd99423",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"1"
+							]
+						},
+						"description": "Removes actor with id 1 from database"
+					},
+					"response": []
+				},
+				{
+					"name": "Add movie",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "72c8f19e-8e72-4c8d-b78e-67513f9d8ea6",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Spiderman 3\",\n    \"release_date\": \"05/04/2007\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies"
+							]
+						},
+						"description": "Adds a new movie"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete movie",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bab515f4-4a75-4135-aaca-d6211118d262",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"1"
+							]
+						},
+						"description": "Deletes movie with id 1 from database"
 					},
 					"response": []
 				}
@@ -57,6 +366,20 @@
 			"item": [
 				{
 					"name": "List actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "42918918-640e-45e4-836e-b4ca13b96c93",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -74,7 +397,114 @@
 					"response": []
 				},
 				{
+					"name": "Fail list actors if token expired",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2c628fbb-24e4-48dd-a422-b8da111cfa55",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									"",
+									"pm.test(\"Token expired\", function () {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.response.to.have.status(401);",
+									"    pm.expect(responseJson.success).to.eql(false);",
+									"    pm.expect(responseJson.message).to.eql(\"Token expired.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjMzUxN2VlMGYwMDAzZDhjZDExOSIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTcwOTc5MjQsImV4cCI6MTU5NzEwNTEyNCwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMiLCJnZXQ6bW92aWVzIl19.cR06a3ViTYfuI6ddcrGt5M7guUtry93ULrzWtdA2tzuqiDIz0I-YnpK1MTvEiZ7ZaWccFhl-6lKux-WZvw26XSf_asfBdmwVVu3hDYuKXWjUtKt7KAzG4yV0uKRntpyfXfDjaeisIbCKWYBN12WWRDAhi0pNIuj_cDcyBrw1eGWpjrkV68CwdWfq8nw_wD_ZGpOVhhS4oc821ImneGp4o9qL_S6_qR2NJbllkdPTFJYUZ2bQ8Lnivx-gSXJV0O6Us7Fx8CwsFfYXjuKncv1q95tRnIzVhI_rqN3tJHTGnUbr5RC6QxnMJDjld4CnKSdFyNzikU1EWsVstKEDGFJ1_A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors-detail",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors-detail"
+							]
+						},
+						"description": "Retireve actors list"
+					},
+					"response": []
+				},
+				{
+					"name": "Fail list actors if no auth header",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b5f628b2-db2d-4d7d-9f24-5fb478a4afea",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									"",
+									"pm.test(\"No authorization header\", function() {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.response.to.have.status(401);",
+									"    pm.expect(responseJson.success).to.eql(false);",
+									"    pm.expect(responseJson.message).to.eql(\"Authorization header is expected.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors-detail",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors-detail"
+							]
+						},
+						"description": "Retireve actors list"
+					},
+					"response": []
+				},
+				{
 					"name": "List movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c564627f-6cc9-4555-9d52-e329d3fc5369",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -89,14 +519,401 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Fail list movies if no auth header",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e970bb41-540f-49c9-883b-8398ce33201e",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									"",
+									"pm.test(\"No authorization header\", function() {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.response.to.have.status(401);",
+									"    pm.expect(responseJson.success).to.eql(false);",
+									"    pm.expect(responseJson.message).to.eql(\"Authorization header is expected.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies-detail",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies-detail"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fail list movies if token expired",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9b99e268-9b86-4768-8690-fb562a953021",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									"",
+									"pm.test(\"Token expired\", function () {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.response.to.have.status(401);",
+									"    pm.expect(responseJson.success).to.eql(false);",
+									"    pm.expect(responseJson.message).to.eql(\"Token expired.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjMzUxN2VlMGYwMDAzZDhjZDExOSIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTcwOTc5MjQsImV4cCI6MTU5NzEwNTEyNCwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMiLCJnZXQ6bW92aWVzIl19.cR06a3ViTYfuI6ddcrGt5M7guUtry93ULrzWtdA2tzuqiDIz0I-YnpK1MTvEiZ7ZaWccFhl-6lKux-WZvw26XSf_asfBdmwVVu3hDYuKXWjUtKt7KAzG4yV0uKRntpyfXfDjaeisIbCKWYBN12WWRDAhi0pNIuj_cDcyBrw1eGWpjrkV68CwdWfq8nw_wD_ZGpOVhhS4oc821ImneGp4o9qL_S6_qR2NJbllkdPTFJYUZ2bQ8Lnivx-gSXJV0O6Us7Fx8CwsFfYXjuKncv1q95tRnIzVhI_rqN3tJHTGnUbr5RC6QxnMJDjld4CnKSdFyNzikU1EWsVstKEDGFJ1_A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies-detail",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies-detail"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add actor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "26373025-6f24-4a98-ae22-39b7b9c964e6",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Jar Jar Binks\",\n    \"age\": 21,\n    \"gender\": \"Male\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors"
+							]
+						},
+						"description": "Add a new actor"
+					},
+					"response": []
+				},
+				{
+					"name": "Updates actor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "207f7540-a4a9-4e63-9f71-d7a9b221665c",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"age\": 57,\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"2"
+							]
+						},
+						"description": "Updates actor age with id 2 from database"
+					},
+					"response": []
+				},
+				{
+					"name": "Updates movie",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "12ac976c-45df-4c04-a5c4-7d0f2519179b",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"release_date\": \"08/08/2020\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"2"
+							]
+						},
+						"description": "Updates release date for movie with id 2"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete actor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ae22eecb-2fd4-4ab2-bd71-ca1f619f5bc6",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors/3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"3"
+							]
+						},
+						"description": "Removes actor with id 1 from database"
+					},
+					"response": []
+				},
+				{
+					"name": "Add movie",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e8d80dee-6806-4d24-abcc-9b28fda8f9ed",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"The Phantom Menace\",\n    \"release_date\": \"05/16/1999\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies"
+							]
+						},
+						"description": "Adds a new movie"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete movie",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bb8410f6-ffdf-4748-9012-74815836fa08",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies/3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"3"
+							]
+						},
+						"description": "Deletes movie with id 1 from database"
+					},
+					"response": []
 				}
 			],
 			"description": "Casting assistant access",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjMzUxN2VlMGYwMDAzZDhjZDExOSIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTc3ODM0NDAsImV4cCI6MTU5Nzc5MDY0MCwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0Om1vdmllcy1kZXRhaWwiXX0.OqMK7BQqyqktHloNNGOFv7tiGGNRPIHvJmKPB2vXkhgIBKidnJ8Ungio_KrPVQiVzpKFxDvyl9ajxdHs07p_4ZuMf2QuwG2cfj-8O7r656rB36XAvGfkgqEh4w4xfy2gOlUvWoZjmJPCO_8syN5Zqbq82AzgKM1zuyMgJQ1thc2zL0lwt9oAW-bzaG29eJ8-9ABJf03EeqnHtjAsh_CAcg5nkWXSR_bKI8lxdJX3HdO8y35HicFNTBWpWUWAL8CrjM9ijBDZbH25jJr2QHizJGpDXAvETqQKC6IxBH0kWSKXoCZw97g_LU8eUs11g-RfNKLSAndHFbwQ_eUhBRsY0g",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5936e163-ccbc-47ed-8d02-a5e005a8864f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "cf5b324d-fae6-4b3e-ab66-4654e1394846",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
 			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Casting director",
 			"item": [
+				{
+					"name": "List actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "004c4c8a-b604-484d-b68d-1fda070c47b5",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors-detail",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors-detail"
+							]
+						},
+						"description": "Retireve actors list"
+					},
+					"response": []
+				},
 				{
 					"name": "Add actor",
 					"event": [
@@ -118,7 +935,12 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Clint Eastwood\",\n    \"age\": 90,\n    \"gender\": \"M\"\n}"
+							"raw": "{\n    \"name\": \"Michael Fassbender\",\n    \"age\": 43,\n    \"gender\": \"Male\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "{{host}}/actors",
@@ -134,32 +956,132 @@
 					"response": []
 				},
 				{
-					"name": "Delete actor",
+					"name": "Fail add actor if invalid token missing appropiate key",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7f93e973-75d1-41e7-9472-f2dbb76f8c79",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									"",
+									"pm.test(\"Token without appropiate key\", function () {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.response.to.have.status(401);",
+									"    pm.expect(responseJson.success).to.eql(false);",
+									"    pm.expect(responseJson.message).to.eql(\"Unable to find the appropiate key.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
-						"method": "DELETE",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InYtQkQ0XzNLZ2pqcXJOcHZZU3BkUyJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWI5ODUwYmU4YzRmMjBjMTNjNDhiYTMiLCJhdWQiOiJjb2ZmZV9zaG9wIiwiaWF0IjoxNTkyNTg3NTcyLCJleHAiOjE1OTI2NzM5NzIsImF6cCI6Inp3djhwVWpURGNIUmNaQnNod1dha3NMTmxBRjBTNnNrIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6ZHJpbmtzLWRldGFpbCJdfQ.t9Eec6iZfv89VeVok2FQO7dTr0YSnILVxKEF49-fZuDMExXsaXVEbPn6ylMwBy3C969rSXtFlkd9elIS75Ibua8zkN1g6h-OO53v6uSH0RasbqPb-v_aOpOVuFUUmW4gMpfaa0AXpNh-wClt46Yw87P2Ih90NCuwQVU4x0i09sMYu-m7P4u1Mde36dE3VeRRPOKQ7kAxQoK4ZBJf9LeHsOAVpOOzz2lVjAfZZeDVNIkaugUW1RUoyN8DjI4NfkDofhnahBuHlvJnCLox67WVJE6BfvV_QYUi0QxPZABbgf2_06jyzIxLtujawwc9K52vPN5eQLBJT5apjf0TYWjE6g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Michael Fassbender\",\n    \"age\": 43,\n    \"gender\": \"Male\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{host}}/actors/1",
+							"raw": "{{host}}/actors",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"actors",
-								"1"
+								"actors"
 							]
 						},
-						"description": "Removes actor with id 1 from database"
+						"description": "Add a new actor"
+					},
+					"response": []
+				},
+				{
+					"name": "Fail add actor if no name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "df1b7b06-3c07-46a2-b831-ecd94b76ad46",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"age\": 43,\n    \"gender\": \"Male\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors"
+							]
+						},
+						"description": "Add a new actor"
 					},
 					"response": []
 				},
 				{
 					"name": "Updates actor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d50029ee-9c57-4d98-a181-ba383709e3af",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"age\": 45,\n}"
+							"raw": "{\n    \"age\": 58\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "{{host}}/actors/2",
@@ -176,13 +1098,74 @@
 					"response": []
 				},
 				{
-					"name": "Updates movie",
+					"name": "Fail update actor if not found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "81ae06c5-54d6-4eca-a61a-1179dd93d6b5",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"release_date\": \"05/07/2020\"\n}"
+							"raw": "{\n    \"age\": 58\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors/200",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"200"
+							]
+						},
+						"description": "Updates actor age with id 2 from database"
+					},
+					"response": []
+				},
+				{
+					"name": "Updates movie",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4198e734-30c6-4e0f-8cdb-bbd10d38d080",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"release_date\": \"09/09/2020\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "{{host}}/movies/2",
@@ -197,9 +1180,283 @@
 						"description": "Updates release date for movie with id 2"
 					},
 					"response": []
+				},
+				{
+					"name": "Fail update movie if not found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5189f937-14f6-4bfa-b0a3-d8ac7680e583",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"release_date\": \"09/09/2020\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies/200",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"200"
+							]
+						},
+						"description": "Updates release date for movie with id 2"
+					},
+					"response": []
+				},
+				{
+					"name": "List movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4aae3120-5dd6-4079-b60f-bcbb9e144017",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies-detail",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies-detail"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete actor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fdd85e73-71e7-46a2-bf98-01ad6d1b6a87",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors/4",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"4"
+							]
+						},
+						"description": "Removes actor with id 1 from database"
+					},
+					"response": []
+				},
+				{
+					"name": "Fail delete actor if no bearer token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0a5c0b1c-1250-4bfc-bbf3-02a7b5b41249",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									"",
+									"pm.test(\"Bearer token missing\", function () {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.response.to.have.status(401);",
+									"    pm.expect(responseJson.success).to.eql(false);",
+									"    pm.expect(responseJson.message).to.eql(\"Authorization header MUST be bearer token.\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InYtQkQ0XzNLZ2pqcXJOcHZZU3BkUyJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWI5ODUwYmU4YzRmMjBjMTNjNDhiYTMiLCJhdWQiOiJjb2ZmZV9zaG9wIiwiaWF0IjoxNTkyNTg3NTcyLCJleHAiOjE1OTI2NzM5NzIsImF6cCI6Inp3djhwVWpURGNIUmNaQnNod1dha3NMTmxBRjBTNnNrIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6ZHJpbmtzLWRldGFpbCJdfQ.t9Eec6iZfv89VeVok2FQO7dTr0YSnILVxKEF49-fZuDMExXsaXVEbPn6ylMwBy3C969rSXtFlkd9elIS75Ibua8zkN1g6h-OO53v6uSH0RasbqPb-v_aOpOVuFUUmW4gMpfaa0AXpNh-wClt46Yw87P2Ih90NCuwQVU4x0i09sMYu-m7P4u1Mde36dE3VeRRPOKQ7kAxQoK4ZBJf9LeHsOAVpOOzz2lVjAfZZeDVNIkaugUW1RUoyN8DjI4NfkDofhnahBuHlvJnCLox67WVJE6BfvV_QYUi0QxPZABbgf2_06jyzIxLtujawwc9K52vPN5eQLBJT5apjf0TYWjE6g bla",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/actors/4",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"4"
+							]
+						},
+						"description": "Removes actor with id 1 from database"
+					},
+					"response": []
+				},
+				{
+					"name": "Fail delete actor if not found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f1d560d6-880c-470f-ae50-8a964ebf98b9",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors/400",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"400"
+							]
+						},
+						"description": "Removes actor with id 1 from database"
+					},
+					"response": []
+				},
+				{
+					"name": "Add movie",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "04a96798-0d2e-4cc9-9e1e-1e4d007fb8fb",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"x-Men: Apocalypse\",\n    \"release_date\": \"05/27/2016\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies"
+							]
+						},
+						"description": "Adds a new movie"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete movie",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "41320a2d-800c-4f3e-8179-4dd9e867270f",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies/4",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"4"
+							]
+						},
+						"description": "Deletes movie with id 1 from database"
+					},
+					"response": []
 				}
 			],
 			"description": "Casting director access",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjM2ZhZDJmMWNkMDAzN2VmZDg3NyIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTc3ODQxNzAsImV4cCI6MTU5Nzc5MTM3MCwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJnZXQ6YWN0b3JzLWRldGFpbCIsImdldDptb3ZpZXMtZGV0YWlsIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiXX0.vi4qNklLoQSiCf1o44-9R8qOtnhr5Gh3MaSIxtyWG1lYu8PXCo3y1l4l9lISMhcnB8pu_9SlY7SPPddkRapfrOgG-dmAflm5kLPqt644itur4iVZtsk4XOSS7Sus7q3waR1OHCDX_DajdXnx-47dhLTSixwE5YFvQKNqqHCT1rjWC9Ne-LGHBoXS7DTAUSn_3HKMrDjjrokyoxWxB2xS_d_PblQQG88eE08Tymu0cJEkAFRtcr4dBlpuLzdLi39j4olzVDF0bxpkBjDcs86_euC-J12ez5DHmyWF4wdPPCerzAaIrVN9F5_D-HAAG-thoJpoiwxcmBYCDJ5oe_ZZ7w",
+						"type": "string"
+					}
+				]
+			},
 			"event": [
 				{
 					"listen": "prerequest",
@@ -235,8 +1492,8 @@
 							"script": {
 								"id": "60989460-fd05-421c-950d-0b2acede6d9f",
 								"exec": [
-									"pm.test(\"Status code is 201\", function () {",
-									"    pm.response.to.have.status(201);",
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -248,7 +1505,112 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"Clint Eastwood\",\n    \"release_date\": \"The Good, the Bad and the Ugly\"\n}"
+							"raw": "{\n    \"title\": \"The Good, the Bad and the Ugly\",\n    \"release_date\": \"12/23/1966\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies"
+							]
+						},
+						"description": "Adds a new movie"
+					},
+					"response": []
+				},
+				{
+					"name": "Fail add movie if authorization malformed",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "53697ffd-e526-417f-9d7c-2f3ae1a6730a",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									"",
+									"pm.test(\"Token malformed\", function () {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.response.to.have.status(401);",
+									"    pm.expect(responseJson.success).to.eql(false);",
+									"    pm.expect(responseJson.message).to.eql(\"Authorization malformed.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"The Good, the Bad and the Ugly\",\n    \"release_date\": \"12/23/1966\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies"
+							]
+						},
+						"description": "Adds a new movie"
+					},
+					"response": []
+				},
+				{
+					"name": "Fail add movie if no title",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d1671e75-2991-4b90-9c8a-caf9be425323",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"release_date\": \"12/23/1966\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "{{host}}/movies",
@@ -265,25 +1627,325 @@
 				},
 				{
 					"name": "Delete movie",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0d5441cb-5ebd-4d06-8bff-89686d731712",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/movies/1",
+							"raw": "{{host}}/movies/5",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"movies",
-								"1"
+								"5"
 							]
 						},
 						"description": "Deletes movie with id 1 from database"
 					},
 					"response": []
+				},
+				{
+					"name": "Fail delete movie if not found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1f867d8c-0d51-4155-8490-c97a4e0e7ab6",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies/500",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"500"
+							]
+						},
+						"description": "Deletes movie with id 1 from database"
+					},
+					"response": []
+				},
+				{
+					"name": "List actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "65f28309-943c-4ee5-a2ea-e3759cee9b04",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors-detail",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors-detail"
+							]
+						},
+						"description": "Retireve actors list"
+					},
+					"response": []
+				},
+				{
+					"name": "List movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "10e7b174-dfae-435d-b9b8-7a081b6311cf",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies-detail",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies-detail"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add actor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "960de410-a0b9-4263-86bb-0c06532e02aa",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Clint Eastwood\",\n    \"age\": 90,\n    \"gender\": \"Male\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors"
+							]
+						},
+						"description": "Add a new actor"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete actor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e4c1f644-5738-4912-a8ea-c537f58fe9ea",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors/5",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"5"
+							]
+						},
+						"description": "Removes actor with id 1 from database"
+					},
+					"response": []
+				},
+				{
+					"name": "Updates actor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9c58de79-3d30-4d32-bed5-2edff29a451e",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"age\": 59\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"2"
+							]
+						},
+						"description": "Updates actor age with id 2 from database"
+					},
+					"response": []
+				},
+				{
+					"name": "Updates movie",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "57959960-87b5-4431-9d2b-51a9e2d6cb40",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"release_date\": \"10/10/2020\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"2"
+							]
+						},
+						"description": "Updates release date for movie with id 2"
+					},
+					"response": []
 				}
 			],
 			"description": "Executive producer access",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjNDQ4N2Q4YTllMDAzNzcxNjlmZCIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTc3ODQ2OTQsImV4cCI6MTU5Nzc5MTg5NCwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6bW92aWVzIiwiZ2V0OmFjdG9ycy1kZXRhaWwiLCJnZXQ6bW92aWVzLWRldGFpbCIsInBhdGNoOmFjdG9ycyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIiwicG9zdDptb3ZpZXMiXX0.r6SOgjroYjXH7jWaZmQLCcAqWsnEDELbn379W7clY_kBhxR5j21TEvAovVsVWP7C3acU3ZFCc3mglOnsNx0Aaov6WZ-k22OTAbi3jKgLMDtXZ5zmd_LQBDiR5lh19uEHjlDI1I8eWrtrPtt_C9q9eh1YjCR0S_-qJqg_056aKrFIIKNkg4g2NAYYRFwnfd_rHiTOcCM3sAkuXSoqEpiftCZAdjO6z7wsOgy1LPUS6SMfPPRZ30SJaC6tIW2YVhFHg_Lb8nOxyqwHoyK7Bad3osYmmWJW6uplgpGTHco_d4bBhRyUIJ1G8REWi_sxpDfR3pIzfLzREdxjT7ARPNQENg",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "f676ec77-c216-4369-b55d-1dde983dc9be",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "c418fca5-7ac0-4e93-9f2c-5f9703b85ebf",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
 			"protocolProfileBehavior": {}
 		}
 	],
@@ -311,7 +1973,7 @@
 	],
 	"variable": [
 		{
-			"id": "19f8babc-c2ed-48b8-a6b2-31aca5e34866",
+			"id": "d9f5e740-779b-4203-a8f0-4c3982e294a0",
 			"key": "host",
 			"value": "localhost:5000"
 		}
