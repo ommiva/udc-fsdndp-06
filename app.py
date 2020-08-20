@@ -56,7 +56,7 @@ def create_app(test_config=None):
                 "success": True,
                 "actor": actor.format()
             }), 201
-                
+
         except exceptions.HTTPException as httpe:
             print("Error HTTP > ", httpe)
             raise
@@ -112,7 +112,7 @@ def create_app(test_config=None):
                     "success": True,
                     "actor": actor.format()
                 })
-                
+
         except exceptions.HTTPException as httpe:
             print("Error HTTP > ", httpe)
             raise
@@ -137,7 +137,7 @@ def create_app(test_config=None):
                     "success": True,
                     "delete": actor_id
                 })
-                
+
         except exceptions.HTTPException as httpe:
             print("Error HTTP > ", httpe)
             raise
@@ -176,12 +176,12 @@ def create_app(test_config=None):
                 "success": True,
                 "movie": movie.format()
             }), 201
-                
+
         except exceptions.HTTPException as httpe:
             print("Error HTTP > ", httpe)
             raise
         except Exception as e:
-            print("Error > ",e)
+            print("Error > ", e)
             print(sys.exc_info())
             abort(422)
 
@@ -230,7 +230,7 @@ def create_app(test_config=None):
                 "success": True,
                 "movie": movie.format()
             })
- 
+
         except exceptions.HTTPException as httpe:
             print("Error HTTP > ", httpe)
             raise
@@ -255,7 +255,7 @@ def create_app(test_config=None):
                     "success": True,
                     "delete": movie_id
                 })
-                
+
         except exceptions.HTTPException as httpe:
             print("Error HTTP > ", httpe)
             raise
@@ -291,7 +291,7 @@ def create_app(test_config=None):
                     "error": 400,
                     "message": "Bad Request"
                 }), 400
-    
+
     @app.errorhandler(AuthError)
     def authentication_error(error):
         """
@@ -303,7 +303,6 @@ def create_app(test_config=None):
                     "error": error.status_code,
                     "message": error.error["description"]
                 }), error.status_code
-
 
     return app
 
@@ -317,7 +316,10 @@ def format_datetime(value, format='medium'):
         format = " MM/dd/yyyy h:mma"
     elif format == 'medium':
         format = "MM/dd/yyyy"
-    return babel.dates.format_datetime(date, format=format, locale=Locale('en', 'US'))
+    return babel.dates.format_datetime(
+        date,
+        format=format,
+        locale=Locale('en', 'US'))
 
 # ------------------------------------------------
 

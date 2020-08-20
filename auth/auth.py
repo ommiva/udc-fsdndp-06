@@ -9,6 +9,7 @@ AUTH0_DOMAIN = 'omv-fsnd-casting.us.auth0.com'
 ALGORITHMS = ['RS256']
 API_AUDIENCE = 'castingagency'
 
+
 # AuthError Exception
 
 class AuthError(Exception):
@@ -16,7 +17,7 @@ class AuthError(Exception):
     AuthError Exception
     Standarized way to communicate auth falure modes
     """
-    def __init__ (self, error, status_code):
+    def __init__(self, error, status_code):
         self.error = error
         self.status_code = status_code
 
@@ -37,7 +38,7 @@ def get_token_auth_header():
             'code': 'authorization_header_missing',
             'description': 'Authorization header is expected.'
         }, 401)
-    
+
     auth_header = request.headers['Authorization']
     parts = auth_header.split(' ')
 
@@ -56,7 +57,7 @@ def get_token_auth_header():
             'code': 'invalid_header',
             'description': 'Authorization header MUST be bearer token.'
         }, 401)
-    
+
     return parts[1]
 
 
@@ -69,13 +70,13 @@ def check_permission(permission, payload):
             'code': 'invalid_claims',
             'description': 'Permission not in JWT.'
         }, 400)
-    
+
     if permission not in payload['permissions']:
         raise AuthError({
             'code': 'unauthorized',
             'description': 'Permission not found'
         }, 403)
-    
+
     return True
 
 
@@ -84,10 +85,8 @@ def verify_decode_jwt(token):
     Validates JWT token
     """
     url = f'https://{AUTH0_DOMAIN}/.well-known/jwks.json'
-    #print("    ____ URL to verify (v_d_j) ", url)
-    
     jsonUrl = urlopen(url)
-    
+
     jwks = json.loads(jsonUrl.read())
     unverified_header = jwt.get_unverified_header(token)
 
@@ -98,7 +97,7 @@ def verify_decode_jwt(token):
             'code': 'invalid_header',
             'description': 'Authorization malformed.'
         }, 401)
-    
+
     for key in jwks['keys']:
         if key['kid'] == unverified_header['kid']:
             rsa_key = {
@@ -108,7 +107,7 @@ def verify_decode_jwt(token):
                 'n': key['n'],
                 'e': key['e']
             }
-    
+
     if rsa_key:
         try:
             payload = jwt.decode(
@@ -120,13 +119,13 @@ def verify_decode_jwt(token):
             )
 
             return payload
-        
+
         except jwt.ExpiredSignatureError:
             raise AuthError({
                 'code': 'token_expired',
                 'description': 'Token expired.'
             }, 401)
-        
+
         except jwt.JWTClaimsError:
             description = 'Incorrect claims.'
             + 'Please, check the audience and user.'
@@ -134,7 +133,7 @@ def verify_decode_jwt(token):
                 'code': 'token_claims',
                 'description': description
             }, 401)
-        
+
         except Exception:
             raise AuthError({
                 'code': 'invalid_header',
@@ -145,7 +144,6 @@ def verify_decode_jwt(token):
         'code': 'invalid_header',
         'description': 'Unable to find the appropiate key.'
     }, 401)
-    
 
 
 def requires_auth(permission=''):
@@ -154,23 +152,23 @@ def requires_auth(permission=''):
 
     - Uses get_token_auth_header method to get the token
     - Uses verify_decode_jwt to decode jwt
-    - Uses check_permission to validate claims anc check 
+    - Uses check_permission to validate claims anc check
       requested permissions
     Return  decoded payload
     """
     def requires_auth_decorator(f):
         @wraps(f)
         def wrapper(*args, **kwargs):
-            print("--- Wrapper")
+            # print("--- Wrapper")
             token = get_token_auth_header()
-            #print("--- Token ", token )
+            # print("--- Token ", token)
             payload = verify_decode_jwt(token)
-            print("--- Payload ", payload )
-            print("--- Permission ", permission)
+            # print("--- Payload ", payload)
+            # print("--- Permission ", permission)
             check_permission(permission, payload)
 
             return f(*args, **kwargs)
-        
+
         return wrapper
 
     return requires_auth_decorator
