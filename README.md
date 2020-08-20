@@ -64,7 +64,7 @@ The API is run on http://127.0.0.1:5000/ by default.
 ===============================
 
 
-## Testing
+#### Testing
 To run tests, run 
 ```bash
 dropdb casting_agency_test
@@ -78,6 +78,16 @@ python test_app.py
 ### API Keys / Authentication
 TODO: It requires no authentication at all.
 
+#### Roles
+- **Casting assistant**
+  - Can view actors and movies.
+- **Casting director**
+  - Casting assistant permissions and...
+  - Add or delete an actors from the database.
+  - Modify actors or movies.
+- **Executive Producer**
+  - Casting director permissions and...
+  - Add or delete an movies from the database.
 
 ### Errors
 
