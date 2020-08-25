@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<head></head>
+<html>
+  <div class="container">
+    <div class="offset-xs-4 col-xs-4"><h3>Authenticating...</h3></div>
+    <br/>
+  </div>
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script type="text/javascript" src="/static/js/libs/jquery-1.11.1.min.js"><\/script>')</script>
+  <script src="/static/js/assets/auth.js"></script>
+  <script>
+    const fragment = window.location.hash.substr(1).split('&')[0].split('=');
+    let payload = "";
+    console.log(fragment);
+    if (fragment[0] === 'access_token') {
+      console.log("Con token");
+      set_jwt(fragment[1]);
+      //localStorage.setItem("JWTS_LOCAL_KEY", fragment[1]);
+      payload = parseJwt(fragment[1]);
+      //$("#tkn").html(localStorage.getItem("JWTS_LOCAL_KEY"));
+      //console.dir(payload);
+      //console.log("Payload: " + payload);
+      window.location.href = "/intro"
+    }
+    else {
+      console.log("SIN token");
+      window.location.href = "/";
+    }
+    
+
+
+  </script>
+</html>

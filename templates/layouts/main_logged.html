@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<head>
+
+  <!-- meta -->
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-widht,initial-scale=1" />
+  <!-- /meta -->
+
+  <title>{% block title %}{% endblock %}</title>
+
+  <!-- styles -->
+  <link type="text/css" rel="stylesheet" href="/static/css/bootstrap.min.css">
+  <link type="text/css" rel="stylesheet" href="/static/css/layout.main.css" />
+  <link type="text/css" rel="stylesheet" href="/static/css/main.css" />
+  <link type="text/css" rel="stylesheet" href="/static/css/main.responsive.css" />
+  <link type="text/css" rel="stylesheet" href="/static/css/main.quickfix.css" />
+  <!-- /styles -->
+
+  <!-- scripts -->
+  <script src="https://kit.fontawesome.com/af77674fe5.js"></script>
+  <script src="/static/js/libs/modernizr-2.8.2.min.js"></script>
+  <script src="/static/js/libs/moment.min.js"></script>
+  <!--[if lt IE 9]><script src="/static/js/libs/respond-1.4.2.min.js"></script><![endif]-->
+  <!-- /scripts -->
+</head>
+<html>
+  <div id="wrap">
+
+
+    <div class="navbar navbar-default navbar-fixed-top"></div>
+
+    <!-- Begin page content -->
+    <main id="content" role="main" class="container">
+      {% with messager = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-block alert-info fade in">
+              <a class="close" data-dismiss="alert">&times;</a>
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      {% block content %}{% endblock %}
+    </main>
+
+    <div id="footer">
+      <div class="container">
+        Capstone 
+      </div>
+    </div>
+
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script type="text/javascript" src="/static/js/libs/jquery-1.11.1.min.js"><\/script>')</script>
+    <script type="text/javascript" src="/static/js/libs/bootstrap-3.1.1.min.js" defer></script>
+    <script src="/static/js/assets/auth.js"></script>
+
+  </div>
+</html>

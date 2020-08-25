@@ -1,13 +1,16 @@
 
-from flask import Flask, request, abort, jsonify
+from flask import Flask, request, abort, render_template, redirect
+from flask import flash, jsonify
 from flask_cors import CORS
 
 from models import setup_db, Actor, Movie, Cast
-from auth.auth import AuthError, requires_auth
+from auth.auth import AuthError, requires_auth, AUTH0_DOMAIN
 from datetime import datetime
 from babel import Locale
 from babel.dates import format_datetime
 from werkzeug import exceptions
+
+from authlib.integrations.flask_client import OAuth
 
 import os
 import sys
@@ -21,20 +24,45 @@ def create_app(test_config=None):
     setup_db(app)
     CORS(app)
 
+    # TODO: Move to env
+
+    domain = "omv-fsnd-casting.us.auth0.com"
+    audience = "castingagency"
+    client_id = "v13pFbBPOlvhNdvmss6QLe13L2gpz9To"
+    redirect_url = "http://localhost:8080/login-results"
+
     # ROUTES
     @app.route('/', methods=["GET"])
-    def default_route():
-        print("Default route")
-        return jsonify({
-            "success": True
-        })
+    def index():
+        return render_template('pages/home.html')
+
+    @app.route('/login', methods=["GET"])
+    def login():
+        link =\
+            f"https://{domain}/"\
+            + f"authorize?audience={audience}"\
+            + "&response_type=token"\
+            + f"&client_id={client_id}"\
+            + f"&redirect_uri={redirect_url}"
+        print(link)
+        return redirect(link)
+
+    @app.route('/login-results', methods=["GET"])
+    def login_config():
+        # TODO:
+        print(request.url)
+        return render_template('pages/dummy.html')
+
+    @app.route('/intro')
+    def intro():
+        return render_template('pages/index.html')
 
     @app.route('/actors', methods=["POST"])
     @requires_auth('post:actors')
     def new_actor():
         print("NEW actor")
 
-        body = request.get_json()
+        body = request.get_data()
         print("POST /actors | ", body)
         try:
             new_name = body.get('name', None)
@@ -282,6 +310,15 @@ def create_app(test_config=None):
                     "error": 404,
                     "message": "Resource not found"
                 }), 404
+
+    @app.errorhandler(405)
+    def not_allowed(error):
+        print(" <<<< Error 405 - ", error)
+        return jsonify({
+                    "success": False,
+                    "error": 405,
+                    "message": "Method not allowed"
+                }), 405
 
     @app.errorhandler(400)
     def bad_request(error):

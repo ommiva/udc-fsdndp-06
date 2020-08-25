@@ -76,7 +76,9 @@ python test_app.py
 
 
 ### API Keys / Authentication
-TODO: It requires no authentication at all.
+TODO: Describe authentication and how to configure it.
+The authentication system used for the project is Auth0.
+
 
 #### Roles
 - **Casting assistant**
