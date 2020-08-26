@@ -5,7 +5,7 @@
     <div class="col-xs-12">
       <h1>Movies</h1>
     </div>
-    <div class="col-xs-12">
+    <div class="col-xs-12" id="movies-content">
     </div>
   </div>
 {% endblock %}
@@ -13,7 +13,56 @@
 {% block scritps %}
   <script>
     $(function() {
-      alert('movies');
+      listMovies();
     });
+
+    function listMovies() {
+      //console.log("JWT (actors) " + active_jwt());
+      fetch('/movies-detail', {
+        headers: {
+          'Authorization': 'bearer ' + active_jwt(),
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(data => data.json())
+      .then(json => {
+        formatActors(json.movies);
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+    }
+
+    function formatActors(movies) {
+      content = movies.map(function(movie) {
+        let row = '<div class="thumbnail">';
+        row += "<h4>" + movie.title + "</h4>";
+        row += "<p>" + movie.release_date + "</p>";
+        row += '</div>';
+        return row;
+      });
+
+      if (content.length > 0) {
+        let rows = ""; 
+        for(let index = 0; index < content.length ; index++) {
+          if(index % 3 == 0) {
+            rows += '<div class="row">';
+          }
+          rows += '<div class="col-xs-4">';
+          rows += content[index];
+          rows += '</div>';
+          if(index % 3 == 2 || index == (content.length - 1)) {
+            rows += '</div> <!-- /end row -->';
+          }
+        }
+
+        content = rows;
+      }
+      else {
+        content = '<div class="alert alert-info">No movies found</div>';
+      }
+
+      $('#movies-content').html(content);
+    }
   </script>
 {% endblock %}

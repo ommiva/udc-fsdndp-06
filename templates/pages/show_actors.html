@@ -17,7 +17,7 @@
     });
 
     function listActors() {
-      console.log("JWT (actors) " + active_jwt());
+      //console.log("JWT (actors) " + active_jwt());
       fetch('/actors-detail', {
         headers: {
           'Authorization': 'bearer ' + active_jwt(),
@@ -26,10 +26,7 @@
       })
       .then(data => data.json())
       .then(json => {
-        console.log('actors list');
-        //console.dir(json);
         formatActors(json.actors);
-
       })
       .catch(function(err){
         console.log(err);
@@ -37,8 +34,6 @@
     }
 
     function formatActors(actors) {
-      console.log("formatActors: " + actors.length);
-      console.dir(actors);
       content = actors.map(function(actor) {
         let row = '<div class="thumbnail">';
         row += "<h4>" + actor.name + "</h4>";
