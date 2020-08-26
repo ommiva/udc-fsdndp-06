@@ -32,6 +32,7 @@ def create_app(test_config=None):
     redirect_url = "http://localhost:8080/login-results"
 
     # ROUTES
+    # Front-end
     @app.route('/', methods=["GET"])
     def index():
         return render_template('pages/home.html')
@@ -51,12 +52,21 @@ def create_app(test_config=None):
     def login_config():
         # TODO:
         print(request.url)
-        return render_template('pages/dummy.html')
+        return render_template('pages/authbridge.html')
 
     @app.route('/intro')
     def intro():
         return render_template('pages/index.html')
 
+    @app.route('/actors-list')
+    def actors():
+        return render_template('pages/show_actors.html')
+
+    @app.route('/movies-list')
+    def movies():
+        return render_template('pages/show_movies.html')
+
+    # API
     @app.route('/actors', methods=["POST"])
     @requires_auth('post:actors')
     def new_actor():

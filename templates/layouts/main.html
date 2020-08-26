@@ -28,7 +28,7 @@
 
     <!-- Begin page content -->
     <main id="content" role="main" class="container">
-      {% with messager = get_flashed_messages() %}
+      {% with messages = get_flashed_messages() %}
         {% if messages %}
           {% for message in messages %}
             <div class="alert alert-block alert-info fade in">

@@ -1,0 +1,74 @@
+{% extends 'layouts/main_logged.html' %}
+{% block title %}Casting Agency: Actors{% endblock %}
+{% block content %}
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>Actors</h1>
+    </div>
+    <div class="col-xs-12" id="actors-content">
+    </div>
+  </div>
+{% endblock %}
+
+{% block scritps %}
+  <script>
+    $(function() {
+      listActors();
+    });
+
+    function listActors() {
+      console.log("JWT (actors) " + active_jwt());
+      fetch('/actors-detail', {
+        headers: {
+          'Authorization': 'bearer ' + active_jwt(),
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(data => data.json())
+      .then(json => {
+        console.log('actors list');
+        //console.dir(json);
+        formatActors(json.actors);
+
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+    }
+
+    function formatActors(actors) {
+      console.log("formatActors: " + actors.length);
+      console.dir(actors);
+      content = actors.map(function(actor) {
+        let row = '<div class="thumbnail">';
+        row += "<h4>" + actor.name + "</h4>";
+        row += "<p>" + actor.gender + "</p>";
+        row += "<p>" + actor.age + "</p>";
+        row += '</div>';
+        return row;
+      });
+
+      if (content.length > 0) {
+        let rows = ""; 
+        for(let index = 0; index < content.length ; index++) {
+          if(index % 3 == 0) {
+            rows += '<div class="row">';
+          }
+          rows += '<div class="col-xs-4">';
+          rows += content[index];
+          rows += '</div>';
+          if(index % 3 == 2 || index == (content.length - 1)) {
+            rows += '</div> <!-- /end row -->';
+          }
+        }
+
+        content = rows;
+      }
+      else {
+        content = '<div class="alert alert-info">No actors found</div>';
+      }
+
+      $('#actors-content').html(content);
+    }
+  </script>
+{% endblock %}

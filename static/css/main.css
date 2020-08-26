@@ -21,6 +21,10 @@ a {
   cursor: pointer;
   color: #ff8c3a;
 }
+.navbar {
+  background-color: darkgoldenrod;
+
+}
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
   background: initial;
   color: initial;
@@ -57,7 +61,20 @@ p.lead {
   box-shadow: none;
   border-bottom: none;
   padding-top: 10px;
-  background-color: white;
+  background-color: darkgoldenrod;
+}
+.navbar > .container > .collapse > ul > li > a,
+.navbar > .container > .navbar-header > .navbar-brand  {
+  color: wheat;
+}
+.navbar > .container > .navbar-header > .navbar-brand {
+  color: wheat;
+  font-weight: bold;
+}
+.navbar > .container > .collapse > ul > li > a:hover {
+  background-color: goldenrod;
+  color: khaki;
+  font-weight: bold;
 }
 .navbar-nav .search {
   margin-top: 6px;

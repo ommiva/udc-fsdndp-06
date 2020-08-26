@@ -27,11 +27,28 @@
   <div id="wrap">
 
 
-    <div class="navbar navbar-default navbar-fixed-top"></div>
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Casting Agency</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li>{% if request.endpoint == 'actors-detail' %} class="active" {% endif %}<a href="{{ url_for('actors')}}">Actors</a></li>
+            <li>{% if request.endpoint == 'movies-detail' %} class="active" {% endif %}<a href="{{ url_for('movies')}}">Movies</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
     <!-- Begin page content -->
     <main id="content" role="main" class="container">
-      {% with messager = get_flashed_messages() %}
+      {% with messages = get_flashed_messages() %}
         {% if messages %}
           {% for message in messages %}
             <div class="alert alert-block alert-info fade in">
@@ -56,5 +73,6 @@
     <script type="text/javascript" src="/static/js/libs/bootstrap-3.1.1.min.js" defer></script>
     <script src="/static/js/assets/auth.js"></script>
 
+    {% block scritps %}{% endblock %}
   </div>
 </html>
