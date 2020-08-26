@@ -80,14 +80,14 @@ def create_app(test_config=None):
     def new_actor():
         print("NEW actor")
 
-        body = request.get_data()
+        body = request.get_json()
         print("POST /actors | ", body)
         try:
             new_name = body.get('name', None)
             new_age = body.get('age', 0)
             new_gender = body.get('gender', None)
 
-            if new_name is None:
+            if new_name is None or not new_name:
                 abort(400)
 
             actor = Actor(
@@ -202,10 +202,10 @@ def create_app(test_config=None):
             new_title = body.get('title', None)
             new_release = body.get('release_date', None)
 
-            if new_title is None:
+            if new_title is None or not new_title:
                 abort(400)
 
-            if new_release is not None:
+            if new_release is not None and new_release:
                 new_release = datetime.strptime(
                     new_release,
                     '%m/%d/%Y'

@@ -10,10 +10,11 @@
   </div>
 {% endblock %}
 
-{% block scritps %}
+{% block scripts %}
   <script>
     $(function() {
       listActors();
+      //showNewActor();
     });
 
     function listActors() {
@@ -26,6 +27,7 @@
       })
       .then(data => data.json())
       .then(json => {
+        console.dir(json);
         formatActors(json.actors);
       })
       .catch(function(err){
@@ -64,6 +66,102 @@
       }
 
       $('#actors-content').html(content);
+      showNewActor();
+    }
+
+    function showNewActor() {
+      let $content = $('#actors-content');
+      let update_content = "";
+
+      if (can('post:actors')) {
+        console.log("can POST");
+        update_content += '<div class="row">'
+          + '<div class="col-xs-10">'
+          +  '<div class="row hidden" id="new-actor-form">'
+          +   '<div class="col-xs-6">'
+          +    '<input type="text" name="actor-name" placeholder="Name" class="form-control"/>'
+          +   '</div>'
+          +   '<div class="col-xs-2">'
+          +    '<select name="actor-gender" class="form-control">'
+          +     '<option value="Select">Select</option>'
+          +     '<option value="Male">male</option>'
+          +     '<option value="Female">Female</option>'
+          +    '</select>'
+          +   '</div>'
+          +   '<div class="col-xs-2">'
+          +    '<input type="number" name="actor-age" placeholder="Age" class="form-control"/>'
+          +   '</div>'
+          +   '<div class="col-xs-2">'
+          +    '<button class="btn btn-block btn-success" id="btn-actor-send">Send</button>'
+          +   '</div>'
+          + '</div></div>'
+          + '<div class="col-xs-2">'
+          +  '<button class="btn btn-success btn-block" id="btn-new">New actor</button>'
+          + '</div></div>'
+          + '<div class="row">&nbsp;</div>';
+
+        $('body').on('click', '#btn-new', function() {
+          console.log('click');
+          showForm(true);
+        });
+
+        $('body').on('click', '#btn-actor-send', function() {
+          console.log('click btn-actor-send');
+          addActor();
+        });
+      }
+
+      update_content += $content.html();
+      //console.log("show new actor \n" + update_content);
+      $content.html(update_content);
+    }
+
+    function showForm(show) {
+      let $buttonNew = $('#btn-new');
+      let $form = $('#new-actor-form');
+      if(show) {
+        $buttonNew.prop('disabled', true)
+          .addClass('disabled')
+          .addClass('btn-default')
+          .removeClass('btn-success');
+        $form.removeClass('hidden');
+      }
+      else {
+        $buttonNew.prop('disabled', false)
+          .removeClass('disabled')
+          .removeClass('btn-default')
+          .addClass('btn-success');
+        $form.addClass('hidden');
+      }
+    }
+
+    function addActor() {
+      //console.log("JWT (actors) " + active_jwt());
+      let _data = {
+          'name': $('input[name="actor-name"]').val(),
+          'gender': $('select[name="actor-gender"]').val(),
+          'age': $('input[name="actor-age"]').val()
+        };
+      console.dir(_data);
+
+      fetch('/actors', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'bearer ' + active_jwt(),
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(_data)
+      })
+      .then(data => data.json())
+      .then(json => {
+        console.dir(json);
+        alert('actor added');
+        showForm(false);
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+      
     }
   </script>
 {% endblock %}

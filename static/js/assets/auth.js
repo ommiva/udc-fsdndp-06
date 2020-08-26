@@ -26,6 +26,14 @@ function logout() {
   window.location.href = "/logout";
 }
 
+function can(permission) {
+  let payload = decode_jwt();
+  return payload 
+    && payload.permissions 
+    && payload.permissions.length 
+    && payload.permissions.indexOf(permission) >= 0;
+}
+
 
 /*
 https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript-without-using-a-library
