@@ -41,62 +41,65 @@ class MoviesTestCase(unittest.TestCase):
         self.update_actor_data = "Kurt Russell"
         self.update_movie_data = "Jaws 3"
 
-        assistant_access_jwt = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6"
-        + "InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25k"
-        + "LWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjMzUxN2VlM"
-        + "GYwMDAzZDhjZDExOSIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTc3OT"
-        + "YxNzYsImV4cCI6MTU5Nzg4MjU3NiwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlF"
-        + "MZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3Rv"
-        + "cnMtZGV0YWlsIiwiZ2V0Om1vdmllcy1kZXRhaWwiXX0.pFfDaOoCmC3z5I2AnI0yD"
-        + "L15Nai386wP9E9jqeybmHPs513BuE1MSv6-EdmbPcTOlaEEMR7GR6OMNsnr7CzyUO"
-        + "PT8618rQvT3LQBIcdbBaaCUT8Wum1LQG0uxTWjrIyDRwwQ9qkcgeGLR81u0EtlUST"
-        + "zDN2JZGjVpeVW06NJp7vQid3N0uGh_lsSqhIJHUwqCQtrWV6WmFLxaL4vrnTTI9Fad"
-        + "UrfdOPbu5qHc-YU17uYzzbBPzgb3G_jK6uEeuWozgkCfKEkFtNIeriQIIUsmFKwDZU"
+        assistant_access_jwt = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6"\
+        + "InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25k"\
+        + "LWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjMzUxN2VlM"\
+        + "GYwMDAzZDhjZDExOSIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTc3OT"\
+        + "YxNzYsImV4cCI6MTU5Nzg4MjU3NiwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlF"\
+        + "MZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3Rv"\
+        + "cnMtZGV0YWlsIiwiZ2V0Om1vdmllcy1kZXRhaWwiXX0.pFfDaOoCmC3z5I2AnI0yD"\
+        + "L15Nai386wP9E9jqeybmHPs513BuE1MSv6-EdmbPcTOlaEEMR7GR6OMNsnr7CzyUO"\
+        + "PT8618rQvT3LQBIcdbBaaCUT8Wum1LQG0uxTWjrIyDRwwQ9qkcgeGLR81u0EtlUST"\
+        + "zDN2JZGjVpeVW06NJp7vQid3N0uGh_lsSqhIJHUwqCQtrWV6WmFLxaL4vrnTTI9Fad"\
+        + "UrfdOPbu5qHc-YU17uYzzbBPzgb3G_jK6uEeuWozgkCfKEkFtNIeriQIIUsmFKwDZU"\
         + "N7IAzXSHnp-RcdaftnJOqH6q-OigP5WMzrTGrl-vdev1vnbviWl88iCpIsg"
-        director_access_jwt = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6In"
-        + "IwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kL"
-        + "WNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjM2ZhZDJmMW"
-        + "NkMDAzN2VmZDg3NyIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTc3OTc"
-        + "yOTEsImV4cCI6MTU5Nzg4MzY5MSwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFM"
-        + "ZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY"
-        + "3RvcnMiLCJnZXQ6YWN0b3JzLWRldGFpbCIsImdldDptb3ZpZXMtZGV0YWlsIiwicG"
-        + "F0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiXX0.V84oeor"
-        + "A-66tffrNzgP1xT6ttVNp6g5AQeeE5vqS7mqddSmvNyn0bkkXAwGXVf1KrqRus8rb"
-        + "h8dPGYsTSxCIuBmmQKSkN3z5QzBrj7mb-29TbVEAQmbp0dShThWNX_r_gR-FLelTj"
-        + "yAQVmXOZ57Tsex3SSMIoWBAz0fjqdimf0J_HW_rIow_jAUHYrrt5EuaN5dN_NfZ_x"
-        + "4tPGGNRGJkQXeFsI2WgAXrU1ZX4ua3evQM1oqoXoekYkygB6208BTIKTZWi7hQWGJ"
-        + "Xdl2T2QqT1bvWhRyQXpPIi7Dd8XIuovp-RDzXqECL03Tp1tOYZuE6M54HVtBWp3jt"
+        
+        director_access_jwt = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6In"\
+        + "IwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kL"\
+        + "WNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjM2ZhZDJmMW"\
+        + "NkMDAzN2VmZDg3NyIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTc3OTc"\
+        + "yOTEsImV4cCI6MTU5Nzg4MzY5MSwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFM"\
+        + "ZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY"\
+        + "3RvcnMiLCJnZXQ6YWN0b3JzLWRldGFpbCIsImdldDptb3ZpZXMtZGV0YWlsIiwicG"\
+        + "F0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiXX0.V84oeor"\
+        + "A-66tffrNzgP1xT6ttVNp6g5AQeeE5vqS7mqddSmvNyn0bkkXAwGXVf1KrqRus8rb"\
+        + "h8dPGYsTSxCIuBmmQKSkN3z5QzBrj7mb-29TbVEAQmbp0dShThWNX_r_gR-FLelTj"\
+        + "yAQVmXOZ57Tsex3SSMIoWBAz0fjqdimf0J_HW_rIow_jAUHYrrt5EuaN5dN_NfZ_x"\
+        + "4tPGGNRGJkQXeFsI2WgAXrU1ZX4ua3evQM1oqoXoekYkygB6208BTIKTZWi7hQWGJ"\
+        + "Xdl2T2QqT1bvWhRyQXpPIi7Dd8XIuovp-RDzXqECL03Tp1tOYZuE6M54HVtBWp3jt"\
         + "b_wgDt9P5Q"
-        producer_access_jwt = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6In"
-        + "IwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWN"
-        + "hc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjNDQ4N2Q4YTllM"
-        + "DAzNzcxNjlmZCIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTc3OTc0NjY"
-        + "sImV4cCI6MTU5Nzg4Mzg2NiwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzT"
-        + "DJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnM"
-        + "iLCJkZWxldGU6bW92aWVzIiwiZ2V0OmFjdG9ycy1kZXRhaWwiLCJnZXQ6bW92aWVzL"
-        + "WRldGFpbCIsInBhdGNoOmFjdG9ycyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3J"
-        + "zIiwicG9zdDptb3ZpZXMiXX0.O3dexNJlqAefARkawj8Zbbs1hn5-zj2MrA-2OhmvT"
-        + "6tEBxSGzUx51jsVz2lzydaG2pvkLw0DdZlaBa4_eRE2ogjSCyqrtTXEnRk3j-O4F5Y"
-        + "0I7wIfnmWfZrfAI8Y6H-L9N3KkKEUYJB8C8tAePAjQqJfS-Gb2Bq-aorvsgCGId5ne"
-        + "Z4lwb2IlLrpiIb5Qrq0RJhPOejdBQ_73xWgl11fujCfZO8Gvcb5-DSiO0TpMErqTUK"
-        + "YHvZOsGNHgRWZW_-ccRz_b_YPpBFm_SY9RCnHJe67LAQUgAbC94KdFdqmMjIg6eGeu"
+        
+        producer_access_jwt = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6In"\
+        + "IwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWN"\
+        + "hc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjNDQ4N2Q4YTllM"\
+        + "DAzNzcxNjlmZCIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTc3OTc0NjY"\
+        + "sImV4cCI6MTU5Nzg4Mzg2NiwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzT"\
+        + "DJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnM"\
+        + "iLCJkZWxldGU6bW92aWVzIiwiZ2V0OmFjdG9ycy1kZXRhaWwiLCJnZXQ6bW92aWVzL"\
+        + "WRldGFpbCIsInBhdGNoOmFjdG9ycyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3J"\
+        + "zIiwicG9zdDptb3ZpZXMiXX0.O3dexNJlqAefARkawj8Zbbs1hn5-zj2MrA-2OhmvT"\
+        + "6tEBxSGzUx51jsVz2lzydaG2pvkLw0DdZlaBa4_eRE2ogjSCyqrtTXEnRk3j-O4F5Y"\
+        + "0I7wIfnmWfZrfAI8Y6H-L9N3KkKEUYJB8C8tAePAjQqJfS-Gb2Bq-aorvsgCGId5ne"\
+        + "Z4lwb2IlLrpiIb5Qrq0RJhPOejdBQ_73xWgl11fujCfZO8Gvcb5-DSiO0TpMErqTUK"\
+        + "YHvZOsGNHgRWZW_-ccRz_b_YPpBFm_SY9RCnHJe67LAQUgAbC94KdFdqmMjIg6eGeu"\
         + "ZkByAfA5bQXcvxYovvxcGOuqsyrpveTqaXGxw"
 
-        expired_jwt = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteH"
-        + "BqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3Rpbmcu"
-        + "dXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjM2ZhZDJmMWNkMDAzN2VmZDg"
-        + "3NyIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTcwOTgwNTAsImV4cCI6MT"
-        + "U5NzEwNTI1MCwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iL"
-        + "CJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJnZXQ6YWN0"
-        + "b3JzIiwiZ2V0Om1vdmllcyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOm1vdmllcyIsInB"
-        + "vc3Q6YWN0b3JzIl19.CSIWw2EmE-uCD0nSScQz2wwRsNtpROtpw8_-6Rd2-QTCekEzP"
-        + "RBeyveCSC98v9AZE3apocpWiZZ11DJTBM_56t-gK85r9q_buuhogpOTd2WpcG1y-pvO"
-        + "c_LdzTwhoX0HhDUyJz7qDg9_OOquIZnhbcuyQBxNc9vLymlTWNsXHYZ0VjZefRJ2XoG"
-        + "tpeyGH3MDrQowPy6HUXFEj64WUDP2HR7Q9lYm1Yv7i7duuPjef2iB9gq1NzuWh13M-g"
-        + "L1X3y4whizwT5FOF4Zoj3M39lyokuhitgy5wNcoTMkY_7lckMutoprjEjtfm6ZSq1RW"
+        expired_jwt = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteH"\
+        + "BqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3Rpbmcu"\
+        + "dXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjM2ZhZDJmMWNkMDAzN2VmZDg"\
+        + "3NyIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTcwOTgwNTAsImV4cCI6MT"\
+        + "U5NzEwNTI1MCwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iL"\
+        + "CJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJnZXQ6YWN0"\
+        + "b3JzIiwiZ2V0Om1vdmllcyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOm1vdmllcyIsInB"\
+        + "vc3Q6YWN0b3JzIl19.CSIWw2EmE-uCD0nSScQz2wwRsNtpROtpw8_-6Rd2-QTCekEzP"\
+        + "RBeyveCSC98v9AZE3apocpWiZZ11DJTBM_56t-gK85r9q_buuhogpOTd2WpcG1y-pvO"\
+        + "c_LdzTwhoX0HhDUyJz7qDg9_OOquIZnhbcuyQBxNc9vLymlTWNsXHYZ0VjZefRJ2XoG"\
+        + "tpeyGH3MDrQowPy6HUXFEj64WUDP2HR7Q9lYm1Yv7i7duuPjef2iB9gq1NzuWh13M-g"\
+        + "L1X3y4whizwT5FOF4Zoj3M39lyokuhitgy5wNcoTMkY_7lckMutoprjEjtfm6ZSq1RW"\
         + "VDuLDz8aRxqS9awP2yytaGflg"
-        malformed_jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMj"
-        + "M0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKx"
+        
+        malformed_jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMj"\
+        + "M0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKx"\
         + "wRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
 
         self.header_full_access = {
