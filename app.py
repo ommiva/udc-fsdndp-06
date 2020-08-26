@@ -34,6 +34,7 @@ def create_app(test_config=None):
     # ROUTES
     # Front-end
     @app.route('/', methods=["GET"])
+    @app.route('/default')
     def index():
         return render_template('pages/home.html')
 
@@ -65,6 +66,13 @@ def create_app(test_config=None):
     @app.route('/movies-list')
     def movies():
         return render_template('pages/show_movies.html')
+    
+    @app.route('/logout')
+    def logout():
+        link = f'https://{domain}/v2/'\
+            + 'logout?returnTo=http%3A%2F%2Flocalhost:8080'\
+            + f'&client_id={client_id}'
+        return redirect(link)
 
     # API
     @app.route('/actors', methods=["POST"])

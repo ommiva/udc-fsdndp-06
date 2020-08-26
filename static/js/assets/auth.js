@@ -23,6 +23,7 @@ function decode_jwt() {
 
 function logout() {
   set_jwt("");
+  window.location.href = "/logout";
 }
 
 
