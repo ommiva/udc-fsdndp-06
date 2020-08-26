@@ -41,7 +41,7 @@ def create_app(test_config=None):
             new_age = body.get('age', 0)
             new_gender = body.get('gender', None)
 
-            if new_name is None:
+            if new_name is None or not new_name:
                 abort(400)
 
             actor = Actor(
@@ -156,10 +156,10 @@ def create_app(test_config=None):
             new_title = body.get('title', None)
             new_release = body.get('release_date', None)
 
-            if new_title is None:
+            if new_title is None or not new_title:
                 abort(400)
 
-            if new_release is not None:
+            if new_release is not None and new_release:
                 new_release = datetime.strptime(
                     new_release,
                     '%m/%d/%Y'
@@ -282,6 +282,15 @@ def create_app(test_config=None):
                     "error": 404,
                     "message": "Resource not found"
                 }), 404
+
+    @app.errorhandler(405)
+    def not_allowed(error):
+        print(" <<<< Error 405 - ", error)
+        return jsonify({
+                    "success": False,
+                    "error": 405,
+                    "message": "Method not allowed"
+                }), 405
 
     @app.errorhandler(400)
     def bad_request(error):
