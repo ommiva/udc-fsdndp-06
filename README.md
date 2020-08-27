@@ -456,6 +456,45 @@ curl http://127.0.0.1:5000/movies -X POST -H "Content-Type: application/json" -d
 
 
 
+#### Casting
+
+##### Endpoints
+
+- GET /cast-detail
+- PATCH /cast/<int:movie_id>
+- DELETE /cast/<int:movie_id>
+- POST /cast
+
+
+###### GET /cast-detail
+* Retrieves all movies available.
+
+* _Request arguments_
+None
+
+* _Response_
+```json
+{
+  "cast": [
+    {
+      "actor_id": 7,
+      "actor_name": "Ian McKellen",
+      "movie_id": 7,
+      "movie_release_date": "06/18/1993",
+      "movie_title": "Last Action Hero"
+    }
+  ]
+}
+```
+
+* _CURL_
+```
+curl http://127.0.0.1:5000/cast-detail 
+```
+
+
+
+
 ### Authors
 
 Omar Miramontes

@@ -1,6 +1,8 @@
 
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column, String, Integer, Date, ForeignKey
+from sqlalchemy import Column, ForeignKey
+from sqlalchemy import String, Integer, Date
+from sqlalchemy.orm import relationship
 
 import json
 import os
@@ -32,6 +34,8 @@ class Movie(db.Model):
     id = Column(Integer, primary_key=True)
     title = Column(String)
     release_date = Column(Date)
+
+    cast = relationship("Cast", back_populates="movie")
 
     def __init__(self, title, release_date):
         self.title = title
@@ -75,6 +79,8 @@ class Actor(db.Model):
     age = Column(Integer)
     gender = Column(String(15))
 
+    cast = relationship("Cast", back_populates="actor")
+
     def __init__(self, name, age, gender):
         self.name = name
         self.age = age
@@ -114,6 +120,9 @@ class Cast(db.Model):
     id = Column(Integer, primary_key=True)
     actor_id = Column(Integer, ForeignKey('actors.id'), nullable=False)
     movie_id = Column(Integer, ForeignKey('movies.id'), nullable=False)
+
+    actor = relationship("Actor", back_populates="cast")
+    movie = relationship("Movie", back_populates="cast")
 
     def __repr__(self):
         return

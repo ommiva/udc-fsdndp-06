@@ -73,6 +73,38 @@
 					"response": []
 				},
 				{
+					"name": "List cast",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "132a8d1c-c227-4d8e-a3b3-a8349f40feb7",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/cast-detail",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast-detail"
+							]
+						},
+						"description": "Retireve actors list"
+					},
+					"response": []
+				},
+				{
 					"name": "List movies",
 					"event": [
 						{
@@ -490,6 +522,46 @@
 					"response": []
 				},
 				{
+					"name": "Fail list actors if post method",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8623cb43-4362-4973-b17e-4d39cd1c48d1",
+								"exec": [
+									"pm.test(\"Status code is 405\", function () {",
+									"    pm.response.to.have.status(405);",
+									"});",
+									"",
+									"pm.test(\"No authorization header\", function() {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.response.to.have.status(405);",
+									"    pm.expect(responseJson.success).to.eql(false);",
+									"    pm.expect(responseJson.message).to.eql(\"Method not allowed\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors-detail",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors-detail"
+							]
+						},
+						"description": "Retireve actors list"
+					},
+					"response": []
+				},
+				{
 					"name": "List movies",
 					"event": [
 						{
@@ -608,6 +680,46 @@
 								"movies-detail"
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fail list movies if post method",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "03588512-faf8-4105-9c09-feef8aefa941",
+								"exec": [
+									"pm.test(\"Status code is 405\", function () {",
+									"    pm.response.to.have.status(405);",
+									"});",
+									"",
+									"pm.test(\"No authorization header\", function() {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.response.to.have.status(405);",
+									"    pm.expect(responseJson.success).to.eql(false);",
+									"    pm.expect(responseJson.message).to.eql(\"Method not allowed\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies-detail",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies-detail"
+							]
+						},
+						"description": "Retireve actors list"
 					},
 					"response": []
 				},
@@ -842,6 +954,158 @@
 						"description": "Deletes movie with id 1 from database"
 					},
 					"response": []
+				},
+				{
+					"name": "List cast",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e19f9506-7506-4f72-8c99-3cf3bee1dffe",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors-detail",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors-detail"
+							]
+						},
+						"description": "Retireve casting list"
+					},
+					"response": []
+				},
+				{
+					"name": "Fail casting list if post method",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "53e60716-b6ae-42cc-8d04-6e0d6206ba51",
+								"exec": [
+									"pm.test(\"Status code is 405\", function () {",
+									"    pm.response.to.have.status(405);",
+									"});",
+									"",
+									"pm.test(\"No authorization header\", function() {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.response.to.have.status(405);",
+									"    pm.expect(responseJson.success).to.eql(false);",
+									"    pm.expect(responseJson.message).to.eql(\"Method not allowed\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/cast-detail",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast-detail"
+							]
+						},
+						"description": "Retireve actors list"
+					},
+					"response": []
+				},
+				{
+					"name": "Fail casting list if token expired",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7c8e8a9b-2c67-403a-adfa-0cc266b84e15",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									"",
+									"pm.test(\"Token expired\", function () {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.response.to.have.status(401);",
+									"    pm.expect(responseJson.success).to.eql(false);",
+									"    pm.expect(responseJson.message).to.eql(\"Token expired.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/cast-detail",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast-detail"
+							]
+						},
+						"description": "Retireve casting list"
+					},
+					"response": []
+				},
+				{
+					"name": "Fail casting list if no auth header",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "39665507-dd31-4585-a35f-84f22ac2f656",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									"",
+									"pm.test(\"No authorization header\", function() {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.response.to.have.status(401);",
+									"    pm.expect(responseJson.success).to.eql(false);",
+									"    pm.expect(responseJson.message).to.eql(\"Authorization header is expected.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors-detail",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors-detail"
+							]
+						},
+						"description": "Retireve casting list"
+					},
+					"response": []
 				}
 			],
 			"description": "Casting assistant access",
@@ -850,7 +1114,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjMzUxN2VlMGYwMDAzZDhjZDExOSIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTc3ODM0NDAsImV4cCI6MTU5Nzc5MDY0MCwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0Om1vdmllcy1kZXRhaWwiXX0.OqMK7BQqyqktHloNNGOFv7tiGGNRPIHvJmKPB2vXkhgIBKidnJ8Ungio_KrPVQiVzpKFxDvyl9ajxdHs07p_4ZuMf2QuwG2cfj-8O7r656rB36XAvGfkgqEh4w4xfy2gOlUvWoZjmJPCO_8syN5Zqbq82AzgKM1zuyMgJQ1thc2zL0lwt9oAW-bzaG29eJ8-9ABJf03EeqnHtjAsh_CAcg5nkWXSR_bKI8lxdJX3HdO8y35HicFNTBWpWUWAL8CrjM9ijBDZbH25jJr2QHizJGpDXAvETqQKC6IxBH0kWSKXoCZw97g_LU8eUs11g-RfNKLSAndHFbwQ_eUhBRsY0g",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjMzUxN2VlMGYwMDAzZDhjZDExOSIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTc3OTYxNzYsImV4cCI6MTU5Nzg4MjU3NiwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0Om1vdmllcy1kZXRhaWwiXX0.pFfDaOoCmC3z5I2AnI0yDL15Nai386wP9E9jqeybmHPs513BuE1MSv6-EdmbPcTOlaEEMR7GR6OMNsnr7CzyUOPT8618rQvT3LQBIcdbBaaCUT8Wum1LQG0uxTWjrIyDRwwQ9qkcgeGLR81u0EtlUSTzDN2JZGjVpeVW06NJp7vQid3N0uGh_lsSqhIJHUwqCQtrWV6WmFLxaL4vrnTTI9FadUrfdOPbu5qHc-YU17uYzzbBPzgb3G_jK6uEeuWozgkCfKEkFtNIeriQIIUsmFKwDZUN7IAzXSHnp-RcdaftnJOqH6q-OigP5WMzrTGrl-vdev1vnbviWl88iCpIsg",
 						"type": "string"
 					}
 				]
@@ -1444,6 +1708,38 @@
 						"description": "Deletes movie with id 1 from database"
 					},
 					"response": []
+				},
+				{
+					"name": "List cast",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "539267cf-34af-4608-8c56-33b7289f3d45",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors-detail",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors-detail"
+							]
+						},
+						"description": "Retireve actors list"
+					},
+					"response": []
 				}
 			],
 			"description": "Casting director access",
@@ -1452,7 +1748,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjM2ZhZDJmMWNkMDAzN2VmZDg3NyIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTc3ODQxNzAsImV4cCI6MTU5Nzc5MTM3MCwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJnZXQ6YWN0b3JzLWRldGFpbCIsImdldDptb3ZpZXMtZGV0YWlsIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiXX0.vi4qNklLoQSiCf1o44-9R8qOtnhr5Gh3MaSIxtyWG1lYu8PXCo3y1l4l9lISMhcnB8pu_9SlY7SPPddkRapfrOgG-dmAflm5kLPqt644itur4iVZtsk4XOSS7Sus7q3waR1OHCDX_DajdXnx-47dhLTSixwE5YFvQKNqqHCT1rjWC9Ne-LGHBoXS7DTAUSn_3HKMrDjjrokyoxWxB2xS_d_PblQQG88eE08Tymu0cJEkAFRtcr4dBlpuLzdLi39j4olzVDF0bxpkBjDcs86_euC-J12ez5DHmyWF4wdPPCerzAaIrVN9F5_D-HAAG-thoJpoiwxcmBYCDJ5oe_ZZ7w",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjM2ZhZDJmMWNkMDAzN2VmZDg3NyIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTc3OTcyOTEsImV4cCI6MTU5Nzg4MzY5MSwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJnZXQ6YWN0b3JzLWRldGFpbCIsImdldDptb3ZpZXMtZGV0YWlsIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiXX0.V84oeorA-66tffrNzgP1xT6ttVNp6g5AQeeE5vqS7mqddSmvNyn0bkkXAwGXVf1KrqRus8rbh8dPGYsTSxCIuBmmQKSkN3z5QzBrj7mb-29TbVEAQmbp0dShThWNX_r_gR-FLelTjyAQVmXOZ57Tsex3SSMIoWBAz0fjqdimf0J_HW_rIow_jAUHYrrt5EuaN5dN_NfZ_x4tPGGNRGJkQXeFsI2WgAXrU1ZX4ua3evQM1oqoXoekYkygB6208BTIKTZWi7hQWGJXdl2T2QqT1bvWhRyQXpPIi7Dd8XIuovp-RDzXqECL03Tp1tOYZuE6M54HVtBWp3jtb_wgDt9P5Q",
 						"type": "string"
 					}
 				]
@@ -1911,6 +2207,38 @@
 						"description": "Updates release date for movie with id 2"
 					},
 					"response": []
+				},
+				{
+					"name": "List cast",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "20dea8cb-d052-47a0-a477-42737b6458f0",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors-detail",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors-detail"
+							]
+						},
+						"description": "Retireve actors list"
+					},
+					"response": []
 				}
 			],
 			"description": "Executive producer access",
@@ -1973,7 +2301,7 @@
 	],
 	"variable": [
 		{
-			"id": "d9f5e740-779b-4203-a8f0-4c3982e294a0",
+			"id": "55df2296-0731-4d8e-a799-e61df7f94a68",
 			"key": "host",
 			"value": "localhost:5000"
 		}

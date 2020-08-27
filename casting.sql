@@ -206,6 +206,19 @@ COPY public.movies (id, title, release_date) FROM stdin;
 
 
 --
+-- Data for Name: movie_cast; Type: TABLE DATA; Schema: public; Owner: ommi
+--
+
+COPY public.movie_cast (id, actor_id, movie_id) FROM stdin;
+1	7	7
+2	5	3
+3	8	5
+4	3	6
+5	5	6
+\.
+
+
+--
 -- Name: actors_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ommi
 --
 
@@ -216,7 +229,7 @@ SELECT pg_catalog.setval('public.actors_id_seq', 8, true);
 -- Name: movie_cast_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ommi
 --
 
-SELECT pg_catalog.setval('public.movie_cast_id_seq', 1, false);
+SELECT pg_catalog.setval('public.movie_cast_id_seq', 5, false);
 
 
 --

@@ -263,6 +263,41 @@ def create_app(test_config=None):
             print(sys.exc_info())
             abort(422)
 
+    @app.route('/cast-detail', methods=["GET"])
+    @requires_auth('get:cast-detail')
+    def list_cast():
+        print("Cast list")
+        try:
+            data = []
+            cast_list = Cast.query.all()
+
+            for cast in cast_list:
+                content = {}
+                content["movie_id"] = cast.movie.id
+                content["movie_title"] = cast.movie.title
+                content["movie_release_date"] = \
+                    cast.movie.release_date.strftime('%m/%d/%Y')
+                content["actor_id"] = cast.actor.id
+                content["actor_name"] = cast.actor.name
+
+                data.append(content)
+                # print("Contnent ", content)
+
+            # print("list: ", len(data))
+            if not len(data):
+                abort(404)
+
+            return jsonify({
+                "cast": data
+            })
+
+        except exceptions.HTTPException as httpe:
+            print("Error HTTP > ", httpe)
+            raise
+        except Exception as e:
+            print(sys.exc_info())
+            abort(422)
+
     # Error Handling
 
     @app.errorhandler(422)

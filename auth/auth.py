@@ -127,8 +127,8 @@ def verify_decode_jwt(token):
             }, 401)
 
         except jwt.JWTClaimsError:
-            description = 'Incorrect claims.'
-            + 'Please, check the audience and user.'
+            description = 'Incorrect claims. ' \
+                + 'Please, check the audience and user.'
             raise AuthError({
                 'code': 'token_claims',
                 'description': description
