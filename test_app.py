@@ -298,6 +298,17 @@ class MoviesTestCase(unittest.TestCase):
         self.assertEqual(data["success"], False)
         self.assertEqual(data["message"], "Resource not found")
 
+    def test_403_if_delete_actor_has_no_permission(self):
+        print("test_403_if_delete_actor_has_no_permission")
+        res = self.client().delete(
+            "/actors/1",
+            headers=self.header_assistant_access)
+        data = res.get_json(res.data)
+
+        self.assertEqual(res.status_code, 403)
+        self.assertEqual(data["success"], False)
+        self.assertEqual(data["message"], "Permission not found")
+
     def test_delete_movie(self):
         print(" >>> test_delete_movie")
         res = self.client().delete(
