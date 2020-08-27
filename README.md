@@ -90,6 +90,22 @@ The authentication system used for the project is Auth0.
   - Casting director permissions and...
   - Add or delete an movies from the database.
 
+#### Permissions
+- **Casting assistant**
+  - get:actors-detail
+  - get:movies-detail
+  - get:cast-detail
+- **Casting director**
+  - Casting assistant permissions plus...
+  - post:actors
+  - delete:actors
+  - patch:actors
+  - patch:movies
+- **Executive Producer**
+  - Casting director permissions plus...
+  - delete:moves
+  - post:movies
+
 ### Errors
 
 #### Response codes
