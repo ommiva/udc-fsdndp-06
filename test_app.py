@@ -187,6 +187,7 @@ class MoviesTestCase(unittest.TestCase):
         self.assertIsNotNone(data["actor"])
 
     def test_400_if_new_actor_has_no_name(self):
+        print(" >>> test_400_if_new_actor_has_no_name")
         new_actor = {
             "age": 74,
             "gender": "Female"
@@ -201,6 +202,18 @@ class MoviesTestCase(unittest.TestCase):
         self.assertEqual(data["success"], False)
         self.assertEqual(data["message"], "Bad Request")
 
+    def test_403_if_add_new_actor_has_no_permission(self):
+        print(" >>> test_403_if_add_new_actor_has_no_permission")
+        res = self.client().post(
+            "/actors",
+            json=self.new_actor,
+            headers=self.header_assistant_access)
+        data = res.get_json(res.data)
+
+        self.assertEqual(res.status_code, 403)
+        self.assertEqual(data["success"], False)
+        self.assertEqual(data["message"], "Permission not found")
+
     def test_add_new_movie(self):
         res = self.client().post(
             "/movies",
@@ -213,6 +226,7 @@ class MoviesTestCase(unittest.TestCase):
         self.assertIsNotNone(data["movie"])
 
     def test_400_if_new_movie_has_no_title(self):
+        print(" >>> test_400_if_new_movie_has_no_title")
         new_movie = {
             "release_date": ""
         }
@@ -225,6 +239,18 @@ class MoviesTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 400)
         self.assertEqual(data["success"], False)
         self.assertEqual(data["message"], "Bad Request")
+
+    def test_403_if_add_new_movie_has_no_permission(self):
+        print(" >>> test_403_if_add_new_movie_has_no_permission")
+        res = self.client().post(
+            "/movies",
+            json=self.new_movie,
+            headers=self.header_director_access)
+        data = res.get_json(res.data)
+
+        self.assertEqual(res.status_code, 403)
+        self.assertEqual(data["success"], False)
+        self.assertEqual(data["message"], "Permission not found")
 
     def test_update_actor(self):
         res = self.client().patch(
@@ -240,6 +266,7 @@ class MoviesTestCase(unittest.TestCase):
         self.assertEqual(actor.name, data["actor"]["name"])
 
     def test_404_if_update_actor_does_not_exist(self):
+        print(" >>> test_404_if_update_actor_does_not_exist")
         res = self.client().patch(
             "/actors/10000",
             json={"gender": "Female"},
@@ -249,6 +276,18 @@ class MoviesTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 404)
         self.assertEqual(data["success"], False)
         self.assertEqual(data["message"], "Resource not found")
+
+    def test_404_if_update_actor_access_expired(self):
+        print(" >>> test_404_if_update_actor_access_expired")
+        res = self.client().patch(
+            "/actors/1",
+            json={"gender": "Female"},
+            headers=self.header_expired)
+        data = res.get_json(res.data)
+
+        self.assertEqual(res.status_code, 401)
+        self.assertEqual(data["success"], False)
+        self.assertEqual(data["message"], "Token expired.")
 
     def test_update_movie(self):
         res = self.client().patch(
@@ -264,6 +303,7 @@ class MoviesTestCase(unittest.TestCase):
         self.assertEqual(movie.title, data["movie"]["title"])
 
     def test_404_if_update_movie_does_not_exist(self):
+        print(" >>> test_404_if_update_movie_does_not_exist")
         res = self.client().patch(
             "/movies/10000",
             json={"release_date": "01/01/0001"},
@@ -332,6 +372,17 @@ class MoviesTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 404)
         self.assertEqual(data["success"], False)
         self.assertEqual(data["message"], "Resource not found")
+
+    def test_403_if_delete_movie_has_no_permission(self):
+        print(" >>> test_404_if_delete_movie_has_no_permission")
+        res = self.client().delete(
+            "/movies/1",
+            headers=self.header_director_access)
+        data = res.get_json(res.data)
+
+        self.assertEqual(res.status_code, 403)
+        self.assertEqual(data["success"], False)
+        self.assertEqual(data["message"], "Permission not found")
 
     def test_get_all_cast(self):
         print(" >>> test_get_all_cast")
