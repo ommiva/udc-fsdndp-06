@@ -105,6 +105,9 @@ The authentication system used for the project is Auth0.
   - Casting director permissions plus...
   - delete:moves
   - post:movies
+- **Notes**
+  - Any attempt to access endpoint without permission will result
+    on a 403 - 'Permission not found' response.
 
 ### Errors
 
@@ -115,6 +118,8 @@ The authentication system used for the project is Auth0.
 - **401 - Unauthorized ^** – Missing or bad authentication.
 - **403 - Forbidden ^** – User authenticated but not authorized to perform the requested operation.
 - **404 - Not found** – The requested resource was not found.
+- **405 - Method not allowed** – The requested method to access a
+  resource was not allowed.
 - **422 - Unprocessable** – The application can not procces the request.
 - **500 - Internal server error** – Something went wrong. 
 
@@ -125,38 +130,44 @@ The authentication system used for the project is Auth0.
 
 ```json
 {
-  "error": 400, 
-  "message": "Bad request", 
+  "error": 400,
+  "message": "Bad request",
   "success": false
 }
 
 {
-  "error": 404, 
-  "message": "Resource not found", 
+  "error": 404,
+  "message": "Resource not found",
   "success": false
 }
 
 {
-  "error": 401, 
-  "message": "Unauthorized", 
+  "error": 405,
+  "message": "Method not allowed",
   "success": false
 }
 
 {
-  "error": 403, 
-  "message": "Forbidden", 
+  "error": 401,
+  "message": "Unauthorized",
   "success": false
 }
 
 {
-  "error": 422, 
-  "message": "Unprocessable", 
+  "error": 403,
+  "message": "Forbidden",
   "success": false
 }
 
 {
-  "error": 500, 
-  "message": "Internal server error", 
+  "error": 422,
+  "message": "Unprocessable",
+  "success": false
+}
+
+{
+  "error": 500,
+  "message": "Internal server error",
   "success": false
 }
 ```
