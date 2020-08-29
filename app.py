@@ -271,25 +271,57 @@ def create_app(test_config=None):
             data = []
             cast_list = Cast.query.all()
 
-            for cast in cast_list:
-                content = {}
-                content["movie_id"] = cast.movie.id
-                content["movie_title"] = cast.movie.title
-                content["movie_release_date"] = \
-                    cast.movie.release_date.strftime('%m/%d/%Y')
-                content["actor_id"] = cast.actor.id
-                content["actor_name"] = cast.actor.name
+            current_cast = [cast.format() for cast in cast_list]
 
-                data.append(content)
-                # print("Contnent ", content)
-
+            # print("Casting ", current_cast)
             # print("list: ", len(data))
-            if not len(data):
+            if not len(current_cast):
                 abort(404)
 
             return jsonify({
-                "cast": data
+                "cast": current_cast
             })
+
+        except exceptions.HTTPException as httpe:
+            print("Error HTTP > ", httpe)
+            raise
+        except Exception as e:
+            print(sys.exc_info())
+            abort(422)
+
+    @app.route('/cast', methods=["POST"])
+    @requires_auth('post:casting')
+    def new_cast():
+        print("New cast")
+
+        body = request.get_json()
+
+        try:
+            actor_id = body.get("actor", None)
+            movie_id = body.get("movie", None)
+
+            if actor_id is None \
+               or movie_id is None \
+               or not actor_id \
+               or not movie_id:
+                abort(400)
+
+            actor = Actor.query.filter_by(id=actor_id).one_or_none()
+            movie = Movie.query.filter_by(id=movie_id).one_or_none()
+
+            if actor is None or movie is None:
+                abort(404)
+
+            casting = Cast(
+                actor_id=actor.id,
+                movie_id=movie.id
+                )
+            casting.insert()
+
+            return jsonify({
+                "success": True,
+                "cast": casting.format()
+            }), 201
 
         except exceptions.HTTPException as httpe:
             print("Error HTTP > ", httpe)

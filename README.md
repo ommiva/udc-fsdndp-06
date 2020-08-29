@@ -101,6 +101,7 @@ The authentication system used for the project is Auth0.
   - delete:actors
   - patch:actors
   - patch:movies
+  - post:casting
 - **Executive Producer**
   - Casting director permissions plus...
   - delete:moves
@@ -517,6 +518,33 @@ None
 * _CURL_
 ```
 curl http://127.0.0.1:5000/cast-detail 
+```
+
+
+###### POST /cast
+* Retrieves all movies available.
+
+* _Request arguments_
+  * Actor (id)
+  * Movie (id)
+
+* _Response_
+```json
+{
+  "cast": {
+    "actor_id": 4,
+    "actor_name": "Emma Watson",
+    "movie_id": 4,
+    "movie_release_date": "12/25/2019",
+    "movie_title": "Little Women"
+  },
+  "success": true
+}
+```
+
+* _CURL_
+```
+curl http://127.0.0.1:5000/cast  -X POST -H "Content-Type: application/json" -d '{"actor": 4, "movie": 4}'
 ```
 
 

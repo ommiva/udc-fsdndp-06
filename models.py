@@ -124,6 +124,27 @@ class Cast(db.Model):
     actor = relationship("Actor", back_populates="cast")
     movie = relationship("Movie", back_populates="cast")
 
+    def insert(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def update(self):
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
+    def format(self):
+        return {
+            "movie_id": self.movie.id,
+            "movie_title": self.movie.title,
+            "movie_release_date":
+                self.movie.release_date.strftime('%m/%d/%Y'),
+            "actor_id": self.actor.id,
+            "actor_name": self.actor.name
+        }
+
     def __repr__(self):
         return
         f'<Cast {self.id} actor: {self.actor_id} movie: {self.movie_id}>'

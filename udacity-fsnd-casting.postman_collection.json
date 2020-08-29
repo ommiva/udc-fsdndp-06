@@ -17,8 +17,8 @@
 							"script": {
 								"id": "5d083be1-4efb-4ca4-b2c8-40ebe215e261",
 								"exec": [
-									"pm.test(\"Status code is 201\", function () {",
-									"    pm.response.to.have.status(201);",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -173,6 +173,47 @@
 							]
 						},
 						"description": "Add a new actor"
+					},
+					"response": []
+				},
+				{
+					"name": "Add casting",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a6a369ac-9580-42d9-95a5-2595f200ec49",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"movie\": 1,   \n    \"actor\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast"
+							]
+						},
+						"description": "Add a new movie-actor assignation"
 					},
 					"response": []
 				},
@@ -988,6 +1029,47 @@
 					"response": []
 				},
 				{
+					"name": "Add casting",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3d0b41d5-a797-4680-ae6c-76a780213bc7",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"movie\": 1,   \n    \"actor\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast"
+							]
+						},
+						"description": "Add a new movie-actor assignation"
+					},
+					"response": []
+				},
+				{
 					"name": "Fail casting list if post method",
 					"event": [
 						{
@@ -1052,6 +1134,16 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjMzUxN2VlMGYwMDAzZDhjZDExOSIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTcwOTc5MjQsImV4cCI6MTU5NzEwNTEyNCwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMiLCJnZXQ6bW92aWVzIl19.cR06a3ViTYfuI6ddcrGt5M7guUtry93ULrzWtdA2tzuqiDIz0I-YnpK1MTvEiZ7ZaWccFhl-6lKux-WZvw26XSf_asfBdmwVVu3hDYuKXWjUtKt7KAzG4yV0uKRntpyfXfDjaeisIbCKWYBN12WWRDAhi0pNIuj_cDcyBrw1eGWpjrkV68CwdWfq8nw_wD_ZGpOVhhS4oc821ImneGp4o9qL_S6_qR2NJbllkdPTFJYUZ2bQ8Lnivx-gSXJV0O6Us7Fx8CwsFfYXjuKncv1q95tRnIzVhI_rqN3tJHTGnUbr5RC6QxnMJDjld4CnKSdFyNzikU1EWsVstKEDGFJ1_A",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -1092,6 +1184,9 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -1114,7 +1209,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjMzUxN2VlMGYwMDAzZDhjZDExOSIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTc3OTYxNzYsImV4cCI6MTU5Nzg4MjU3NiwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0Om1vdmllcy1kZXRhaWwiXX0.pFfDaOoCmC3z5I2AnI0yDL15Nai386wP9E9jqeybmHPs513BuE1MSv6-EdmbPcTOlaEEMR7GR6OMNsnr7CzyUOPT8618rQvT3LQBIcdbBaaCUT8Wum1LQG0uxTWjrIyDRwwQ9qkcgeGLR81u0EtlUSTzDN2JZGjVpeVW06NJp7vQid3N0uGh_lsSqhIJHUwqCQtrWV6WmFLxaL4vrnTTI9FadUrfdOPbu5qHc-YU17uYzzbBPzgb3G_jK6uEeuWozgkCfKEkFtNIeriQIIUsmFKwDZUN7IAzXSHnp-RcdaftnJOqH6q-OigP5WMzrTGrl-vdev1vnbviWl88iCpIsg",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjMzUxN2VlMGYwMDAzZDhjZDExOSIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTg2NDU1MzIsImV4cCI6MTU5ODczMTkzMiwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0OmNhc3QtZGV0YWlsIiwiZ2V0Om1vdmllcy1kZXRhaWwiXX0.J-jaEx-e4xvaz8JrL5LKfpIH4C6-Kwoj7kA1tGzrMC8r2C9uR7iO9pJo-Q_uL8UHOVKyQzBhSl4F4HZsUsALtyl_feKhxxeBvrXBeKagCgPAmAtT7Qt68Z52auQ9LvqXkuHEpV4jyCwAkH8Nw_OO_ixqJ0jhGLhDDsybvKxgqyxSgM4nLkN_WR-51TkUAwXHfo5Ly3_VWxBVjFVockEkkWQIBA-uCtYgF02VsfEp83NPKUv3EZ49QoacnF0JrT10BzpXXG1WnjTsD0uBHABWGxrJnpJBpM6DtkXEnGoXaCqRmGE_uSx4xu64JRyostH66-Vge9Xqo6Gfnsu7IzcAow",
 						"type": "string"
 					}
 				]
@@ -1552,6 +1647,57 @@
 					"response": []
 				},
 				{
+					"name": "Fail delete actor if incorrect claims",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "649027aa-3e65-4037-adc2-ccdd315f9de4",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									"",
+									"pm.test(\"No authorization header\", function() {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.response.to.have.status(401);",
+									"    pm.expect(responseJson.success).to.eql(false);",
+									"    pm.expect(responseJson.message).to.eql(\"Incorrect claims. Please, check the audience and user.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmNDdlM2RmOWM1MTA2MDA2ZGUxNmMxOSIsImF1ZCI6ImNhc3RpbmdhZ2VudHMiLCJpYXQiOjE1OTg2NDQxOTAsImV4cCI6MTU5ODczMDU5MCwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0OmFnZW50LWRldGFpbCJdfQ.c3491jC-Ab8EQOc1lk_cK9AetivNymxxDEJY28lCD53_r_wHotvxVAtedw3qHKBsb1w98IOd0GB2ohfwdRa2vQcvFHh3vC3_QZpekms6YQ2gFOmDBEp0rWfL7m5zB-I5Lc9rezVpGWNk0qHl69YdZuNVgoGduDRm7jGrq04xW7vji0GfnPCIf0zviP3xzgRZesF1PcG9DDPWSwLBnQ-CCBxojE1nqAPRa_zgBcTd5iLmhuR5nxULfRoxASXZXc4F8eFNcGssttW2i2zN4RifQzvBGMStbLphTKSTqyidVprAhFohAZRn0tjA_IL7PEq8-GH6mK-EDsrMDOiIpGytcA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors/4",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"4"
+							]
+						},
+						"description": "Removes actor with id 1 from database"
+					},
+					"response": []
+				},
+				{
 					"name": "Fail delete actor if no bearer token",
 					"event": [
 						{
@@ -1740,6 +1886,211 @@
 						"description": "Retireve actors list"
 					},
 					"response": []
+				},
+				{
+					"name": "Add casting",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "627fc2b4-21af-4f6e-ba03-8ae8ba8e39f5",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"movie\": 2,   \n    \"actor\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast"
+							]
+						},
+						"description": "Add a new movie-actor assignation"
+					},
+					"response": []
+				},
+				{
+					"name": "Fail add casting if no actor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3558cbae-b0d8-4c5e-af41-2def576868ab",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"movie\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast"
+							]
+						},
+						"description": "Add a new movie-actor assignation"
+					},
+					"response": []
+				},
+				{
+					"name": "Fail add casting if no movie",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "050ec18a-3ab9-408c-890e-20a395234f4a",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n    \"actor\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast"
+							]
+						},
+						"description": "Add a new movie-actor assignation"
+					},
+					"response": []
+				},
+				{
+					"name": "Fail add casting if actor not found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3ccd3031-14bf-4dfc-afc6-5c26d3a6837d",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"movie\": 2,   \n    \"actor\": 2000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast"
+							]
+						},
+						"description": "Add a new movie-actor assignation"
+					},
+					"response": []
+				},
+				{
+					"name": "Fail add casting if movie not found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4511047b-cd54-4cd3-9b41-40da124d1350",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"movie\": 2000,   \n    \"actor\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast"
+							]
+						},
+						"description": "Add a new movie-actor assignation"
+					},
+					"response": []
 				}
 			],
 			"description": "Casting director access",
@@ -1748,7 +2099,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjM2ZhZDJmMWNkMDAzN2VmZDg3NyIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTc3OTcyOTEsImV4cCI6MTU5Nzg4MzY5MSwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJnZXQ6YWN0b3JzLWRldGFpbCIsImdldDptb3ZpZXMtZGV0YWlsIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiXX0.V84oeorA-66tffrNzgP1xT6ttVNp6g5AQeeE5vqS7mqddSmvNyn0bkkXAwGXVf1KrqRus8rbh8dPGYsTSxCIuBmmQKSkN3z5QzBrj7mb-29TbVEAQmbp0dShThWNX_r_gR-FLelTjyAQVmXOZ57Tsex3SSMIoWBAz0fjqdimf0J_HW_rIow_jAUHYrrt5EuaN5dN_NfZ_x4tPGGNRGJkQXeFsI2WgAXrU1ZX4ua3evQM1oqoXoekYkygB6208BTIKTZWi7hQWGJXdl2T2QqT1bvWhRyQXpPIi7Dd8XIuovp-RDzXqECL03Tp1tOYZuE6M54HVtBWp3jtb_wgDt9P5Q",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjM2ZhZDJmMWNkMDAzN2VmZDg3NyIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTg2NDkwNzgsImV4cCI6MTU5ODczNTQ3OCwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJnZXQ6YWN0b3JzLWRldGFpbCIsImdldDpjYXN0LWRldGFpbCIsImdldDptb3ZpZXMtZGV0YWlsIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiLCJwb3N0OmNhc3RpbmciXX0.FojMF6akenAXZWhhP2aPRqBYDUyGQpDwnSq5WLNMbqCGLakBBhFCYym4mBZ24TN-tzT33CQWC_oHMhBWRan22QdmPsuuc9dwfQqzUaMfhJCp1BhTJiQ5P9n5gKFSgc0Q17Q9guj9BN7aDjyPAw-gf1Z8mKKJpnLBXw_vqm0XuFC9f--tV060euhjOGuW2cpjLm7ClnhvRrOF5X6KgkfSfrMUNnJh6zB2nozYOQV7LbrIrMqijpBiSSqP5M9CyH_1kCPZhNMWLluCAp10c0t1-5Sf9ResqBqCROlvc4yELHjZo0StNRlgKD7iCrpskbWVuITBC-HhHwKsDMCsJ1kvVg",
 						"type": "string"
 					}
 				]
@@ -1788,8 +2139,8 @@
 							"script": {
 								"id": "60989460-fd05-421c-950d-0b2acede6d9f",
 								"exec": [
-									"pm.test(\"Status code is 401\", function () {",
-									"    pm.response.to.have.status(401);",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -2239,6 +2590,47 @@
 						"description": "Retireve actors list"
 					},
 					"response": []
+				},
+				{
+					"name": "Add casting",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "00934b01-1b85-4d0a-b1ed-c9957ed4b9f2",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"movie\": 3,   \n    \"actor\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast"
+							]
+						},
+						"description": "Add a new movie-actor assignation"
+					},
+					"response": []
 				}
 			],
 			"description": "Executive producer access",
@@ -2247,7 +2639,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjNDQ4N2Q4YTllMDAzNzcxNjlmZCIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTc3ODQ2OTQsImV4cCI6MTU5Nzc5MTg5NCwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6bW92aWVzIiwiZ2V0OmFjdG9ycy1kZXRhaWwiLCJnZXQ6bW92aWVzLWRldGFpbCIsInBhdGNoOmFjdG9ycyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIiwicG9zdDptb3ZpZXMiXX0.r6SOgjroYjXH7jWaZmQLCcAqWsnEDELbn379W7clY_kBhxR5j21TEvAovVsVWP7C3acU3ZFCc3mglOnsNx0Aaov6WZ-k22OTAbi3jKgLMDtXZ5zmd_LQBDiR5lh19uEHjlDI1I8eWrtrPtt_C9q9eh1YjCR0S_-qJqg_056aKrFIIKNkg4g2NAYYRFwnfd_rHiTOcCM3sAkuXSoqEpiftCZAdjO6z7wsOgy1LPUS6SMfPPRZ30SJaC6tIW2YVhFHg_Lb8nOxyqwHoyK7Bad3osYmmWJW6uplgpGTHco_d4bBhRyUIJ1G8REWi_sxpDfR3pIzfLzREdxjT7ARPNQENg",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjNDQ4N2Q4YTllMDAzNzcxNjlmZCIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTg2NDkyMTUsImV4cCI6MTU5ODczNTYxNSwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6bW92aWVzIiwiZ2V0OmFjdG9ycy1kZXRhaWwiLCJnZXQ6Y2FzdC1kZXRhaWwiLCJnZXQ6bW92aWVzLWRldGFpbCIsInBhdGNoOmFjdG9ycyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIiwicG9zdDpjYXN0aW5nIiwicG9zdDptb3ZpZXMiXX0.EoC_pfBMh8czoNi4rU1lYl7HasUX9Cmcmhq4LvxgJHEb9oddKXvGQ68atJPNb2bjJbkNEO7HKgxR7N-FHgQ98_2x3nZ02tkJt8ktCdMHCz6uOxVyXatbMFiUDOMPxgYdlVjnZtfo_cXF2uP4BN-9iPA0WXveaPnJaBhAPVVY7D1joKXg6_TRbQp7Oh8EQAnU_gGlqn2c4g8H-425oJVhw4tuyov507qK1584x1SO8FIS-z15a996Cnq-YphjKawx1Q2I_bMd0ogJYRPzaqrtzOpG0libF31LT4ui_4bfi_UBocaGnBfkMJue1ZwOkarR5mkXHsrqzgkauT0WngCj4Q",
 						"type": "string"
 					}
 				]
@@ -2301,7 +2693,7 @@
 	],
 	"variable": [
 		{
-			"id": "55df2296-0731-4d8e-a799-e61df7f94a68",
+			"id": "5b073c13-3086-4dd5-85e2-63264e987bc8",
 			"key": "host",
 			"value": "localhost:5000"
 		}
