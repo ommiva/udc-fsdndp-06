@@ -329,6 +329,30 @@ def create_app(test_config=None):
         except Exception as e:
             print(sys.exc_info())
             abort(422)
+    
+    @app.route('/cast-actor/<int:cast_id>', methods=["DELETE"])
+    @requires_auth("delete:casting-actor")
+    def delete_casting_actor(cast_id):
+        try:
+            cast = Cast.query.filter_by(id=cast_id).one_or_none()
+
+            if cast is None:
+                abort(404)
+                
+            deleted = cast.format()
+            cast.delete()
+
+            return jsonify({
+                "success": True,
+                "delete": deleted
+            })
+
+        except exceptions.HTTPException as httpe:
+            print("Error HTTP > ", httpe)
+            raise
+        except Exception as e:
+            print(sys.exc_info())
+            abort(422)
 
     # Error Handling
 

@@ -336,7 +336,7 @@ curl http://127.0.0.1:5000/actors/3 -X PATCH -H "Content-Type: application/json"
 
 * _CURL_
 ```
-curl http://127.0.0.1:5000/actors/4
+curl http://127.0.0.1:5000/actors/4 -X DELETE
 ```
 
 
@@ -455,7 +455,7 @@ curl http://127.0.0.1:5000/movies/3
 
 * _CURL_
 ```
-curl http://127.0.0.1:5000/movies/4
+curl http://127.0.0.1:5000/movies/4 -X DELETE
 ```
 
 
@@ -522,7 +522,7 @@ curl http://127.0.0.1:5000/cast-detail
 
 
 ###### POST /cast
-* Retrieves all movies available.
+* Adds new movie-actor assignation.
 
 * _Request arguments_
   * Actor (id)
@@ -545,6 +545,33 @@ curl http://127.0.0.1:5000/cast-detail
 * _CURL_
 ```
 curl http://127.0.0.1:5000/cast  -X POST -H "Content-Type: application/json" -d '{"actor": 4, "movie": 4}'
+```
+```
+
+
+###### DELETE /cast-actor/<int:cast_id>
+* Deletes existing movie-actor assignation.
+
+* _Request arguments_
+  * Cast (id)
+
+* _Response_
+```json
+{
+  "delete": {
+    "actor_id": 8,
+    "actor_name": "Jodie Foster",
+    "movie_id": 5,
+    "movie_release_date": "01/30/1991",
+    "movie_title": "the silence of the lambs"
+  },
+  "success": true
+}
+```
+
+* _CURL_
+```
+curl http://127.0.0.1:5000/cast  -X DELETE
 ```
 
 

@@ -1209,7 +1209,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjMzUxN2VlMGYwMDAzZDhjZDExOSIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTg2NDU1MzIsImV4cCI6MTU5ODczMTkzMiwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0OmNhc3QtZGV0YWlsIiwiZ2V0Om1vdmllcy1kZXRhaWwiXX0.J-jaEx-e4xvaz8JrL5LKfpIH4C6-Kwoj7kA1tGzrMC8r2C9uR7iO9pJo-Q_uL8UHOVKyQzBhSl4F4HZsUsALtyl_feKhxxeBvrXBeKagCgPAmAtT7Qt68Z52auQ9LvqXkuHEpV4jyCwAkH8Nw_OO_ixqJ0jhGLhDDsybvKxgqyxSgM4nLkN_WR-51TkUAwXHfo5Ly3_VWxBVjFVockEkkWQIBA-uCtYgF02VsfEp83NPKUv3EZ49QoacnF0JrT10BzpXXG1WnjTsD0uBHABWGxrJnpJBpM6DtkXEnGoXaCqRmGE_uSx4xu64JRyostH66-Vge9Xqo6Gfnsu7IzcAow",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjMzUxN2VlMGYwMDAzZDhjZDExOSIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTg5MDkxMzksImV4cCI6MTU5ODk5NTUzOSwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0OmNhc3QtZGV0YWlsIiwiZ2V0Om1vdmllcy1kZXRhaWwiXX0.D78SEivNA8RendFHQMHAcoHcWL53hbLWRNXXivxNCNKz9VVDritkF1xmlAEFtTRxgC_6vFUmsK9KXhv2Zp9Y22Um6JO_xrxWrRVonNVetxMNK8VMT6st35cjSuNtQEnBbj5Y_G7L7-ViZRGZ7GmDLT15un1pGdp28i3C4UiBH69IjwuefVJu9NOIYn_9YlJKfKCU9Em8gAj0csOozqfChS70M7Z4P0-EzGo_qo8DMjIPZ6VWcpnsxaMpX592melaln77KKZuOYH2ha7C5_6hlIJ3TC3TW2OOnD-sxBQL6SO5oLEgNRl85HsLSeeqg9GQW9j8RBBGY0umydjITUxxlw",
 						"type": "string"
 					}
 				]
@@ -1676,7 +1676,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmNDdlM2RmOWM1MTA2MDA2ZGUxNmMxOSIsImF1ZCI6ImNhc3RpbmdhZ2VudHMiLCJpYXQiOjE1OTg2NDQxOTAsImV4cCI6MTU5ODczMDU5MCwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0OmFnZW50LWRldGFpbCJdfQ.c3491jC-Ab8EQOc1lk_cK9AetivNymxxDEJY28lCD53_r_wHotvxVAtedw3qHKBsb1w98IOd0GB2ohfwdRa2vQcvFHh3vC3_QZpekms6YQ2gFOmDBEp0rWfL7m5zB-I5Lc9rezVpGWNk0qHl69YdZuNVgoGduDRm7jGrq04xW7vji0GfnPCIf0zviP3xzgRZesF1PcG9DDPWSwLBnQ-CCBxojE1nqAPRa_zgBcTd5iLmhuR5nxULfRoxASXZXc4F8eFNcGssttW2i2zN4RifQzvBGMStbLphTKSTqyidVprAhFohAZRn0tjA_IL7PEq8-GH6mK-EDsrMDOiIpGytcA",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmNDdlM2RmOWM1MTA2MDA2ZGUxNmMxOSIsImF1ZCI6ImNhc3RpbmdhZ2VudHMiLCJpYXQiOjE1OTg5MTAxMjEsImV4cCI6MTU5ODk5NjUyMSwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0OmFnZW50LWRldGFpbCJdfQ.K3GD_1wM77nWFhUPZDWOMVDShEMya1frtn_RFeWna98JoAIvttH8Z1xh5NtWNPWoNY_tc9l5tx3Y4l6YNoUE7gjkhDZBScFNLHG6dKiCqmpbPlyh6-jvvDm0TbCyfW0dfqGXHjM_iAftxge9Sdvn1jKAA15DtjihBmbEwFGCoE3FSskl-_rZ64FVWzhOsf2DnY39QDGRhb2cYSJYoSSMLl6gfjs54PLdKv312xzhHIkNM6QCg-VgbMZd06WhQsDaPozWSj7aYr3vqtzKQ8AKWezCQjQ7hLQhJeyyyui7Tp9xfyQXbNFkaaiNDRJ4KkT7gkfzrRhKVPo6ak6AtUutSQ",
 									"type": "string"
 								}
 							]
@@ -2091,6 +2091,132 @@
 						"description": "Add a new movie-actor assignation"
 					},
 					"response": []
+				},
+				{
+					"name": "Delete actor from casting",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5d41f531-03a2-49b1-8491-fe5066f57f33",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast-actor/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast-actor",
+								"2"
+							]
+						},
+						"description": "Delete existing movie-actor assignation"
+					},
+					"response": []
+				},
+				{
+					"name": "Fail delete actor from casting if no actor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a40b9c08-228d-4a8a-948a-0aa367c153ff",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast-actor/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast-actor",
+								""
+							]
+						},
+						"description": "Delete existing movie-actor assignation"
+					},
+					"response": []
+				},
+				{
+					"name": "Fail delete actor from casting if actor not found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "61343f2a-6633-4721-a696-456d0bedd53a",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast-actor/2000",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast-actor",
+								"2000"
+							]
+						},
+						"description": "Delete existing movie-actor assignation"
+					},
+					"response": []
 				}
 			],
 			"description": "Casting director access",
@@ -2099,7 +2225,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjM2ZhZDJmMWNkMDAzN2VmZDg3NyIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTg2NDkwNzgsImV4cCI6MTU5ODczNTQ3OCwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJnZXQ6YWN0b3JzLWRldGFpbCIsImdldDpjYXN0LWRldGFpbCIsImdldDptb3ZpZXMtZGV0YWlsIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiLCJwb3N0OmNhc3RpbmciXX0.FojMF6akenAXZWhhP2aPRqBYDUyGQpDwnSq5WLNMbqCGLakBBhFCYym4mBZ24TN-tzT33CQWC_oHMhBWRan22QdmPsuuc9dwfQqzUaMfhJCp1BhTJiQ5P9n5gKFSgc0Q17Q9guj9BN7aDjyPAw-gf1Z8mKKJpnLBXw_vqm0XuFC9f--tV060euhjOGuW2cpjLm7ClnhvRrOF5X6KgkfSfrMUNnJh6zB2nozYOQV7LbrIrMqijpBiSSqP5M9CyH_1kCPZhNMWLluCAp10c0t1-5Sf9ResqBqCROlvc4yELHjZo0StNRlgKD7iCrpskbWVuITBC-HhHwKsDMCsJ1kvVg",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjM2ZhZDJmMWNkMDAzN2VmZDg3NyIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTg5MTU3NzAsImV4cCI6MTU5OTAwMjE3MCwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6Y2FzdGluZy1hY3RvciIsImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0OmNhc3QtZGV0YWlsIiwiZ2V0Om1vdmllcy1kZXRhaWwiLCJwYXRjaDphY3RvcnMiLCJwYXRjaDptb3ZpZXMiLCJwb3N0OmFjdG9ycyIsInBvc3Q6Y2FzdGluZyJdfQ.emqCsNMouVl8V9M2lujnq2EwVsSAoRmb7dOT4Rru3QuY71nq8TPm8dzbr-Fh_zZfR6vQG21iLT-AkGIjCwp-jbNktOr3Do-Hb6__qSpnoK0hAr8MPoxRYJ0xSlTh6BKyD9qZk_iTB8og9yBYsj-2gZYU43STWEVnNzNafQVbJ6KF7IIgJqA17EDXCErMpp2onaFB4G8FiyUzF5LzUt0O6SSx_QvSDfTgVNZfql0GzzeHD--9lHM0FGfEafxanD67bXpWPkGrH4cHhPLz_JHxLv8zo0hJkCkUU_R-DpoPWFWkoBtLC3ideqgM39eEnyaCij-De2eKp2W77Aj5wmhCDw",
 						"type": "string"
 					}
 				]
@@ -2631,6 +2757,48 @@
 						"description": "Add a new movie-actor assignation"
 					},
 					"response": []
+				},
+				{
+					"name": "Delete actor from casting",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "02bd80fc-51af-4c64-b316-e34ffe1b2a46",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast-actor/3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast-actor",
+								"3"
+							]
+						},
+						"description": "Delete existing movie-actor assignation"
+					},
+					"response": []
 				}
 			],
 			"description": "Executive producer access",
@@ -2639,7 +2807,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjNDQ4N2Q4YTllMDAzNzcxNjlmZCIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTg2NDkyMTUsImV4cCI6MTU5ODczNTYxNSwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6bW92aWVzIiwiZ2V0OmFjdG9ycy1kZXRhaWwiLCJnZXQ6Y2FzdC1kZXRhaWwiLCJnZXQ6bW92aWVzLWRldGFpbCIsInBhdGNoOmFjdG9ycyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIiwicG9zdDpjYXN0aW5nIiwicG9zdDptb3ZpZXMiXX0.EoC_pfBMh8czoNi4rU1lYl7HasUX9Cmcmhq4LvxgJHEb9oddKXvGQ68atJPNb2bjJbkNEO7HKgxR7N-FHgQ98_2x3nZ02tkJt8ktCdMHCz6uOxVyXatbMFiUDOMPxgYdlVjnZtfo_cXF2uP4BN-9iPA0WXveaPnJaBhAPVVY7D1joKXg6_TRbQp7Oh8EQAnU_gGlqn2c4g8H-425oJVhw4tuyov507qK1584x1SO8FIS-z15a996Cnq-YphjKawx1Q2I_bMd0ogJYRPzaqrtzOpG0libF31LT4ui_4bfi_UBocaGnBfkMJue1ZwOkarR5mkXHsrqzgkauT0WngCj4Q",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjNDQ4N2Q4YTllMDAzNzcxNjlmZCIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTg5MTYyNjQsImV4cCI6MTU5OTAwMjY2NCwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6Y2FzdGluZy1hY3RvciIsImRlbGV0ZTptb3ZpZXMiLCJnZXQ6YWN0b3JzLWRldGFpbCIsImdldDpjYXN0LWRldGFpbCIsImdldDptb3ZpZXMtZGV0YWlsIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiLCJwb3N0OmNhc3RpbmciLCJwb3N0Om1vdmllcyJdfQ.Z_UxkEURpicU92KjrPZDWclB2vQmUmBevyxF3V9GxKKA03pB-oGtBgiJLHkK_Oa9o6EN2VQsFP3Q4tw2oHlbXozGD8zQSCdLhJ1NyOtKgWPsMwoQoKFwcgKRV6elAyn91MUlmbnTZgwG--_sIuXutvuRQ5lGBhV2BJh_ZdVXfFiRshj3jc2MSWgSvd6OFUTq6cgSobXDajRei0IGJD00W3hPKnrmDsqWNrcl7e6nkWpme7ck9pbnrAQtNEJdBcGTJLSrNVIKA3QUEDHgRc09iaqy5DsVAaM3DgxbZRI0zdIu7_eqF9F6pc1SqRGAetR4aUJ7qHKtpS5OiCcTGvW8Qw",
 						"type": "string"
 					}
 				]
@@ -2693,7 +2861,7 @@
 	],
 	"variable": [
 		{
-			"id": "5b073c13-3086-4dd5-85e2-63264e987bc8",
+			"id": "ad95bb56-54f2-430a-bccf-2b581d9ad5ee",
 			"key": "host",
 			"value": "localhost:5000"
 		}
