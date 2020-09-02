@@ -42,12 +42,13 @@ class MoviesTestCase(unittest.TestCase):
         self.update_movie_data = "Jaws 3"
 
         assistant_access_jwt = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6I"\
-            + "nIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjMzUxN2VlMGYwMDAzZDhjZDExOSIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTg5MDkxMzksImV4cCI6MTU5ODk5NTUzOSwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0OmNhc3QtZGV0YWlsIiwiZ2V0Om1vdmllcy1kZXRhaWwiXX0.D78SEivNA8RendFHQMHAcoHcWL53hbLWRNXXivxNCNKz9VVDritkF1xmlAEFtTRxgC_6vFUmsK9KXhv2Zp9Y22Um6JO_xrxWrRVonNVetxMNK8VMT6st35cjSuNtQEnBbj5Y_G7L7-ViZRGZ7GmDLT15un1pGdp28i3C4UiBH69IjwuefVJu9NOIYn_9YlJKfKCU9Em8gAj0csOozqfChS70M7Z4P0-EzGo_qo8DMjIPZ6VWcpnsxaMpX592melaln77KKZuOYH2ha7C5_6hlIJ3TC3TW2OOnD-sxBQL6SO5oLEgNRl85HsLSeeqg9GQW9j8RBBGY0umydjITUxxlw"
+            + "nIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjMzUxN2VlMGYwMDAzZDhjZDExOSIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTkwODUwNTcsImV4cCI6MTU5OTE3MTQ1NywiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0OmNhc3QtZGV0YWlsIiwiZ2V0Om1vdmllcy1kZXRhaWwiXX0.vr3lEU3qwWA8veurN9KKLiu0-ozYBn0gq1YkNMeNbt2ZyMUvqTC45egr6aFEcN7ef8n7_x-Wfbam1CPRk71kcPicizJgIu_RA7dRWqadTr1dyXBNOX5G7XgnEoO3GFrjydt8isgCzpwHXxgHA2TT2FPKtSkFkcYUg465aZf0rd0FbpM6vyfDyJHnhGa8t2WCgLpxWLnPByMROZKNZg0CqTSc994K9K0fthNI8_oJvEsuuY-nx1rXGzY_vJs5jhqxyhe0RrDHyLupv6PnX0TPiPourk3jWU4ZHuAbi_GTGey5tBfIMs1qddqSwhi0EEQM3Hld1dau7C_iraMsGmsNyQ"
 
         director_access_jwt = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6In"\
-            + "IwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjM2ZhZDJmMWNkMDAzN2VmZDg3NyIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTg5MTU3NzAsImV4cCI6MTU5OTAwMjE3MCwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6Y2FzdGluZy1hY3RvciIsImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0OmNhc3QtZGV0YWlsIiwiZ2V0Om1vdmllcy1kZXRhaWwiLCJwYXRjaDphY3RvcnMiLCJwYXRjaDptb3ZpZXMiLCJwb3N0OmFjdG9ycyIsInBvc3Q6Y2FzdGluZyJdfQ.emqCsNMouVl8V9M2lujnq2EwVsSAoRmb7dOT4Rru3QuY71nq8TPm8dzbr-Fh_zZfR6vQG21iLT-AkGIjCwp-jbNktOr3Do-Hb6__qSpnoK0hAr8MPoxRYJ0xSlTh6BKyD9qZk_iTB8og9yBYsj-2gZYU43STWEVnNzNafQVbJ6KF7IIgJqA17EDXCErMpp2onaFB4G8FiyUzF5LzUt0O6SSx_QvSDfTgVNZfql0GzzeHD--9lHM0FGfEafxanD67bXpWPkGrH4cHhPLz_JHxLv8zo0hJkCkUU_R-DpoPWFWkoBtLC3ideqgM39eEnyaCij-De2eKp2W77Aj5wmhCDw"
+            + "IwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjM2ZhZDJmMWNkMDAzN2VmZDg3NyIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTkwODUxMTcsImV4cCI6MTU5OTE3MTUxNywiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6Y2FzdGluZy1hY3RvciIsImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0OmNhc3QtZGV0YWlsIiwiZ2V0Om1vdmllcy1kZXRhaWwiLCJwYXRjaDphY3RvcnMiLCJwYXRjaDptb3ZpZXMiLCJwb3N0OmFjdG9ycyIsInBvc3Q6Y2FzdGluZyJdfQ.w9rhryKJLQRgP6i-E95D0C6hKv9nJlJtfPq4nPQQz1Y4VeMWtNU0PjYRiM5VJb0c3KC6ARYideqYGtYA_BhLXvJqFwRuwfEi8BxKFZ3ZlEKxDpXKrKKJwU7huowyCQaAdqARDMswytAbpknYBt66iHhiu-X7lNrVoJLR72w4ibWR8ZAQdC3XdhVnn113zvT7Ur0D9J-Byr6B442TCtjpxQBAng8aame9UA88gqn4f1OOcA3xFiWwraiwJbsaovTKl_Iz2oGDkWRcdi620m2vj7dQKSW5Kc09w7cpjGDXtvZleoLIFlkrAZOOfDBk_dVB6GkH-Yi5Fx_XrBztGEKkyg"
 
-        producer_access_jwt = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjNDQ4N2Q4YTllMDAzNzcxNjlmZCIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTg5MTYyNjQsImV4cCI6MTU5OTAwMjY2NCwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6Y2FzdGluZy1hY3RvciIsImRlbGV0ZTptb3ZpZXMiLCJnZXQ6YWN0b3JzLWRldGFpbCIsImdldDpjYXN0LWRldGFpbCIsImdldDptb3ZpZXMtZGV0YWlsIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiLCJwb3N0OmNhc3RpbmciLCJwb3N0Om1vdmllcyJdfQ.Z_UxkEURpicU92KjrPZDWclB2vQmUmBevyxF3V9GxKKA03pB-oGtBgiJLHkK_Oa9o6EN2VQsFP3Q4tw2oHlbXozGD8zQSCdLhJ1NyOtKgWPsMwoQoKFwcgKRV6elAyn91MUlmbnTZgwG--_sIuXutvuRQ5lGBhV2BJh_ZdVXfFiRshj3jc2MSWgSvd6OFUTq6cgSobXDajRei0IGJD00W3hPKnrmDsqWNrcl7e6nkWpme7ck9pbnrAQtNEJdBcGTJLSrNVIKA3QUEDHgRc09iaqy5DsVAaM3DgxbZRI0zdIu7_eqF9F6pc1SqRGAetR4aUJ7qHKtpS5OiCcTGvW8Qw"
+        producer_access_jwt = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6In"\
+            + "IwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjNDQ4N2Q4YTllMDAzNzcxNjlmZCIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTkwODUyMTUsImV4cCI6MTU5OTE3MTYxNSwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6Y2FzdGluZy1hY3RvciIsImRlbGV0ZTptb3ZpZXMiLCJnZXQ6YWN0b3JzLWRldGFpbCIsImdldDpjYXN0LWRldGFpbCIsImdldDptb3ZpZXMtZGV0YWlsIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiLCJwb3N0OmNhc3RpbmciLCJwb3N0Om1vdmllcyJdfQ.d2kmvqOws48JynjSZdubK5RoPY0YBrgeJ1Vvw9tzSxoyDJPldfDJXfyc5MQSpo4Wa3FCrMkJ_ey2sf3rmJdmINpFs8W72luFDElFcdGgJARZhBZW3ZL-Co7NXOTH12EEX8WSupj0yDi_3qreA2vIzBxeY_IO2QKSdBDffDLOy5T_i6_-D24de1x3JI2u9a6ETgWCC--1QVhs1QZB6C1CAwOF2UIp8aiIbwp5DVHufM03XvTT45ixgEFR-XJHQsDNBQeb7wpBnHGT1xBPcV3NovX9Z9rrUo6XzQ62iz6yoOmil8SG2PguIHhnLWeyhonmPJJtQfsoxdClIgxMqxRoQw"
 
         expired_jwt = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteH"\
             + "BqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3R"\
@@ -69,7 +70,7 @@ class MoviesTestCase(unittest.TestCase):
             + "SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
 
         claims_error_jwt = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIw"\
-            + "VzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmNDdlM2RmOWM1MTA2MDA2ZGUxNmMxOSIsImF1ZCI6ImNhc3RpbmdhZ2VudHMiLCJpYXQiOjE1OTg5MTAxMjEsImV4cCI6MTU5ODk5NjUyMSwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0OmFnZW50LWRldGFpbCJdfQ.K3GD_1wM77nWFhUPZDWOMVDShEMya1frtn_RFeWna98JoAIvttH8Z1xh5NtWNPWoNY_tc9l5tx3Y4l6YNoUE7gjkhDZBScFNLHG6dKiCqmpbPlyh6-jvvDm0TbCyfW0dfqGXHjM_iAftxge9Sdvn1jKAA15DtjihBmbEwFGCoE3FSskl-_rZ64FVWzhOsf2DnY39QDGRhb2cYSJYoSSMLl6gfjs54PLdKv312xzhHIkNM6QCg-VgbMZd06WhQsDaPozWSj7aYr3vqtzKQ8AKWezCQjQ7hLQhJeyyyui7Tp9xfyQXbNFkaaiNDRJ4KkT7gkfzrRhKVPo6ak6AtUutSQ"
+            + "VzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmNDdlM2RmOWM1MTA2MDA2ZGUxNmMxOSIsImF1ZCI6ImNhc3RpbmdhZ2VudHMiLCJpYXQiOjE1OTkwODUyODEsImV4cCI6MTU5OTE3MTY4MSwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0OmFnZW50LWRldGFpbCJdfQ.VsHU_PU_J7PQPAoMV25qH2iGC3WHXwndgPWWdvoZ3isqtOO7c587vEWQY4WDpiTkcsQV0DyYj4Ydn3Xwm1EPswp9dtrk2KxC2XqB87Tr6feBs3pdRxqWkiPH-QjaZhgaNnS1qhckLE-Fo1p-i2y84UGkvIWq3NNdge3hBUaK3N4BfpBYIEn23CNsIrcX7H_8FtRSJrafkI_StgjILd7tpN9pvzsvFSdmR7P_ybTCqi3JkSz5SWtArrrQOA6hVlWOjnvsGFcf-0fJufak4ga1OYDAQtR_BdA-YqJPRqaUL3qwEeaiIk1ONjX2deByt6mfTbOXR79Tm9JmuFa5lHk6lA"
 
         self.header_full_access = {
             'Authorization': 'Bearer {}'.format(producer_access_jwt)
@@ -273,10 +274,12 @@ class MoviesTestCase(unittest.TestCase):
         data = res.get_json(res.data)
 
         actor = Actor.query.filter(Actor.id == 1).one_or_none()
+        total_cast = Cast.query.filter_by(actor_id=1).count()
 
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data["success"], True)
         self.assertEqual(actor, None)
+        self.assertEqual(total_cast, 0)
 
     def test_404_if_delete_actor_does_not_exist(self):
         print(" >>> test_404_if_delete_actor_does_not_exist")
@@ -308,10 +311,12 @@ class MoviesTestCase(unittest.TestCase):
         data = res.get_json(res.data)
 
         movie = Movie.query.filter(Movie.id == 1).one_or_none()
+        total_cast = Cast.query.filter_by(movie_id=1).count()
 
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data["success"], True)
         self.assertEqual(movie, None)
+        self.assertEqual(total_cast, 0)
 
     def test_404_if_delete_movie_does_not_exist(self):
         print(" >>> test_404_if_delete_movie_does_not_exist")
@@ -405,7 +410,7 @@ class MoviesTestCase(unittest.TestCase):
     def test_delete_cast_actor(self):
         print(" >>> test_delete_cast_actor")
         res = self.client().delete(
-            "/cast-actor/4",
+            "/cast/4",
             headers=self.header_full_access)
         data = res.get_json(res.data)
 
@@ -418,7 +423,7 @@ class MoviesTestCase(unittest.TestCase):
     def test_404_if_delete_cast_actor_has_no_cast(self):
         print(" >>> test_404_if_delete_cast_actor_has_no_cast")
         res = self.client().delete(
-            "/cast-actor",
+            "/cast/",
             headers=self.header_full_access)
         data = res.get_json(res.data)
 
@@ -429,13 +434,16 @@ class MoviesTestCase(unittest.TestCase):
     def test_404_if_delete_cast_actor_not_found(self):
         print(" >>> test_404_if_delete_cast_actor_not_found")
         res = self.client().delete(
-            "/cast-actor/4000",
+            "/cast/4000",
             headers=self.header_full_access)
         data = res.get_json(res.data)
 
         self.assertEqual(res.status_code, 404)
         self.assertEqual(data["success"], False)
         self.assertEqual(data["message"], "Resource not found")
+    
+    # def deleted_cast_movie(self):
+
 
 
 
@@ -463,12 +471,48 @@ def setUp_deleted():
         movie.insert()
     
     deleted_cast = Cast.query\
-        .filter(Cast.id == 4)\
+        .filter(Cast.id == 2)\
+        .one_or_none()
+    if deleted_cast is None:
+        cast = Cast(actor_id=8,
+                    movie_id=5)
+        cast.id = 2
+        cast.insert()
+    
+    deleted_cast = Cast.query\
+        .filter(Cast.id == 3)\
         .one_or_none()
     if deleted_cast is None:
         cast = Cast(actor_id=3,
                     movie_id=6)
+        cast.id = 3
+        cast.insert()
+    
+    deleted_cast = Cast.query\
+        .filter(Cast.id == 4)\
+        .one_or_none()
+    if deleted_cast is None:
+        cast = Cast(actor_id=8,
+                    movie_id=8)
         cast.id = 4
+        cast.insert()
+    
+    deleted_cast = Cast.query\
+        .filter(Cast.id == 9)\
+        .one_or_none()
+    if deleted_cast is None:
+        cast = Cast(actor_id=1,
+                    movie_id=2)
+        cast.id = 9
+        cast.insert()
+    
+    deleted_cast = Cast.query\
+        .filter(Cast.id == 10)\
+        .one_or_none()
+    if deleted_cast is None:
+        cast = Cast(actor_id=2,
+                    movie_id=1)
+        cast.id = 10
         cast.insert()
 
 

@@ -177,47 +177,6 @@
 					"response": []
 				},
 				{
-					"name": "Add casting",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "a6a369ac-9580-42d9-95a5-2595f200ec49",
-								"exec": [
-									"pm.test(\"Status code is 401\", function () {",
-									"    pm.response.to.have.status(401);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"movie\": 1,   \n    \"actor\": 1\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/cast",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"cast"
-							]
-						},
-						"description": "Add a new movie-actor assignation"
-					},
-					"response": []
-				},
-				{
 					"name": "Updates actor",
 					"event": [
 						{
@@ -405,6 +364,89 @@
 							]
 						},
 						"description": "Deletes movie with id 1 from database"
+					},
+					"response": []
+				},
+				{
+					"name": "Add casting",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a6a369ac-9580-42d9-95a5-2595f200ec49",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"movie\": 1,   \n    \"actor\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast"
+							]
+						},
+						"description": "Add a new movie-actor assignation"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete actor from casting",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b8ff692a-dd22-4c2e-b632-ec8aa613b28a",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast",
+								"1"
+							]
+						},
+						"description": "Delete existing movie-actor assignation"
 					},
 					"response": []
 				}
@@ -826,7 +868,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"age\": 57,\n}",
+							"raw": "{\n    \"age\": 57\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1029,47 +1071,6 @@
 					"response": []
 				},
 				{
-					"name": "Add casting",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "3d0b41d5-a797-4680-ae6c-76a780213bc7",
-								"exec": [
-									"pm.test(\"Status code is 403\", function () {",
-									"    pm.response.to.have.status(403);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"movie\": 1,   \n    \"actor\": 1\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/cast",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"cast"
-							]
-						},
-						"description": "Add a new movie-actor assignation"
-					},
-					"response": []
-				},
-				{
 					"name": "Fail casting list if post method",
 					"event": [
 						{
@@ -1190,15 +1191,98 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/actors-detail",
+							"raw": "{{host}}/cast-detail",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"actors-detail"
+								"cast-detail"
 							]
 						},
 						"description": "Retireve casting list"
+					},
+					"response": []
+				},
+				{
+					"name": "Add casting",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3d0b41d5-a797-4680-ae6c-76a780213bc7",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"movie\": 1,   \n    \"actor\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast"
+							]
+						},
+						"description": "Add a new movie-actor assignation"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete actor from casting",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f5ac86a5-c7fe-481c-8c55-3bffe869cc30",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast",
+								"1"
+							]
+						},
+						"description": "Delete existing movie-actor assignation"
 					},
 					"response": []
 				}
@@ -1209,7 +1293,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjMzUxN2VlMGYwMDAzZDhjZDExOSIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTg5MDkxMzksImV4cCI6MTU5ODk5NTUzOSwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0OmNhc3QtZGV0YWlsIiwiZ2V0Om1vdmllcy1kZXRhaWwiXX0.D78SEivNA8RendFHQMHAcoHcWL53hbLWRNXXivxNCNKz9VVDritkF1xmlAEFtTRxgC_6vFUmsK9KXhv2Zp9Y22Um6JO_xrxWrRVonNVetxMNK8VMT6st35cjSuNtQEnBbj5Y_G7L7-ViZRGZ7GmDLT15un1pGdp28i3C4UiBH69IjwuefVJu9NOIYn_9YlJKfKCU9Em8gAj0csOozqfChS70M7Z4P0-EzGo_qo8DMjIPZ6VWcpnsxaMpX592melaln77KKZuOYH2ha7C5_6hlIJ3TC3TW2OOnD-sxBQL6SO5oLEgNRl85HsLSeeqg9GQW9j8RBBGY0umydjITUxxlw",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjMzUxN2VlMGYwMDAzZDhjZDExOSIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTkwODUwNTcsImV4cCI6MTU5OTE3MTQ1NywiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0OmNhc3QtZGV0YWlsIiwiZ2V0Om1vdmllcy1kZXRhaWwiXX0.vr3lEU3qwWA8veurN9KKLiu0-ozYBn0gq1YkNMeNbt2ZyMUvqTC45egr6aFEcN7ef8n7_x-Wfbam1CPRk71kcPicizJgIu_RA7dRWqadTr1dyXBNOX5G7XgnEoO3GFrjydt8isgCzpwHXxgHA2TT2FPKtSkFkcYUg465aZf0rd0FbpM6vyfDyJHnhGa8t2WCgLpxWLnPByMROZKNZg0CqTSc994K9K0fthNI8_oJvEsuuY-nx1rXGzY_vJs5jhqxyhe0RrDHyLupv6PnX0TPiPourk3jWU4ZHuAbi_GTGey5tBfIMs1qddqSwhi0EEQM3Hld1dau7C_iraMsGmsNyQ",
 						"type": "string"
 					}
 				]
@@ -1353,7 +1437,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Michael Fassbender\",\n    \"age\": 43,\n    \"gender\": \"Male\"\n}",
+							"raw": "{\n    \"name\": \"Michael Fassbender Err\",\n    \"age\": 43,\n    \"gender\": \"Male\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1477,7 +1561,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"age\": 58\n}",
+							"raw": "{\n    \"age\": 580\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1561,7 +1645,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"release_date\": \"09/09/2020\"\n}",
+							"raw": "{\n    \"release_date\": \"02/29/2020\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1676,7 +1760,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmNDdlM2RmOWM1MTA2MDA2ZGUxNmMxOSIsImF1ZCI6ImNhc3RpbmdhZ2VudHMiLCJpYXQiOjE1OTg5MTAxMjEsImV4cCI6MTU5ODk5NjUyMSwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0OmFnZW50LWRldGFpbCJdfQ.K3GD_1wM77nWFhUPZDWOMVDShEMya1frtn_RFeWna98JoAIvttH8Z1xh5NtWNPWoNY_tc9l5tx3Y4l6YNoUE7gjkhDZBScFNLHG6dKiCqmpbPlyh6-jvvDm0TbCyfW0dfqGXHjM_iAftxge9Sdvn1jKAA15DtjihBmbEwFGCoE3FSskl-_rZ64FVWzhOsf2DnY39QDGRhb2cYSJYoSSMLl6gfjs54PLdKv312xzhHIkNM6QCg-VgbMZd06WhQsDaPozWSj7aYr3vqtzKQ8AKWezCQjQ7hLQhJeyyyui7Tp9xfyQXbNFkaaiNDRJ4KkT7gkfzrRhKVPo6ak6AtUutSQ",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmNDdlM2RmOWM1MTA2MDA2ZGUxNmMxOSIsImF1ZCI6ImNhc3RpbmdhZ2VudHMiLCJpYXQiOjE1OTkwODUyODEsImV4cCI6MTU5OTE3MTY4MSwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0OmFnZW50LWRldGFpbCJdfQ.VsHU_PU_J7PQPAoMV25qH2iGC3WHXwndgPWWdvoZ3isqtOO7c587vEWQY4WDpiTkcsQV0DyYj4Ydn3Xwm1EPswp9dtrk2KxC2XqB87Tr6feBs3pdRxqWkiPH-QjaZhgaNnS1qhckLE-Fo1p-i2y84UGkvIWq3NNdge3hBUaK3N4BfpBYIEn23CNsIrcX7H_8FtRSJrafkI_StgjILd7tpN9pvzsvFSdmR7P_ybTCqi3JkSz5SWtArrrQOA6hVlWOjnvsGFcf-0fJufak4ga1OYDAQtR_BdA-YqJPRqaUL3qwEeaiIk1ONjX2deByt6mfTbOXR79Tm9JmuFa5lHk6lA",
 									"type": "string"
 								}
 							]
@@ -2121,12 +2205,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/cast-actor/2",
+							"raw": "{{host}}/cast/2",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"cast-actor",
+								"cast",
 								"2"
 							]
 						},
@@ -2163,12 +2247,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/cast-actor/",
+							"raw": "{{host}}/cast/",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"cast-actor",
+								"cast",
 								""
 							]
 						},
@@ -2205,12 +2289,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/cast-actor/2000",
+							"raw": "{{host}}/cast/2000",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"cast-actor",
+								"cast",
 								"2000"
 							]
 						},
@@ -2225,7 +2309,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjM2ZhZDJmMWNkMDAzN2VmZDg3NyIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTg5MTU3NzAsImV4cCI6MTU5OTAwMjE3MCwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6Y2FzdGluZy1hY3RvciIsImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0OmNhc3QtZGV0YWlsIiwiZ2V0Om1vdmllcy1kZXRhaWwiLCJwYXRjaDphY3RvcnMiLCJwYXRjaDptb3ZpZXMiLCJwb3N0OmFjdG9ycyIsInBvc3Q6Y2FzdGluZyJdfQ.emqCsNMouVl8V9M2lujnq2EwVsSAoRmb7dOT4Rru3QuY71nq8TPm8dzbr-Fh_zZfR6vQG21iLT-AkGIjCwp-jbNktOr3Do-Hb6__qSpnoK0hAr8MPoxRYJ0xSlTh6BKyD9qZk_iTB8og9yBYsj-2gZYU43STWEVnNzNafQVbJ6KF7IIgJqA17EDXCErMpp2onaFB4G8FiyUzF5LzUt0O6SSx_QvSDfTgVNZfql0GzzeHD--9lHM0FGfEafxanD67bXpWPkGrH4cHhPLz_JHxLv8zo0hJkCkUU_R-DpoPWFWkoBtLC3ideqgM39eEnyaCij-De2eKp2W77Aj5wmhCDw",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjM2ZhZDJmMWNkMDAzN2VmZDg3NyIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTkwODUxMTcsImV4cCI6MTU5OTE3MTUxNywiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6Y2FzdGluZy1hY3RvciIsImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0OmNhc3QtZGV0YWlsIiwiZ2V0Om1vdmllcy1kZXRhaWwiLCJwYXRjaDphY3RvcnMiLCJwYXRjaDptb3ZpZXMiLCJwb3N0OmFjdG9ycyIsInBvc3Q6Y2FzdGluZyJdfQ.w9rhryKJLQRgP6i-E95D0C6hKv9nJlJtfPq4nPQQz1Y4VeMWtNU0PjYRiM5VJb0c3KC6ARYideqYGtYA_BhLXvJqFwRuwfEi8BxKFZ3ZlEKxDpXKrKKJwU7huowyCQaAdqARDMswytAbpknYBt66iHhiu-X7lNrVoJLR72w4ibWR8ZAQdC3XdhVnn113zvT7Ur0D9J-Byr6B442TCtjpxQBAng8aame9UA88gqn4f1OOcA3xFiWwraiwJbsaovTKl_Iz2oGDkWRcdi620m2vj7dQKSW5Kc09w7cpjGDXtvZleoLIFlkrAZOOfDBk_dVB6GkH-Yi5Fx_XrBztGEKkyg",
 						"type": "string"
 					}
 				]
@@ -2337,7 +2421,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"The Good, the Bad and the Ugly\",\n    \"release_date\": \"12/23/1966\"\n}",
+							"raw": "{\n    \"title\": \"The Good, the Bad and the Ugly Err\",\n    \"release_date\": \"12/23/1966\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2787,13 +2871,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/cast-actor/3",
+							"raw": "{{host}}/cast/1",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"cast-actor",
-								"3"
+								"cast",
+								"1"
 							]
 						},
 						"description": "Delete existing movie-actor assignation"
@@ -2807,7 +2891,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjNDQ4N2Q4YTllMDAzNzcxNjlmZCIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTg5MTYyNjQsImV4cCI6MTU5OTAwMjY2NCwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6Y2FzdGluZy1hY3RvciIsImRlbGV0ZTptb3ZpZXMiLCJnZXQ6YWN0b3JzLWRldGFpbCIsImdldDpjYXN0LWRldGFpbCIsImdldDptb3ZpZXMtZGV0YWlsIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiLCJwb3N0OmNhc3RpbmciLCJwb3N0Om1vdmllcyJdfQ.Z_UxkEURpicU92KjrPZDWclB2vQmUmBevyxF3V9GxKKA03pB-oGtBgiJLHkK_Oa9o6EN2VQsFP3Q4tw2oHlbXozGD8zQSCdLhJ1NyOtKgWPsMwoQoKFwcgKRV6elAyn91MUlmbnTZgwG--_sIuXutvuRQ5lGBhV2BJh_ZdVXfFiRshj3jc2MSWgSvd6OFUTq6cgSobXDajRei0IGJD00W3hPKnrmDsqWNrcl7e6nkWpme7ck9pbnrAQtNEJdBcGTJLSrNVIKA3QUEDHgRc09iaqy5DsVAaM3DgxbZRI0zdIu7_eqF9F6pc1SqRGAetR4aUJ7qHKtpS5OiCcTGvW8Qw",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjNDQ4N2Q4YTllMDAzNzcxNjlmZCIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTkwODUyMTUsImV4cCI6MTU5OTE3MTYxNSwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6Y2FzdGluZy1hY3RvciIsImRlbGV0ZTptb3ZpZXMiLCJnZXQ6YWN0b3JzLWRldGFpbCIsImdldDpjYXN0LWRldGFpbCIsImdldDptb3ZpZXMtZGV0YWlsIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiLCJwb3N0OmNhc3RpbmciLCJwb3N0Om1vdmllcyJdfQ.d2kmvqOws48JynjSZdubK5RoPY0YBrgeJ1Vvw9tzSxoyDJPldfDJXfyc5MQSpo4Wa3FCrMkJ_ey2sf3rmJdmINpFs8W72luFDElFcdGgJARZhBZW3ZL-Co7NXOTH12EEX8WSupj0yDi_3qreA2vIzBxeY_IO2QKSdBDffDLOy5T_i6_-D24de1x3JI2u9a6ETgWCC--1QVhs1QZB6C1CAwOF2UIp8aiIbwp5DVHufM03XvTT45ixgEFR-XJHQsDNBQeb7wpBnHGT1xBPcV3NovX9Z9rrUo6XzQ62iz6yoOmil8SG2PguIHhnLWeyhonmPJJtQfsoxdClIgxMqxRoQw",
 						"type": "string"
 					}
 				]
@@ -2861,7 +2945,7 @@
 	],
 	"variable": [
 		{
-			"id": "ad95bb56-54f2-430a-bccf-2b581d9ad5ee",
+			"id": "ce5291ab-315a-494f-a0cf-2e76f4d6e53c",
 			"key": "host",
 			"value": "localhost:5000"
 		}

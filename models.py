@@ -35,7 +35,11 @@ class Movie(db.Model):
     title = Column(String)
     release_date = Column(Date)
 
-    cast = relationship("Cast", back_populates="movie")
+    cast = relationship(
+        "Cast",
+        back_populates="movie",
+        cascade='all, delete-orphan',
+        lazy=True)
 
     def __init__(self, title, release_date):
         self.title = title
@@ -79,7 +83,11 @@ class Actor(db.Model):
     age = Column(Integer)
     gender = Column(String(15))
 
-    cast = relationship("Cast", back_populates="actor")
+    cast = relationship(
+        "Cast",
+        back_populates="actor",
+        cascade='all, delete-orphan',
+        lazy=True)
 
     def __init__(self, name, age, gender):
         self.name = name

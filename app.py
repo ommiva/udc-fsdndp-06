@@ -330,7 +330,7 @@ def create_app(test_config=None):
             print(sys.exc_info())
             abort(422)
     
-    @app.route('/cast-actor/<int:cast_id>', methods=["DELETE"])
+    @app.route('/cast/<int:cast_id>', methods=["DELETE"])
     @requires_auth("delete:casting-actor")
     def delete_casting_actor(cast_id):
         try:

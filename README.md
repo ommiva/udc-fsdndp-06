@@ -490,7 +490,7 @@ curl http://127.0.0.1:5000/movies -X POST -H "Content-Type: application/json" -d
 
 - GET /cast-detail
 - PATCH /cast/<int:movie_id>
-- DELETE /cast/<int:movie_id>
+- DELETE /cast/<int:cast_id>
 - POST /cast
 
 
@@ -546,10 +546,9 @@ curl http://127.0.0.1:5000/cast-detail
 ```
 curl http://127.0.0.1:5000/cast  -X POST -H "Content-Type: application/json" -d '{"actor": 4, "movie": 4}'
 ```
-```
 
 
-###### DELETE /cast-actor/<int:cast_id>
+###### DELETE /cast/<int:cast_id>
 * Deletes existing movie-actor assignation.
 
 * _Request arguments_
@@ -571,7 +570,7 @@ curl http://127.0.0.1:5000/cast  -X POST -H "Content-Type: application/json" -d 
 
 * _CURL_
 ```
-curl http://127.0.0.1:5000/cast  -X DELETE
+curl http://127.0.0.1:5000/cast/2  -X DELETE
 ```
 
 
