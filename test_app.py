@@ -532,21 +532,21 @@ def setUp_deleted():
         cast.insert()
 
     deleted_cast = Cast.query\
-        .filter(Cast.id == 9)\
+        .filter(Cast.id == 6)\
         .one_or_none()
     if deleted_cast is None:
         cast = Cast(actor_id=1,
                     movie_id=2)
-        cast.id = 9
+        cast.id = 6
         cast.insert()
 
     deleted_cast = Cast.query\
-        .filter(Cast.id == 10)\
+        .filter(Cast.id == 7)\
         .one_or_none()
     if deleted_cast is None:
         cast = Cast(actor_id=2,
                     movie_id=1)
-        cast.id = 10
+        cast.id = 7
         cast.insert()
 
 

@@ -217,11 +217,8 @@ COPY public.movie_cast (id, actor_id, movie_id) FROM stdin;
 3	3	6
 4	8	8
 5	2	8
-6	6	6
-7	6	9
-8	8	9
-9	1	2
-10	2	1
+6	1	2
+7	2	1
 \.
 
 
