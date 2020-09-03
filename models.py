@@ -71,6 +71,13 @@ class Movie(db.Model):
         return f'<Movie {self.id} "{self.title}">'
 
 
+def bulk_delete_cast_by_movie(movie_id):
+    # https://stackoverflow.com/questions/39773560/sqlalchemy-how-do-you-delete-multiple-rows-without-querying
+    query = Cast.__table__.delete().where(Cast.movie_id == movie_id)
+    db.session.execute(query)
+    db.session.commit()
+
+
 class Actor(db.Model):
     '''
     Actor

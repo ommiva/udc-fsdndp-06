@@ -3,6 +3,7 @@ from flask import Flask, request, abort, jsonify
 from flask_cors import CORS
 
 from models import setup_db, Actor, Movie, Cast
+from models import bulk_delete_cast_by_movie
 from auth.auth import AuthError, requires_auth
 from datetime import datetime
 from babel import Locale
@@ -329,7 +330,7 @@ def create_app(test_config=None):
         except Exception as e:
             print(sys.exc_info())
             abort(422)
-    
+
     @app.route('/cast/<int:cast_id>', methods=["DELETE"])
     @requires_auth("delete:casting-actor")
     def delete_casting_actor(cast_id):
@@ -338,13 +339,42 @@ def create_app(test_config=None):
 
             if cast is None:
                 abort(404)
-                
+
             deleted = cast.format()
             cast.delete()
 
             return jsonify({
                 "success": True,
                 "delete": deleted
+            })
+
+        except exceptions.HTTPException as httpe:
+            print("Error HTTP > ", httpe)
+            raise
+        except Exception as e:
+            print(sys.exc_info())
+            abort(422)
+
+    @app.route('/cast-movie/<int:movie_id>', methods=["DELETE"])
+    @requires_auth("delete:casting-movie")
+    def delete_casting_movie(movie_id):
+        try:
+            casting_movie_total = Cast.query\
+                .filter_by(movie_id=movie_id).count()
+
+            if casting_movie_total == 0:
+                abort(404)
+
+            """
+            casting_movie = Cast.query.filter_by(movie_id=movie_id).all()
+            casting_movie.delete()
+            Cast.query.filter_by(movie_id=movie_id).delete()
+            """
+            bulk_delete_cast_by_movie(movie_id)
+
+            return jsonify({
+                "success": True,
+                "delete": casting_movie_total
             })
 
         except exceptions.HTTPException as httpe:

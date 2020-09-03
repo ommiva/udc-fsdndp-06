@@ -102,10 +102,12 @@ The authentication system used for the project is Auth0.
   - patch:actors
   - patch:movies
   - post:casting
+  - delete:casting-actor
 - **Executive Producer**
   - Casting director permissions plus...
-  - delete:moves
+  - delete:movies
   - post:movies
+  - delete:casting-movies
 - **Notes**
   - Any attempt to access endpoint without permission will result
     on a 403 - 'Permission not found' response.
@@ -491,6 +493,7 @@ curl http://127.0.0.1:5000/movies -X POST -H "Content-Type: application/json" -d
 - GET /cast-detail
 - PATCH /cast/<int:movie_id>
 - DELETE /cast/<int:cast_id>
+- DELETE /cast-movie/<int:movie_id>
 - POST /cast
 
 
@@ -571,6 +574,26 @@ curl http://127.0.0.1:5000/cast  -X POST -H "Content-Type: application/json" -d 
 * _CURL_
 ```
 curl http://127.0.0.1:5000/cast/2  -X DELETE
+```
+
+
+###### DELETE /cast-movie/<int:movie_id>
+* Deletes existing movie and all its assignations.
+
+* _Request arguments_
+  * Movie (id)
+
+* _Response_
+```json
+{
+  "delete": 2,
+  "success": true
+}
+```
+
+* _CURL_
+```
+curl http://127.0.0.1:5000/cast-movie/8  -X DELETE
 ```
 
 
