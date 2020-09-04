@@ -40,9 +40,9 @@ python manage.py db upgrade
 
 
 
--------------------------------
+- - -
 TODO: Remove debug
--------------------------------
+
 ### DEBUG
 * To install the application
 ```bash
@@ -60,8 +60,11 @@ or
 $ FLASK_APP=flaskr FLASKNV=development flask run
 ```
 
+- - -
+
 The API is run on http://127.0.0.1:5000/ by default.
 
+- - -
 
 #### Testing
 To run tests, run 
@@ -107,15 +110,15 @@ The authentication system used for the project is Auth0.
   - delete:movies
   - post:movies
   - delete:casting-movies
-- **Notes**
+- __Notes__
   - Any attempt to access endpoint without permission will result
     on a _403 \- Permission not found_ response.
 
 
 
-### Errors ###
+### Errors
 
-#### Response codes ####
+#### Response codes
 - **200 - OK** – Everything is ok
 - **201 - Created** - Resource created.
 - **400 - Bad  request** – Client error.
@@ -130,7 +133,7 @@ The authentication system used for the project is Auth0.
 > **^ aknowledge** - From [stakoverflow](https://stackoverflow.com/questions/3297048/403-forbidden-vs-401-unauthorized-http-responses) 
 
 
-#### Messages ####
+#### Messages
 
 ```json
 {
@@ -245,10 +248,10 @@ The authentication system used for the project is Auth0.
 
 #### Actors
 
-##### Endpoints #####
+##### Endpoints
 
 - GET /actors-detail
-- [PATCH /actors/<int:actor_id>](#PATCH-/actors/<int:actor_id>)
+- [PATCH /actors/<int:actor_id>] [patch-actors]
 - DELETE /actors/<int:actor_id>
 - POST /actors
 
@@ -256,7 +259,7 @@ The authentication system used for the project is Auth0.
 * Retrieves all actors available
 
 * _Request arguments_
-None
+  * None
 
 * _Response_
 ```json
@@ -296,7 +299,7 @@ curl http://127.0.0.1:5000/actors-detail
 ```
 
 
-###### PATCH /actors/<int:actor_id>
+[patch-actors]: ###### PATCH /actors/<int:actor_id>
 * Updates actor data for given actor id.
 
 * _Request arguments_
