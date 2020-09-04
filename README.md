@@ -251,7 +251,7 @@ The authentication system used for the project is Auth0.
 ##### Endpoints
 
 - GET /actors-detail
-- [PATCH /actors/<int:actor_id>] [patch-actors]
+- [PATCH /actors/<int:actor_id>][patch-actors]
 - DELETE /actors/<int:actor_id>
 - POST /actors
 
@@ -299,7 +299,7 @@ curl http://127.0.0.1:5000/actors-detail
 ```
 
 
-[patch-actors]: ###### PATCH /actors/<int:actor_id>
+[patch-actors]: (###### PATCH /actors/<int:actor_id>)
 * Updates actor data for given actor id.
 
 * _Request arguments_
@@ -389,7 +389,7 @@ curl http://127.0.0.1:5000/categories -X POST -H "Content-Type: application/json
 * Retrieves all movies available
 
 * _Request arguments_
-None
+  * None
 
 * _Response_
 ```json
@@ -507,7 +507,7 @@ curl http://127.0.0.1:5000/movies -X POST -H "Content-Type: application/json" -d
 * Retrieves all movies available.
 
 * _Request arguments_
-None
+  * None
 
 * _Response_
 ```json
