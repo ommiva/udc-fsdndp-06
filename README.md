@@ -119,16 +119,16 @@ The authentication system used for the project is Auth0.
 ### Errors
 
 #### Response codes
-- **200 \- OK** \– Everything is ok
-- **201 \- Created** \- Resource created.
-- **400 \- Bad  request** \– Client error.
-- **401 \- Unauthorized ^** \– Missing or bad authentication.
-- **403 \- Forbidden ^** \– User authenticated but not authorized to perform the requested operation.
-- **404 \- Not found** \– The requested resource was not found.
-- **405 \- Method not allowed** \– The requested method to access a
+- **200 \- OK** – Everything is ok
+- **201 \- Created** - Resource created.
+- **400 \- Bad  request** – Client error.
+- **401 \- Unauthorized ^** – Missing or bad authentication.
+- **403 \- Forbidden ^** – User authenticated but not authorized to perform the requested operation.
+- **404 \- Not found** – The requested resource was not found.
+- **405 \- Method not allowed** – The requested method to access a
   resource was not allowed.
-- **422 \- Unprocessable** \– The application can not procces the request.
-- **500 \- Internal server error** \– Something went wrong. 
+- **422 \- Unprocessable** – The application can not procces the request.
+- **500 \- Internal server error** – Something went wrong. 
 
 > **^ aknowledge** \- From [stakoverflow](https://stackoverflow.com/questions/3297048/403-forbidden-vs-401-unauthorized-http-responses) 
 
