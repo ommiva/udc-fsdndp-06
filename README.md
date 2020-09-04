@@ -113,9 +113,9 @@ The authentication system used for the project is Auth0.
 
 
 
-### Errors
+### Errors ###
 
-#### Response codes
+#### Response codes ####
 - **200 - OK** – Everything is ok
 - **201 - Created** - Resource created.
 - **400 - Bad  request** – Client error.
@@ -130,7 +130,7 @@ The authentication system used for the project is Auth0.
 > **^ aknowledge** - From [stakoverflow](https://stackoverflow.com/questions/3297048/403-forbidden-vs-401-unauthorized-http-responses) 
 
 
-#### Messages
+#### Messages ####
 
 ```json
 {
@@ -245,10 +245,10 @@ The authentication system used for the project is Auth0.
 
 #### Actors
 
-##### Endpoints
+##### Endpoints #####
 
-- [GET /actors-detail](#GET-/actors-detail)
-- PATCH /actors/<int:actor_id>
+- GET /actors-detail
+- [PATCH /actors/<int:actor_id>](#PATCH-/actors/<int:actor_id>)
 - DELETE /actors/<int:actor_id>
 - POST /actors
 
