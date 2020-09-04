@@ -251,7 +251,7 @@ The authentication system used for the project is Auth0.
 ##### Endpoints
 
 - GET /actors-detail
-- [PATCH /actors/<int:actor_id>][patch-actors]
+- PATCH /actors/<int:actor_id>
 - DELETE /actors/<int:actor_id>
 - POST /actors
 
@@ -299,7 +299,7 @@ curl http://127.0.0.1:5000/actors-detail
 ```
 
 
-[patch-actors]: (###### PATCH /actors/<int:actor_id>)
+###### PATCH /actors/<int:actor_id>
 * Updates actor data for given actor id.
 
 * _Request arguments_
