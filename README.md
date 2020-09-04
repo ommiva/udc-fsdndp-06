@@ -109,7 +109,9 @@ The authentication system used for the project is Auth0.
   - delete:casting-movies
 - **Notes**
   - Any attempt to access endpoint without permission will result
-    on a 403 \- 'Permission not found' response.
+    on a _403 \- Permission not found_ response.
+
+
 
 ### Errors
 
@@ -237,18 +239,20 @@ The authentication system used for the project is Auth0.
 }
 ```
 
+
+
 ### Resource endpoint library
 
 #### Actors
 
 ##### Endpoints
 
-- GET /actors-detail
+- [GET /actors-detail](#GET-/actors-detail)
 - PATCH /actors/<int:actor_id>
 - DELETE /actors/<int:actor_id>
 - POST /actors
 
-##### GET /actors-detail
+###### GET /actors-detail
 * Retrieves all actors available
 
 * _Request arguments_
@@ -378,7 +382,7 @@ curl http://127.0.0.1:5000/categories -X POST -H "Content-Type: application/json
 - DELETE /movies/<int:movie_id>
 - POST /movies
 
-##### GET /movies-detail
+###### GET /movies-detail
 * Retrieves all movies available
 
 * _Request arguments_
