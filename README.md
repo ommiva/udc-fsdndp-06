@@ -6,6 +6,8 @@ Casting Agency application.
 Simplify and streamline agency creation of movies and managing and assigning
 actors to those movies.
 
+<br/>
+<br/>
 
 ## Getting started
 
@@ -60,11 +62,16 @@ or
 $ FLASK_APP=flaskr FLASKNV=development flask run
 ```
 
+<br/>
+<br/>
+
 - - -
 
 The API runs at http://127.0.0.1:5000/ by default.
 
 - - -
+
+<br/>
 
 #### Testing
 To run tests, run 
@@ -76,6 +83,8 @@ python test_app.py
 ```
 
 
+<br/>
+<br/>
 
 ### API Keys / Authentication
 TODO: It requires no authentication at all.
@@ -115,6 +124,8 @@ The authentication system used for the project is Auth0.
     on a _403 \- Permission not found_ response.
 
 
+<br/>
+<br/>
 
 ### Errors
 
@@ -132,6 +143,7 @@ The authentication system used for the project is Auth0.
 
 > **^ aknowledge** \- From [stakoverflow](https://stackoverflow.com/questions/3297048/403-forbidden-vs-401-unauthorized-http-responses) 
 
+<br/>
 
 #### Messages
 
@@ -242,9 +254,13 @@ The authentication system used for the project is Auth0.
 }
 ```
 
+<br/>
+<br/>
 
 
 ### Resource endpoint library
+
+<br/>
 
 #### Actors
 
@@ -374,7 +390,7 @@ curl http://127.0.0.1:5000/categories -X POST -H "Content-Type: application/json
 ```
 
 
-
+<br/>
 
 #### Movies
 
@@ -490,7 +506,7 @@ curl http://127.0.0.1:5000/movies -X POST -H "Content-Type: application/json" -d
 ```
 
 
-
+<br/>
 
 #### Casting
 
@@ -602,7 +618,8 @@ curl http://127.0.0.1:5000/cast/2  -X DELETE
 curl http://127.0.0.1:5000/cast-movie/8  -X DELETE
 ```
 
-
+<br/>
+<br/>
 
 
 ### Authors
