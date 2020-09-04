@@ -129,9 +129,9 @@ The authentication system used for the project is Auth0.
 <br/>
 <br/>
 
-### Errors
+### Errors
 
-#### Response codes
+#### Response codes
 - **200 \- OK** – Everything is ok
 - **201 \- Created** - Resource created.
 - **400 \- Bad  request** – Client error.
@@ -147,7 +147,7 @@ The authentication system used for the project is Auth0.
 
 <br/>
 
-#### Messages
+#### Messages
 
 ```json
 {
@@ -267,7 +267,7 @@ The authentication system used for the project is Auth0.
 
 #### Actors
 
-##### Endpoints
+##### Endpoints
 
 - GET /actors-detail
 - PATCH /actors/<int:actor_id>
@@ -402,7 +402,7 @@ curl http://127.0.0.1:5000/categories -X POST -H "Content-Type: application/json
 
 #### Movies
 
-##### Endpoints
+##### Endpoints
 
 - GET /movies-detail
 - PATCH /movies/<int:movie_id>
@@ -523,7 +523,7 @@ curl http://127.0.0.1:5000/movies -X POST -H "Content-Type: application/json" -d
 
 #### Casting
 
-##### Endpoints
+##### Endpoints
 
 - GET /cast-detail
 - PATCH /cast/<int:movie_id>
@@ -639,7 +639,7 @@ curl http://127.0.0.1:5000/cast-movie/8  -X DELETE
 <br/>
 
 
-### Authors
+### Authors
 
 Omar Miramontes
 
