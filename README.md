@@ -109,7 +109,7 @@ The authentication system used for the project is Auth0.
   - delete:casting-movies
 - **Notes**
   - Any attempt to access endpoint without permission will result
-    on a 403 - 'Permission not found' response.
+    on a 403 \- 'Permission not found' response.
 
 ### Errors
 
