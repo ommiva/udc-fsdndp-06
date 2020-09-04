@@ -202,6 +202,23 @@ COPY public.movies (id, title, release_date) FROM stdin;
 5	the silence of the lambs	1991-01-30
 6	Kill Bill: Volume 1	2003-11-28
 7	Last Action Hero	1993-06-18
+8	RED	2010-10-15
+9	Back to the future	1985-07-03
+\.
+
+
+--
+-- Data for Name: movie_cast; Type: TABLE DATA; Schema: public; Owner: ommi
+--
+
+COPY public.movie_cast (id, actor_id, movie_id) FROM stdin;
+1	7	7
+2	8	5
+3	3	6
+4	8	8
+5	2	8
+6	1	2
+7	2	1
 \.
 
 
@@ -216,14 +233,14 @@ SELECT pg_catalog.setval('public.actors_id_seq', 8, true);
 -- Name: movie_cast_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ommi
 --
 
-SELECT pg_catalog.setval('public.movie_cast_id_seq', 1, false);
+SELECT pg_catalog.setval('public.movie_cast_id_seq', 10, false);
 
 
 --
 -- Name: movies_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ommi
 --
 
-SELECT pg_catalog.setval('public.movies_id_seq', 7, true);
+SELECT pg_catalog.setval('public.movies_id_seq', 9, true);
 
 
 --

@@ -76,9 +76,8 @@ python test_app.py
 
 
 ### API Keys / Authentication
-TODO: Describe authentication and how to configure it.
+TODO: It requires no authentication at all.
 The authentication system used for the project is Auth0.
-
 
 #### Roles
 - **Casting assistant**
@@ -91,6 +90,28 @@ The authentication system used for the project is Auth0.
   - Casting director permissions and...
   - Add or delete an movies from the database.
 
+#### Permissions
+- **Casting assistant**
+  - get:actors-detail
+  - get:movies-detail
+  - get:cast-detail
+- **Casting director**
+  - Casting assistant permissions plus...
+  - post:actors
+  - delete:actors
+  - patch:actors
+  - patch:movies
+  - post:casting
+  - delete:casting-actor
+- **Executive Producer**
+  - Casting director permissions plus...
+  - delete:movies
+  - post:movies
+  - delete:casting-movies
+- **Notes**
+  - Any attempt to access endpoint without permission will result
+    on a 403 - 'Permission not found' response.
+
 ### Errors
 
 #### Response codes
@@ -100,6 +121,8 @@ The authentication system used for the project is Auth0.
 - **401 - Unauthorized ^** – Missing or bad authentication.
 - **403 - Forbidden ^** – User authenticated but not authorized to perform the requested operation.
 - **404 - Not found** – The requested resource was not found.
+- **405 - Method not allowed** – The requested method to access a
+  resource was not allowed.
 - **422 - Unprocessable** – The application can not procces the request.
 - **500 - Internal server error** – Something went wrong. 
 
@@ -110,38 +133,44 @@ The authentication system used for the project is Auth0.
 
 ```json
 {
-  "error": 400, 
-  "message": "Bad request", 
+  "error": 400,
+  "message": "Bad request",
   "success": false
 }
 
 {
-  "error": 404, 
-  "message": "Resource not found", 
+  "error": 404,
+  "message": "Resource not found",
   "success": false
 }
 
 {
-  "error": 401, 
-  "message": "Unauthorized", 
+  "error": 405,
+  "message": "Method not allowed",
   "success": false
 }
 
 {
-  "error": 403, 
-  "message": "Forbidden", 
+  "error": 401,
+  "message": "Unauthorized",
   "success": false
 }
 
 {
-  "error": 422, 
-  "message": "Unprocessable", 
+  "error": 403,
+  "message": "Forbidden",
   "success": false
 }
 
 {
-  "error": 500, 
-  "message": "Internal server error", 
+  "error": 422,
+  "message": "Unprocessable",
+  "success": false
+}
+
+{
+  "error": 500,
+  "message": "Internal server error",
   "success": false
 }
 ```
@@ -309,7 +338,7 @@ curl http://127.0.0.1:5000/actors/3 -X PATCH -H "Content-Type: application/json"
 
 * _CURL_
 ```
-curl http://127.0.0.1:5000/actors/4
+curl http://127.0.0.1:5000/actors/4 -X DELETE
 ```
 
 
@@ -428,7 +457,7 @@ curl http://127.0.0.1:5000/movies/3
 
 * _CURL_
 ```
-curl http://127.0.0.1:5000/movies/4
+curl http://127.0.0.1:5000/movies/4 -X DELETE
 ```
 
 
@@ -452,6 +481,119 @@ curl http://127.0.0.1:5000/movies/4
 * _CURL_
 ```
 curl http://127.0.0.1:5000/movies -X POST -H "Content-Type: application/json" -d '{"title": "The Good, the Bad and the Ugly", "release_date": "12/23/1966"}'
+```
+
+
+
+
+#### Casting
+
+##### Endpoints
+
+- GET /cast-detail
+- PATCH /cast/<int:movie_id>
+- DELETE /cast/<int:cast_id>
+- DELETE /cast-movie/<int:movie_id>
+- POST /cast
+
+
+###### GET /cast-detail
+* Retrieves all movies available.
+
+* _Request arguments_
+None
+
+* _Response_
+```json
+{
+  "cast": [
+    {
+      "actor_id": 7,
+      "actor_name": "Ian McKellen",
+      "movie_id": 7,
+      "movie_release_date": "06/18/1993",
+      "movie_title": "Last Action Hero"
+    }
+  ]
+}
+```
+
+* _CURL_
+```
+curl http://127.0.0.1:5000/cast-detail 
+```
+
+
+###### POST /cast
+* Adds new movie-actor assignation.
+
+* _Request arguments_
+  * Actor (id)
+  * Movie (id)
+
+* _Response_
+```json
+{
+  "cast": {
+    "actor_id": 4,
+    "actor_name": "Emma Watson",
+    "movie_id": 4,
+    "movie_release_date": "12/25/2019",
+    "movie_title": "Little Women"
+  },
+  "success": true
+}
+```
+
+* _CURL_
+```
+curl http://127.0.0.1:5000/cast  -X POST -H "Content-Type: application/json" -d '{"actor": 4, "movie": 4}'
+```
+
+
+###### DELETE /cast/<int:cast_id>
+* Deletes existing movie-actor assignation.
+
+* _Request arguments_
+  * Cast (id)
+
+* _Response_
+```json
+{
+  "delete": {
+    "actor_id": 8,
+    "actor_name": "Jodie Foster",
+    "movie_id": 5,
+    "movie_release_date": "01/30/1991",
+    "movie_title": "the silence of the lambs"
+  },
+  "success": true
+}
+```
+
+* _CURL_
+```
+curl http://127.0.0.1:5000/cast/2  -X DELETE
+```
+
+
+###### DELETE /cast-movie/<int:movie_id>
+* Deletes existing movie and all its assignations.
+
+* _Request arguments_
+  * Movie (id)
+
+* _Response_
+```json
+{
+  "delete": 2,
+  "success": true
+}
+```
+
+* _CURL_
+```
+curl http://127.0.0.1:5000/cast-movie/8  -X DELETE
 ```
 
 

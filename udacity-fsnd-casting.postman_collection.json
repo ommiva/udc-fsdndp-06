@@ -17,8 +17,8 @@
 							"script": {
 								"id": "5d083be1-4efb-4ca4-b2c8-40ebe215e261",
 								"exec": [
-									"pm.test(\"Status code is 201\", function () {",
-									"    pm.response.to.have.status(201);",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -66,6 +66,38 @@
 							],
 							"path": [
 								"actors-detail"
+							]
+						},
+						"description": "Retireve actors list"
+					},
+					"response": []
+				},
+				{
+					"name": "List cast",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "132a8d1c-c227-4d8e-a3b3-a8349f40feb7",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/cast-detail",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast-detail"
 							]
 						},
 						"description": "Retireve actors list"
@@ -334,6 +366,131 @@
 						"description": "Deletes movie with id 1 from database"
 					},
 					"response": []
+				},
+				{
+					"name": "Add casting",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a6a369ac-9580-42d9-95a5-2595f200ec49",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"movie\": 1,   \n    \"actor\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast"
+							]
+						},
+						"description": "Add a new movie-actor assignation"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete actor from casting",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b8ff692a-dd22-4c2e-b632-ec8aa613b28a",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast",
+								"1"
+							]
+						},
+						"description": "Delete existing movie-actor assignation"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete casting for movie",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3b867d92-5c06-4ebe-8bc0-534cc41604e8",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast-movie/8",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast-movie",
+								"8"
+							]
+						},
+						"description": "Delete existing movie and all its assignation"
+					},
+					"response": []
 				}
 			],
 			"description": "Remove\n\nThere is no public access.  For debug only",
@@ -490,6 +647,46 @@
 					"response": []
 				},
 				{
+					"name": "Fail list actors if post method",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8623cb43-4362-4973-b17e-4d39cd1c48d1",
+								"exec": [
+									"pm.test(\"Status code is 405\", function () {",
+									"    pm.response.to.have.status(405);",
+									"});",
+									"",
+									"pm.test(\"No authorization header\", function() {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.response.to.have.status(405);",
+									"    pm.expect(responseJson.success).to.eql(false);",
+									"    pm.expect(responseJson.message).to.eql(\"Method not allowed\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors-detail",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors-detail"
+							]
+						},
+						"description": "Retireve actors list"
+					},
+					"response": []
+				},
+				{
 					"name": "List movies",
 					"event": [
 						{
@@ -612,6 +809,46 @@
 					"response": []
 				},
 				{
+					"name": "Fail list movies if post method",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "03588512-faf8-4105-9c09-feef8aefa941",
+								"exec": [
+									"pm.test(\"Status code is 405\", function () {",
+									"    pm.response.to.have.status(405);",
+									"});",
+									"",
+									"pm.test(\"No authorization header\", function() {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.response.to.have.status(405);",
+									"    pm.expect(responseJson.success).to.eql(false);",
+									"    pm.expect(responseJson.message).to.eql(\"Method not allowed\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies-detail",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies-detail"
+							]
+						},
+						"description": "Retireve actors list"
+					},
+					"response": []
+				},
+				{
 					"name": "Add actor",
 					"event": [
 						{
@@ -673,7 +910,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"age\": 57,\n}",
+							"raw": "{\n    \"age\": 57\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -842,6 +1079,296 @@
 						"description": "Deletes movie with id 1 from database"
 					},
 					"response": []
+				},
+				{
+					"name": "List cast",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e19f9506-7506-4f72-8c99-3cf3bee1dffe",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors-detail",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors-detail"
+							]
+						},
+						"description": "Retireve casting list"
+					},
+					"response": []
+				},
+				{
+					"name": "Fail casting list if post method",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "53e60716-b6ae-42cc-8d04-6e0d6206ba51",
+								"exec": [
+									"pm.test(\"Status code is 405\", function () {",
+									"    pm.response.to.have.status(405);",
+									"});",
+									"",
+									"pm.test(\"No authorization header\", function() {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.response.to.have.status(405);",
+									"    pm.expect(responseJson.success).to.eql(false);",
+									"    pm.expect(responseJson.message).to.eql(\"Method not allowed\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/cast-detail",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast-detail"
+							]
+						},
+						"description": "Retireve actors list"
+					},
+					"response": []
+				},
+				{
+					"name": "Fail casting list if token expired",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7c8e8a9b-2c67-403a-adfa-0cc266b84e15",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									"",
+									"pm.test(\"Token expired\", function () {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.response.to.have.status(401);",
+									"    pm.expect(responseJson.success).to.eql(false);",
+									"    pm.expect(responseJson.message).to.eql(\"Token expired.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjMzUxN2VlMGYwMDAzZDhjZDExOSIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTcwOTc5MjQsImV4cCI6MTU5NzEwNTEyNCwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMiLCJnZXQ6bW92aWVzIl19.cR06a3ViTYfuI6ddcrGt5M7guUtry93ULrzWtdA2tzuqiDIz0I-YnpK1MTvEiZ7ZaWccFhl-6lKux-WZvw26XSf_asfBdmwVVu3hDYuKXWjUtKt7KAzG4yV0uKRntpyfXfDjaeisIbCKWYBN12WWRDAhi0pNIuj_cDcyBrw1eGWpjrkV68CwdWfq8nw_wD_ZGpOVhhS4oc821ImneGp4o9qL_S6_qR2NJbllkdPTFJYUZ2bQ8Lnivx-gSXJV0O6Us7Fx8CwsFfYXjuKncv1q95tRnIzVhI_rqN3tJHTGnUbr5RC6QxnMJDjld4CnKSdFyNzikU1EWsVstKEDGFJ1_A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/cast-detail",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast-detail"
+							]
+						},
+						"description": "Retireve casting list"
+					},
+					"response": []
+				},
+				{
+					"name": "Fail casting list if no auth header",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "39665507-dd31-4585-a35f-84f22ac2f656",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									"",
+									"pm.test(\"No authorization header\", function() {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.response.to.have.status(401);",
+									"    pm.expect(responseJson.success).to.eql(false);",
+									"    pm.expect(responseJson.message).to.eql(\"Authorization header is expected.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/cast-detail",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast-detail"
+							]
+						},
+						"description": "Retireve casting list"
+					},
+					"response": []
+				},
+				{
+					"name": "Add casting",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3d0b41d5-a797-4680-ae6c-76a780213bc7",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"movie\": 1,   \n    \"actor\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast"
+							]
+						},
+						"description": "Add a new movie-actor assignation"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete actor from casting",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f5ac86a5-c7fe-481c-8c55-3bffe869cc30",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast",
+								"1"
+							]
+						},
+						"description": "Delete existing movie-actor assignation"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete casting for movie",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "364ddb90-f3e3-410a-baa5-bffe15b60e2f",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast-movie/8",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast-movie",
+								"8"
+							]
+						},
+						"description": "Delete existing movie and all its assignation"
+					},
+					"response": []
 				}
 			],
 			"description": "Casting assistant access",
@@ -850,7 +1377,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjMzUxN2VlMGYwMDAzZDhjZDExOSIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTc3ODM0NDAsImV4cCI6MTU5Nzc5MDY0MCwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0Om1vdmllcy1kZXRhaWwiXX0.OqMK7BQqyqktHloNNGOFv7tiGGNRPIHvJmKPB2vXkhgIBKidnJ8Ungio_KrPVQiVzpKFxDvyl9ajxdHs07p_4ZuMf2QuwG2cfj-8O7r656rB36XAvGfkgqEh4w4xfy2gOlUvWoZjmJPCO_8syN5Zqbq82AzgKM1zuyMgJQ1thc2zL0lwt9oAW-bzaG29eJ8-9ABJf03EeqnHtjAsh_CAcg5nkWXSR_bKI8lxdJX3HdO8y35HicFNTBWpWUWAL8CrjM9ijBDZbH25jJr2QHizJGpDXAvETqQKC6IxBH0kWSKXoCZw97g_LU8eUs11g-RfNKLSAndHFbwQ_eUhBRsY0g",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjMzUxN2VlMGYwMDAzZDhjZDExOSIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTkxNDczNTMsImV4cCI6MTU5OTIzMzc1MywiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0OmNhc3QtZGV0YWlsIiwiZ2V0Om1vdmllcy1kZXRhaWwiXX0.Sqv2MA7k6RNo8taHHrPlxGC2A3muAKSc8LKYEVQt7PRJy9Xs5sPbTbphXFNCvT30rqzUDfLo03j7bCcX-85LtD7BkcHRlZjSrqG3phzFFvRaey48LJ6hbiTOtSFeR5QTQbVxZ8ir6awtqAfXZV8magaEBn86NQZJdFuy42bT6qxC4x9fGPksYVIXWSjFG_uhFon4S2wdCr1ezxC-78AiY2BGHxsU9juSz805zby6OiLx1fqhOUwoSLP-gPT5NlF43mRwizNs4bgUy9OWxUZHNcXMovMNObIQx97Du4bzIWu93u8gzL4oFFI1s64kFF8um57I1TmFM0ims2vea_q1zA",
 						"type": "string"
 					}
 				]
@@ -994,7 +1521,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Michael Fassbender\",\n    \"age\": 43,\n    \"gender\": \"Male\"\n}",
+							"raw": "{\n    \"name\": \"Michael Fassbender Err\",\n    \"age\": 43,\n    \"gender\": \"Male\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1118,7 +1645,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"age\": 58\n}",
+							"raw": "{\n    \"age\": 580\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1202,7 +1729,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"release_date\": \"09/09/2020\"\n}",
+							"raw": "{\n    \"release_date\": \"02/29/2020\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1271,6 +1798,57 @@
 						}
 					],
 					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors/4",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"4"
+							]
+						},
+						"description": "Removes actor with id 1 from database"
+					},
+					"response": []
+				},
+				{
+					"name": "Fail delete actor if incorrect claims",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "649027aa-3e65-4037-adc2-ccdd315f9de4",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									"",
+									"pm.test(\"No authorization header\", function() {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.response.to.have.status(401);",
+									"    pm.expect(responseJson.success).to.eql(false);",
+									"    pm.expect(responseJson.message).to.eql(\"Incorrect claims. Please, check the audience and user.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmNDdlM2RmOWM1MTA2MDA2ZGUxNmMxOSIsImF1ZCI6ImNhc3RpbmdhZ2VudHMiLCJpYXQiOjE1OTkxNDcyMzksImV4cCI6MTU5OTIzMzYzOSwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0OmFnZW50LWRldGFpbCJdfQ.qYVRknmrexNXM1JjpcRq-ncZK0nQYlnvqTNXZmv-vVUHNVL5qWC4dYLNMJChA2-1JYlJPO30-OuyaVh32cT_hSTZ-xI6CtBKqq1LWAslDBdhF9YnPRaXnr6UPq-qSKSUgK8ebuHbsugBtigmx4I-MvLAj2nMLb-hUB5Bx8qedvol5_rRJKiFGfEGd417HR4TBRkVcpSmDGJX5VDolgegIYgpHJYuvfa4v9VEuE0jcr5dOUs4U3oiyMZ7IoywrAtlDPuQ0sR-S5HL-Ft6R3_6-oVqZYhQJNA94sBo8Ucyf0t8U_c9fjtYMnMk4_-AkI-A45hZGIBZIAFEwi2pRSmqJA",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
@@ -1444,6 +2022,411 @@
 						"description": "Deletes movie with id 1 from database"
 					},
 					"response": []
+				},
+				{
+					"name": "List cast",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "539267cf-34af-4608-8c56-33b7289f3d45",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors-detail",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors-detail"
+							]
+						},
+						"description": "Retireve actors list"
+					},
+					"response": []
+				},
+				{
+					"name": "Add casting",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "627fc2b4-21af-4f6e-ba03-8ae8ba8e39f5",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"movie\": 2,   \n    \"actor\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast"
+							]
+						},
+						"description": "Add a new movie-actor assignation"
+					},
+					"response": []
+				},
+				{
+					"name": "Fail add casting if no actor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3558cbae-b0d8-4c5e-af41-2def576868ab",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"movie\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast"
+							]
+						},
+						"description": "Add a new movie-actor assignation"
+					},
+					"response": []
+				},
+				{
+					"name": "Fail add casting if no movie",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "050ec18a-3ab9-408c-890e-20a395234f4a",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n    \"actor\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast"
+							]
+						},
+						"description": "Add a new movie-actor assignation"
+					},
+					"response": []
+				},
+				{
+					"name": "Fail add casting if actor not found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3ccd3031-14bf-4dfc-afc6-5c26d3a6837d",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"movie\": 2,   \n    \"actor\": 2000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast"
+							]
+						},
+						"description": "Add a new movie-actor assignation"
+					},
+					"response": []
+				},
+				{
+					"name": "Fail add casting if movie not found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4511047b-cd54-4cd3-9b41-40da124d1350",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"movie\": 2000,   \n    \"actor\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast"
+							]
+						},
+						"description": "Add a new movie-actor assignation"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete actor from casting",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5d41f531-03a2-49b1-8491-fe5066f57f33",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast",
+								"2"
+							]
+						},
+						"description": "Delete existing movie-actor assignation"
+					},
+					"response": []
+				},
+				{
+					"name": "Fail delete actor from casting if no actor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a40b9c08-228d-4a8a-948a-0aa367c153ff",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast",
+								""
+							]
+						},
+						"description": "Delete existing movie-actor assignation"
+					},
+					"response": []
+				},
+				{
+					"name": "Fail delete actor from casting if actor not found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "61343f2a-6633-4721-a696-456d0bedd53a",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast/2000",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast",
+								"2000"
+							]
+						},
+						"description": "Delete existing movie-actor assignation"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete casting for movie",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "56497f34-c002-4c82-842d-5c724ae8262d",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast-movie/8",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast-movie",
+								"8"
+							]
+						},
+						"description": "Delete existing movie and all its assignation"
+					},
+					"response": []
 				}
 			],
 			"description": "Casting director access",
@@ -1452,7 +2435,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjM2ZhZDJmMWNkMDAzN2VmZDg3NyIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTc3ODQxNzAsImV4cCI6MTU5Nzc5MTM3MCwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJnZXQ6YWN0b3JzLWRldGFpbCIsImdldDptb3ZpZXMtZGV0YWlsIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiXX0.vi4qNklLoQSiCf1o44-9R8qOtnhr5Gh3MaSIxtyWG1lYu8PXCo3y1l4l9lISMhcnB8pu_9SlY7SPPddkRapfrOgG-dmAflm5kLPqt644itur4iVZtsk4XOSS7Sus7q3waR1OHCDX_DajdXnx-47dhLTSixwE5YFvQKNqqHCT1rjWC9Ne-LGHBoXS7DTAUSn_3HKMrDjjrokyoxWxB2xS_d_PblQQG88eE08Tymu0cJEkAFRtcr4dBlpuLzdLi39j4olzVDF0bxpkBjDcs86_euC-J12ez5DHmyWF4wdPPCerzAaIrVN9F5_D-HAAG-thoJpoiwxcmBYCDJ5oe_ZZ7w",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjM2ZhZDJmMWNkMDAzN2VmZDg3NyIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTkxNDc0MzcsImV4cCI6MTU5OTIzMzgzNywiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6Y2FzdGluZy1hY3RvciIsImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0OmNhc3QtZGV0YWlsIiwiZ2V0Om1vdmllcy1kZXRhaWwiLCJwYXRjaDphY3RvcnMiLCJwYXRjaDptb3ZpZXMiLCJwb3N0OmFjdG9ycyIsInBvc3Q6Y2FzdGluZyJdfQ.XvSh01LuH2hYyBJe2dkVdpKjOoBcPetPly8XbQ5cwsoKgnHa2-vxJuWpFN3Qzb4yxje64Ejjedh65IeoElDpfNTBNdDYDmG4bDb7g2grAOyA3fM_H5K-c23nTWJzhi7LLnpi2YAR-bJMzOiM23yDGlhZMP6LHRoxBJGNLlymR7vniRIi6kU0xDIzxV_4QK3QdIIrfWx3WOZ2-_3dhZcARVJa0ODyFKr0qFTV1K_UUzRc4e4JoR337awG1hlh8kPYYRkYesl7nsiTMxOEzo2lceCLWQisqYBoTzFFbNWs1K0-y6IqrQ9n6fUqZwzgICJSBHJ6Dr1lcV6EANPHxS8dYA",
 						"type": "string"
 					}
 				]
@@ -1492,8 +2475,8 @@
 							"script": {
 								"id": "60989460-fd05-421c-950d-0b2acede6d9f",
 								"exec": [
-									"pm.test(\"Status code is 401\", function () {",
-									"    pm.response.to.have.status(401);",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1564,7 +2547,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"The Good, the Bad and the Ugly\",\n    \"release_date\": \"12/23/1966\"\n}",
+							"raw": "{\n    \"title\": \"The Good, the Bad and the Ugly Err\",\n    \"release_date\": \"12/23/1966\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1911,6 +2894,247 @@
 						"description": "Updates release date for movie with id 2"
 					},
 					"response": []
+				},
+				{
+					"name": "List cast",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "20dea8cb-d052-47a0-a477-42737b6458f0",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors-detail",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors-detail"
+							]
+						},
+						"description": "Retireve actors list"
+					},
+					"response": []
+				},
+				{
+					"name": "Add casting",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "00934b01-1b85-4d0a-b1ed-c9957ed4b9f2",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"movie\": 3,   \n    \"actor\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast"
+							]
+						},
+						"description": "Add a new movie-actor assignation"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete actor from casting",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "02bd80fc-51af-4c64-b316-e34ffe1b2a46",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast",
+								"1"
+							]
+						},
+						"description": "Delete existing movie-actor assignation"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete casting for movie",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a7b323e8-c926-475c-bc81-3c0abd8ba980",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast-movie/8",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast-movie",
+								"8"
+							]
+						},
+						"description": "Delete existing movie and all its assignation"
+					},
+					"response": []
+				},
+				{
+					"name": "Fail delete casting for movie if not found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d64bd25d-984b-443f-a124-0040ed4c3afa",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast-movie/8000",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast-movie",
+								"8000"
+							]
+						},
+						"description": "Delete existing movie and all its assignation"
+					},
+					"response": []
+				},
+				{
+					"name": "Fail delete casting for movie if has no movie id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cddc36f7-3c71-44cd-be53-47ddc531a8cb",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cast-movie/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cast-movie",
+								""
+							]
+						},
+						"description": "Delete existing movie and all its assignation"
+					},
+					"response": []
 				}
 			],
 			"description": "Executive producer access",
@@ -1919,7 +3143,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjNDQ4N2Q4YTllMDAzNzcxNjlmZCIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTc3ODQ2OTQsImV4cCI6MTU5Nzc5MTg5NCwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6bW92aWVzIiwiZ2V0OmFjdG9ycy1kZXRhaWwiLCJnZXQ6bW92aWVzLWRldGFpbCIsInBhdGNoOmFjdG9ycyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIiwicG9zdDptb3ZpZXMiXX0.r6SOgjroYjXH7jWaZmQLCcAqWsnEDELbn379W7clY_kBhxR5j21TEvAovVsVWP7C3acU3ZFCc3mglOnsNx0Aaov6WZ-k22OTAbi3jKgLMDtXZ5zmd_LQBDiR5lh19uEHjlDI1I8eWrtrPtt_C9q9eh1YjCR0S_-qJqg_056aKrFIIKNkg4g2NAYYRFwnfd_rHiTOcCM3sAkuXSoqEpiftCZAdjO6z7wsOgy1LPUS6SMfPPRZ30SJaC6tIW2YVhFHg_Lb8nOxyqwHoyK7Bad3osYmmWJW6uplgpGTHco_d4bBhRyUIJ1G8REWi_sxpDfR3pIzfLzREdxjT7ARPNQENg",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjNDQ4N2Q4YTllMDAzNzcxNjlmZCIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTkxNDc1NjQsImV4cCI6MTU5OTIzMzk2NCwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6Y2FzdGluZy1hY3RvciIsImRlbGV0ZTpjYXN0aW5nLW1vdmllIiwiZGVsZXRlOm1vdmllcyIsImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0OmNhc3QtZGV0YWlsIiwiZ2V0Om1vdmllcy1kZXRhaWwiLCJwYXRjaDphY3RvcnMiLCJwYXRjaDptb3ZpZXMiLCJwb3N0OmFjdG9ycyIsInBvc3Q6Y2FzdGluZyIsInBvc3Q6bW92aWVzIl19.cy2nq7kYKSy-_7neCbfgrA-V_ZTXdu-qb-b0RhDvlgTBoNJDBHPBBszawaDppSgFFlKae5ykyWbcMR3-KuMHhJWveQiaGQVO15OoPBoCXvUY0qhwQQ6sJOCaAg9PbrxPKWE_gGVbpvL7Dg5vAMj-7DIG5oOOku32sNwWLkViMFAugH6iro2GCqtDvvGQAlk7EPwDZo1vw7_dRInhi8k7Bt_fNKXYHgPtX9MOr_-aVqp4HImTD0F5i3LsKrzDYurATl9OPvA4_lXrXxBlxYPVJqW1HNGM_o285jxOsPzDeFUR8Oe_QmCH-nulei7z0AAXOmBHEVpSTYdYBWTNb5jpMA",
 						"type": "string"
 					}
 				]
@@ -1973,7 +3197,7 @@
 	],
 	"variable": [
 		{
-			"id": "d9f5e740-779b-4203-a8f0-4c3982e294a0",
+			"id": "37ae7357-5e97-4deb-af1e-db817a30e3fa",
 			"key": "host",
 			"value": "localhost:5000"
 		}

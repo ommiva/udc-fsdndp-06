@@ -1,6 +1,8 @@
 
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column, String, Integer, Date, ForeignKey
+from sqlalchemy import Column, ForeignKey
+from sqlalchemy import String, Integer, Date
+from sqlalchemy.orm import relationship
 
 import json
 import os
@@ -33,6 +35,12 @@ class Movie(db.Model):
     title = Column(String)
     release_date = Column(Date)
 
+    cast = relationship(
+        "Cast",
+        back_populates="movie",
+        cascade='all, delete-orphan',
+        lazy=True)
+
     def __init__(self, title, release_date):
         self.title = title
         self.release_date = release_date
@@ -63,6 +71,13 @@ class Movie(db.Model):
         return f'<Movie {self.id} "{self.title}">'
 
 
+def bulk_delete_cast_by_movie(movie_id):
+    # https://stackoverflow.com/questions/39773560/sqlalchemy-how-do-you-delete-multiple-rows-without-querying
+    query = Cast.__table__.delete().where(Cast.movie_id == movie_id)
+    db.session.execute(query)
+    db.session.commit()
+
+
 class Actor(db.Model):
     '''
     Actor
@@ -74,6 +89,12 @@ class Actor(db.Model):
     name = Column(String)
     age = Column(Integer)
     gender = Column(String(15))
+
+    cast = relationship(
+        "Cast",
+        back_populates="actor",
+        cascade='all, delete-orphan',
+        lazy=True)
 
     def __init__(self, name, age, gender):
         self.name = name
@@ -114,6 +135,30 @@ class Cast(db.Model):
     id = Column(Integer, primary_key=True)
     actor_id = Column(Integer, ForeignKey('actors.id'), nullable=False)
     movie_id = Column(Integer, ForeignKey('movies.id'), nullable=False)
+
+    actor = relationship("Actor", back_populates="cast")
+    movie = relationship("Movie", back_populates="cast")
+
+    def insert(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def update(self):
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
+    def format(self):
+        return {
+            "movie_id": self.movie.id,
+            "movie_title": self.movie.title,
+            "movie_release_date":
+                self.movie.release_date.strftime('%m/%d/%Y'),
+            "actor_id": self.actor.id,
+            "actor_name": self.actor.name
+        }
 
     def __repr__(self):
         return

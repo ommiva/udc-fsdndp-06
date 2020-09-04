@@ -4,7 +4,8 @@ from flask import flash, jsonify
 from flask_cors import CORS
 
 from models import setup_db, Actor, Movie, Cast
-from auth.auth import AuthError, requires_auth, AUTH0_DOMAIN
+from models import bulk_delete_cast_by_movie
+from auth.auth import AuthError, requires_auth
 from datetime import datetime
 from babel import Locale
 from babel.dates import format_datetime
@@ -301,6 +302,126 @@ def create_app(test_config=None):
                     "success": True,
                     "delete": movie_id
                 })
+
+        except exceptions.HTTPException as httpe:
+            print("Error HTTP > ", httpe)
+            raise
+        except Exception as e:
+            print(sys.exc_info())
+            abort(422)
+
+    @app.route('/cast-detail', methods=["GET"])
+    @requires_auth('get:cast-detail')
+    def list_cast():
+        print("Cast list")
+        try:
+            data = []
+            cast_list = Cast.query.all()
+
+            current_cast = [cast.format() for cast in cast_list]
+
+            # print("Casting ", current_cast)
+            # print("list: ", len(data))
+            if not len(current_cast):
+                abort(404)
+
+            return jsonify({
+                "cast": current_cast
+            })
+
+        except exceptions.HTTPException as httpe:
+            print("Error HTTP > ", httpe)
+            raise
+        except Exception as e:
+            print(sys.exc_info())
+            abort(422)
+
+    @app.route('/cast', methods=["POST"])
+    @requires_auth('post:casting')
+    def new_cast():
+        print("New cast")
+
+        body = request.get_json()
+
+        try:
+            actor_id = body.get("actor", None)
+            movie_id = body.get("movie", None)
+
+            if actor_id is None \
+               or movie_id is None \
+               or not actor_id \
+               or not movie_id:
+                abort(400)
+
+            actor = Actor.query.filter_by(id=actor_id).one_or_none()
+            movie = Movie.query.filter_by(id=movie_id).one_or_none()
+
+            if actor is None or movie is None:
+                abort(404)
+
+            casting = Cast(
+                actor_id=actor.id,
+                movie_id=movie.id
+                )
+            casting.insert()
+
+            return jsonify({
+                "success": True,
+                "cast": casting.format()
+            }), 201
+
+        except exceptions.HTTPException as httpe:
+            print("Error HTTP > ", httpe)
+            raise
+        except Exception as e:
+            print(sys.exc_info())
+            abort(422)
+
+    @app.route('/cast/<int:cast_id>', methods=["DELETE"])
+    @requires_auth("delete:casting-actor")
+    def delete_casting_actor(cast_id):
+        try:
+            cast = Cast.query.filter_by(id=cast_id).one_or_none()
+
+            if cast is None:
+                abort(404)
+
+            deleted = cast.format()
+            cast.delete()
+
+            return jsonify({
+                "success": True,
+                "delete": deleted
+            })
+
+        except exceptions.HTTPException as httpe:
+            print("Error HTTP > ", httpe)
+            raise
+        except Exception as e:
+            print(sys.exc_info())
+            abort(422)
+
+    @app.route('/cast-movie/<int:movie_id>', methods=["DELETE"])
+    @requires_auth("delete:casting-movie")
+    def delete_casting_movie(movie_id):
+        try:
+            casting_movie_total = Cast.query\
+                .filter_by(movie_id=movie_id).count()
+
+            if casting_movie_total == 0:
+                abort(404)
+
+            """
+            casting_movie = Cast.query.filter_by(movie_id=movie_id).all()
+            casting_movie.delete()
+            Cast.query.filter_by(movie_id=movie_id).delete()
+            """
+            bulk_delete_cast_by_movie(movie_id)
+
+            return jsonify({
+                "success": True,
+                "delete": casting_movie_total
+            })
 
         except exceptions.HTTPException as httpe:
             print("Error HTTP > ", httpe)
