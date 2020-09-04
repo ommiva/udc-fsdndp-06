@@ -7,7 +7,6 @@ Simplify and streamline agency creation of movies and managing and assigning
 actors to those movies.
 
 <br/>
-<br/>
 
 ## Getting started
 
@@ -40,9 +39,9 @@ python manage.py db migrate
 python manage.py db upgrade
 ```
 
-
-
 - - -
+
+<br/>
 TODO: Remove debug
 
 ### DEBUG
@@ -90,6 +89,8 @@ python test_app.py
 TODO: It requires no authentication at all.
 The authentication system used for the project is Auth0.
 
+<br/>
+
 #### Roles
 - **Casting assistant**
   - Can view actors and movies.
@@ -100,6 +101,8 @@ The authentication system used for the project is Auth0.
 - **Executive Producer**
   - Casting director permissions and...
   - Add or delete an movies from the database.
+
+<br/>
 
 #### Permissions
 - **Casting assistant**
@@ -191,6 +194,8 @@ The authentication system used for the project is Auth0.
 }
 ```
 
+<br/>
+
 #### Authetication messages
 ```json
 {
@@ -260,7 +265,6 @@ The authentication system used for the project is Auth0.
 
 ### Resource endpoint library
 
-<br/>
 
 #### Actors
 
@@ -270,6 +274,8 @@ The authentication system used for the project is Auth0.
 - PATCH /actors/<int:actor_id>
 - DELETE /actors/<int:actor_id>
 - POST /actors
+
+<br/>
 
 ###### GET /actors-detail
 * Retrieves all actors available
@@ -314,6 +320,7 @@ The authentication system used for the project is Auth0.
 curl http://127.0.0.1:5000/actors-detail
 ```
 
+<br/>
 
 ###### PATCH /actors/<int:actor_id>
 * Updates actor data for given actor id.
@@ -343,6 +350,7 @@ curl http://127.0.0.1:5000/actors-detail
 curl http://127.0.0.1:5000/actors/3 -X PATCH -H "Content-Type: application/json" -d '{"name":"Russel Crowe", "age": 58, "gender": }'
 ```
 
+<br/>
 
 ###### DELETE /actors/<int:actor_id>
 * Deletes a actor given actor id.
@@ -363,6 +371,7 @@ curl http://127.0.0.1:5000/actors/3 -X PATCH -H "Content-Type: application/json"
 curl http://127.0.0.1:5000/actors/4 -X DELETE
 ```
 
+<br/>
 
 ###### POST /actors
 * Creates an actor in the actors list, given his/hers name, gender and age.
@@ -401,6 +410,8 @@ curl http://127.0.0.1:5000/categories -X POST -H "Content-Type: application/json
 - DELETE /movies/<int:movie_id>
 - POST /movies
 
+<br/>
+
 ###### GET /movies-detail
 * Retrieves all movies available
 
@@ -435,6 +446,7 @@ curl http://127.0.0.1:5000/categories -X POST -H "Content-Type: application/json
 curl http://127.0.0.1:5000/movies-detail
 ```
 
+<br/>
 
 ###### PATCH /movies/<int:movie_id>
 * Updates movie data for given movie id.
@@ -462,6 +474,7 @@ curl http://127.0.0.1:5000/movies-detail
 curl http://127.0.0.1:5000/movies/3
 ```
 
+<br/>
 
 ###### DELETE /movies/<int:movie_id>
 * Deletes a movie given movie id.
@@ -482,6 +495,7 @@ curl http://127.0.0.1:5000/movies/3
 curl http://127.0.0.1:5000/movies/4 -X DELETE
 ```
 
+<br/>
 
 ###### POST /movies
 * Creates a movie in the movies list, given a title and release date.
@@ -518,6 +532,7 @@ curl http://127.0.0.1:5000/movies -X POST -H "Content-Type: application/json" -d
 - DELETE /cast-movie/<int:movie_id>
 - POST /cast
 
+<br/>
 
 ###### GET /cast-detail
 * Retrieves all movies available.
@@ -545,6 +560,7 @@ curl http://127.0.0.1:5000/movies -X POST -H "Content-Type: application/json" -d
 curl http://127.0.0.1:5000/cast-detail 
 ```
 
+<br/>
 
 ###### POST /cast
 * Adds new movie-actor assignation.
@@ -572,6 +588,7 @@ curl http://127.0.0.1:5000/cast-detail
 curl http://127.0.0.1:5000/cast  -X POST -H "Content-Type: application/json" -d '{"actor": 4, "movie": 4}'
 ```
 
+<br/>
 
 ###### DELETE /cast/<int:cast_id>
 * Deletes existing movie-actor assignation.
@@ -598,6 +615,7 @@ curl http://127.0.0.1:5000/cast  -X POST -H "Content-Type: application/json" -d 
 curl http://127.0.0.1:5000/cast/2  -X DELETE
 ```
 
+<br/>
 
 ###### DELETE /cast-movie/<int:movie_id>
 * Deletes existing movie and all its assignations.
