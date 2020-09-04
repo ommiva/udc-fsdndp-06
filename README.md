@@ -22,7 +22,6 @@ To create the database, first set DATABASE_URL environment variable
 export DATABASE_URL=postgres://postgres@[host]:5432/[database_name]
 ```
 
-(TODO: Remove example)
 Example:   
 ```bash
 export DATABASE_URL=postgres://postgres@localhost:5432/casting_agency
@@ -86,7 +85,7 @@ python test_app.py
 <br/>
 
 ### API Keys / Authentication
-TODO: It requires no authentication at all.
+TODO: It requires no authentication at all.<br/>
 The authentication system used for the project is Auth0.
 
 <br/>
