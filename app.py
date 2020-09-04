@@ -365,11 +365,6 @@ def create_app(test_config=None):
             if casting_movie_total == 0:
                 abort(404)
 
-            """
-            casting_movie = Cast.query.filter_by(movie_id=movie_id).all()
-            casting_movie.delete()
-            Cast.query.filter_by(movie_id=movie_id).delete()
-            """
             bulk_delete_cast_by_movie(movie_id)
 
             return jsonify({
