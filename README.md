@@ -6,6 +6,7 @@ Casting Agency application.
 Simplify and streamline agency creation of movies and managing and assigning
 actors to those movies.
 
+<br/>
 
 ## Getting started
 
@@ -21,7 +22,6 @@ To create the database, first set DATABASE_URL environment variable
 export DATABASE_URL=postgres://postgres@[host]:5432/[database_name]
 ```
 
-(TODO: Remove example)
 Example:   
 ```bash
 export DATABASE_URL=postgres://postgres@localhost:5432/casting_agency
@@ -38,11 +38,11 @@ python manage.py db migrate
 python manage.py db upgrade
 ```
 
+- - -
 
-
--------------------------------
+<br/>
 TODO: Remove debug
--------------------------------
+
 ### DEBUG
 * To install the application
 ```bash
@@ -60,9 +60,16 @@ or
 $ FLASK_APP=flaskr FLASKNV=development flask run
 ```
 
-The API is run on http://127.0.0.1:5000/ by default.
-===============================
+<br/>
+<br/>
 
+- - -
+
+The API runs at http://127.0.0.1:5000/ by default.
+
+- - -
+
+<br/>
 
 #### Testing
 To run tests, run 
@@ -74,10 +81,14 @@ python test_app.py
 ```
 
 
+<br/>
+<br/>
 
 ### API Keys / Authentication
-TODO: It requires no authentication at all.
+TODO: It requires no authentication at all.<br/>
 The authentication system used for the project is Auth0.
+
+<br/>
 
 #### Roles
 - **Casting assistant**
@@ -89,6 +100,8 @@ The authentication system used for the project is Auth0.
 - **Executive Producer**
   - Casting director permissions and...
   - Add or delete an movies from the database.
+
+<br/>
 
 #### Permissions
 - **Casting assistant**
@@ -108,28 +121,33 @@ The authentication system used for the project is Auth0.
   - delete:movies
   - post:movies
   - delete:casting-movies
-- **Notes**
+- __Notes__
   - Any attempt to access endpoint without permission will result
-    on a 403 - 'Permission not found' response.
+    on a _403 \- Permission not found_ response.
 
-### Errors
 
-#### Response codes
-- **200 - OK** – Everything is ok
-- **201 - Created** - Resource created.
-- **400 - Bad  request** – Client error.
-- **401 - Unauthorized ^** – Missing or bad authentication.
-- **403 - Forbidden ^** – User authenticated but not authorized to perform the requested operation.
-- **404 - Not found** – The requested resource was not found.
-- **405 - Method not allowed** – The requested method to access a
+<br/>
+<br/>
+
+### Errors
+
+#### Response codes
+- **200 \- OK** – Everything is ok
+- **201 \- Created** - Resource created.
+- **400 \- Bad  request** – Client error.
+- **401 \- Unauthorized ^** – Missing or bad authentication.
+- **403 \- Forbidden ^** – User authenticated but not authorized to perform the requested operation.
+- **404 \- Not found** – The requested resource was not found.
+- **405 \- Method not allowed** – The requested method to access a
   resource was not allowed.
-- **422 - Unprocessable** – The application can not procces the request.
-- **500 - Internal server error** – Something went wrong. 
+- **422 \- Unprocessable** – The application can not procces the request.
+- **500 \- Internal server error** – Something went wrong. 
 
-- **^ aknowledge** - From https://stackoverflow.com/questions/3297048/403-forbidden-vs-401-unauthorized-http-responses 
+> **^ aknowledge** \- From [stakoverflow](https://stackoverflow.com/questions/3297048/403-forbidden-vs-401-unauthorized-http-responses) 
 
+<br/>
 
-#### Messages
+#### Messages
 
 ```json
 {
@@ -174,6 +192,8 @@ The authentication system used for the project is Auth0.
   "success": false
 }
 ```
+
+<br/>
 
 #### Authetication messages
 ```json
@@ -238,22 +258,29 @@ The authentication system used for the project is Auth0.
 }
 ```
 
+<br/>
+<br/>
+
+
 ### Resource endpoint library
+
 
 #### Actors
 
-##### Endpoints
+##### Endpoints
 
 - GET /actors-detail
 - PATCH /actors/<int:actor_id>
 - DELETE /actors/<int:actor_id>
 - POST /actors
 
-##### GET /actors-detail
+<br/>
+
+###### GET /actors-detail
 * Retrieves all actors available
 
 * _Request arguments_
-None
+  * None
 
 * _Response_
 ```json
@@ -292,6 +319,7 @@ None
 curl http://127.0.0.1:5000/actors-detail
 ```
 
+<br/>
 
 ###### PATCH /actors/<int:actor_id>
 * Updates actor data for given actor id.
@@ -321,6 +349,7 @@ curl http://127.0.0.1:5000/actors-detail
 curl http://127.0.0.1:5000/actors/3 -X PATCH -H "Content-Type: application/json" -d '{"name":"Russel Crowe", "age": 58, "gender": }'
 ```
 
+<br/>
 
 ###### DELETE /actors/<int:actor_id>
 * Deletes a actor given actor id.
@@ -341,6 +370,7 @@ curl http://127.0.0.1:5000/actors/3 -X PATCH -H "Content-Type: application/json"
 curl http://127.0.0.1:5000/actors/4 -X DELETE
 ```
 
+<br/>
 
 ###### POST /actors
 * Creates an actor in the actors list, given his/hers name, gender and age.
@@ -368,22 +398,24 @@ curl http://127.0.0.1:5000/categories -X POST -H "Content-Type: application/json
 ```
 
 
-
+<br/>
 
 #### Movies
 
-##### Endpoints
+##### Endpoints
 
 - GET /movies-detail
 - PATCH /movies/<int:movie_id>
 - DELETE /movies/<int:movie_id>
 - POST /movies
 
-##### GET /movies-detail
+<br/>
+
+###### GET /movies-detail
 * Retrieves all movies available
 
 * _Request arguments_
-None
+  * None
 
 * _Response_
 ```json
@@ -413,6 +445,7 @@ None
 curl http://127.0.0.1:5000/movies-detail
 ```
 
+<br/>
 
 ###### PATCH /movies/<int:movie_id>
 * Updates movie data for given movie id.
@@ -440,6 +473,7 @@ curl http://127.0.0.1:5000/movies-detail
 curl http://127.0.0.1:5000/movies/3
 ```
 
+<br/>
 
 ###### DELETE /movies/<int:movie_id>
 * Deletes a movie given movie id.
@@ -460,6 +494,7 @@ curl http://127.0.0.1:5000/movies/3
 curl http://127.0.0.1:5000/movies/4 -X DELETE
 ```
 
+<br/>
 
 ###### POST /movies
 * Creates a movie in the movies list, given a title and release date.
@@ -484,11 +519,11 @@ curl http://127.0.0.1:5000/movies -X POST -H "Content-Type: application/json" -d
 ```
 
 
-
+<br/>
 
 #### Casting
 
-##### Endpoints
+##### Endpoints
 
 - GET /cast-detail
 - PATCH /cast/<int:movie_id>
@@ -496,12 +531,13 @@ curl http://127.0.0.1:5000/movies -X POST -H "Content-Type: application/json" -d
 - DELETE /cast-movie/<int:movie_id>
 - POST /cast
 
+<br/>
 
 ###### GET /cast-detail
 * Retrieves all movies available.
 
 * _Request arguments_
-None
+  * None
 
 * _Response_
 ```json
@@ -523,6 +559,7 @@ None
 curl http://127.0.0.1:5000/cast-detail 
 ```
 
+<br/>
 
 ###### POST /cast
 * Adds new movie-actor assignation.
@@ -550,6 +587,7 @@ curl http://127.0.0.1:5000/cast-detail
 curl http://127.0.0.1:5000/cast  -X POST -H "Content-Type: application/json" -d '{"actor": 4, "movie": 4}'
 ```
 
+<br/>
 
 ###### DELETE /cast/<int:cast_id>
 * Deletes existing movie-actor assignation.
@@ -576,6 +614,7 @@ curl http://127.0.0.1:5000/cast  -X POST -H "Content-Type: application/json" -d 
 curl http://127.0.0.1:5000/cast/2  -X DELETE
 ```
 
+<br/>
 
 ###### DELETE /cast-movie/<int:movie_id>
 * Deletes existing movie and all its assignations.
@@ -596,10 +635,11 @@ curl http://127.0.0.1:5000/cast/2  -X DELETE
 curl http://127.0.0.1:5000/cast-movie/8  -X DELETE
 ```
 
+<br/>
+<br/>
 
 
-
-### Authors
+### Authors
 
 Omar Miramontes
 
