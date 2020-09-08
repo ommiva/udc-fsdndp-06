@@ -90,11 +90,17 @@ def create_app(test_config=None):
 
             if new_name is None or not new_name:
                 abort(400)
+                
+            if not new_age:
+                new_age = 0
+            
+            if new_gender == 'Select':
+                new_gender = ''
 
             actor = Actor(
-                name=new_name,
+                name=new_name.strip(),
                 age=new_age,
-                gender=new_gender
+                gender=new_gender.strip()
             )
 
             actor.insert()

@@ -53,6 +53,10 @@ p.lead {
 
 /* Various other styles end */
 
+#error-msg {
+  margin-top: 5px;
+}
+
 #front-splash {
 	width: 100%;
 }
