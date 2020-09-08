@@ -54,7 +54,14 @@ p.lead {
 /* Various other styles end */
 
 #error-msg {
-  margin-top: 5px;
+  position: fixed;
+  bottom: 65px;
+  width: 100%;
+  height: 60px;
+  padding-left: 50px;
+  padding-right: 50px;
+  display: block;
+  z-index: 1030;
 }
 
 #front-splash {
@@ -234,4 +241,12 @@ h2.monospace {
 }
 .subtitle {
   opacity: 0.5;
+}
+
+.footer {
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  background-color: khaki;
+  display: block;
 }
