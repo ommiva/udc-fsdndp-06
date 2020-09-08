@@ -39,9 +39,18 @@
     function formatActors(actors) {
       content = actors.map(function(actor) {
         let row = '<div class="thumbnail">';
-        row += "<h4>" + actor.name + "</h4>";
+        row += '<div class="clearfix"><h4><div class="pull-left">' 
+          + actor.name + '</div>';
+        if (can('delete:actors')) {
+          row += '<div class="pull-right btn-delete">' 
+              + '<span class="fas fa-trash text-danger" '
+                +'id="btn-actor-delete-' + actor.id + '"></span></div>';
+        }
+        row += '</h4></div>';
         row += "<p>" + actor.gender + "</p>";
-        row += "<p>" + actor.age + "</p>";
+        if (actor.age > 0) {
+          row += "<p>" + actor.age + "</p>";
+        }
         row += '</div>';
         return row;
       });
@@ -151,7 +160,7 @@
           'gender': gender,
           'age': $('input[name="actor-age"]').val().trim()
         };
-      console.dir(_data);
+      //console.dir(_data);
 
       fetch('/actors', {
         method: 'POST',
@@ -165,18 +174,15 @@
       .then(json => {
         console.dir(json);
         if (json.success) {
-          $error.removeAdd('hidden');
-          alert('actor added');
+          $error.addClass('hidden');
           showForm(false);
           listActors();
         }
         else {
           let message = json.message;
-          message = '<div class="alert alert-danger">' + message + '</div>';
+          message = '<div class="alert alert-danger alert-dismissible">' + message + '</div>';
           $error.html(message);
           $error.removeClass('hidden');
-          
-          alert('error: ' + json.message);
         }
       })
       .catch(function(err){
@@ -185,20 +191,57 @@
       
     }
 
+    function deleteActor(actor_id) {
+      let $error = $('#error-msg');
+      let url = '/actors/' + actor_id;
+
+      fetch(url, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': 'bearer ' + active_jwt(),
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(data => data.json())
+      .then(json => {
+        console.dir(json);
+        if (json.success) {
+          $error.removeClass('hidden');
+          message = '<div class="alert alert-info alert-dismissible">Actor deleted</div>';
+          $error.html(message);
+          setTimeout(() => {
+            listActors();
+          }, 1500);
+        }
+        else {
+          let message = json.message;
+          message = '<div class="alert alert-danger alert-dismissible">' + message + '</div>';
+          $error.html(message);
+          $error.removeClass('hidden');          
+        }
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+
+    }
+
     function addEvents() {
       $('body').on('click', '#btn-new', function() {
-        console.log('click');
         showForm(true);
       });
 
       $('body').on('click', '#btn-actor-send', function() {
-        console.log('click btn-actor-send');
         addActor();
       });
 
       $('body').on('click', '#btn-actor-cancel', function() {
-        console.log('click btn-actor-cancel');
         showForm(false);
+      });
+
+      $('body').on('click', 'span[id^="btn-actor-delete-"]', function() {
+        let id = $(this).attr('id').split('-')[3];
+        deleteActor(id);
       });
     }
   </script>

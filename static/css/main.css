@@ -108,6 +108,11 @@ p.lead {
     color: #444;
 }
 
+.btn-delete {
+    padding-right: 5px;
+    cursor: pointer;
+}
+
 #content h3 {
   margin-top: 15px;
   margin-bottom: 15px;
