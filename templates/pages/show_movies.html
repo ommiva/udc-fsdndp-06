@@ -2,7 +2,7 @@
 {% block title %}Casting Agency: Movies{% endblock %}
 {% block content %}
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-xs-12" style="margin-bottom: 15px;">
       <h1>Movies</h1>
     </div>
     <div class="col-xs-12" id="movies-content">
@@ -44,6 +44,11 @@
               + '<span class="fas fa-trash text-danger" '
                 +'id="btn-movie-delete-' + movie.id + '"></span></div>';
         }
+        if (can('patch:movies')) {
+          row += '<div class="pull-right btn-delete">' 
+              + '<span class="fas fa-edit text-info" '
+                +'id="btn-movie-edit-' + movie.id + '"></span></div>';
+        }
         row += '</h4></div>';
         if(movie.release_date !== null) {
           row += "<p>" + movie.release_date + "</p>";
@@ -67,6 +72,7 @@
         }
 
         content = rows;
+        content += '<a href="#pag-title" id="link-movie-data"></a>';
       }
       else {
         content = '<div class="alert alert-info">No movies found</div>';
@@ -87,6 +93,7 @@
           + '<div class="col-xs-10">'
           +  '<div class="row hidden" id="new-movie-form">'
           +   '<div class="col-xs-5">'
+          +    '<input type="hidden" name="movie-id" value=""/>'
           +    '<input type="text" name="movie-title" placeholder="Title" class="form-control"/>'
           +   '</div>'
           +   '<div class="col-xs-4">'
@@ -120,9 +127,8 @@
           .removeClass('btn-success');
         $form.removeClass('hidden');
       }
-      else {
-        $('input[name="movie-title"]').val('');
-        $('input[name="movie-release"]').val('');      
+      else {  
+        freeInputs();   
 
         $buttonNew.prop('disabled', false)
           .removeClass('disabled')
@@ -135,15 +141,34 @@
     function addMovie() {
       let $error = $('#error-msg');
       //console.log("JWT (actors) " + active_jwt());
+      $error.html('');
 
       let _data = {
           'title': $('input[name="movie-title"]').val().trim(),
           'release_date': $('input[name="movie-release"]').val().trim()
         };
+
+      let url = '/movies';
+      let _method = '';
+      let _message = '';
+      let movie_id = $('input[name="movie-id"]').val().trim();
+
+      if (movie_id == "") {
+        _method = "POST";
+        _message = "Movie added"
+      }
+      else {
+        url += '/' + movie_id;
+        _method = "PATCH";
+        _data.id = movie_id; 
+        _message = "Movie updated";
+      }
+      
+      console.log(_method);
       console.dir(_data);
 
-      fetch('/movies', {
-        method: 'POST',
+      fetch(url, {
+        method: _method,
         headers: {
           'Authorization': 'bearer ' + active_jwt(),
           'Content-Type': 'application/json'
@@ -154,9 +179,12 @@
       .then(json => {
         console.dir(json);
         if (json.success) {
-          $error.addClass('hidden');
           showForm(false);
           listMovies();
+          message = '<div class="alert alert-info alert-dismissible" role="alert"> '
+            +'<button type="button" class="close" data-dismiss="alert" aria-label="Close">'
+            + '<span aria-hidden="true">&times;</span></button>' + _message + '</div>';
+          $error.html(message);
         }
         else {
           let message = json.message;
@@ -164,7 +192,6 @@
             +'<button type="button" class="close" data-dismiss="alert" aria-label="Close">'
             + '<span aria-hidden="true">&times;</span></button>' + message + '</div>';
           $error.html(message);
-          $error.removeClass('hidden');
         }
       })
       .catch(function(err){
@@ -175,6 +202,7 @@
     function deleteMovie(movie_id) {
       let $error = $('#error-msg');
       let url = '/movies/' + movie_id;
+      $error.html('');
 
       fetch(url, {
         method: 'DELETE',
@@ -187,7 +215,6 @@
       .then(json => {
         console.dir(json);
         if (json.success) {
-          $error.removeClass('hidden');
           message = '<div class="alert alert-info alert-dismissible" role="alert"> '
             +'<button type="button" class="close" data-dismiss="alert" aria-label="Close">'
             + '<span aria-hidden="true">&times;</span></button>Movie deleted</div>';
@@ -199,14 +226,41 @@
           message = '<div class="alert alert-danger alert-dismissible" role="alert"> '
             +'<button type="button" class="close" data-dismiss="alert" aria-label="Close">'
             + '<span aria-hidden="true">&times;</span></button>' + message + '</div>';
-          $error.html(message);
-          $error.removeClass('hidden');          
+          $error.html(message);        
         }
       })
       .catch(function(err){
         console.log(err);
       });
+    }
 
+    function openEdit(movie_id) {
+      freeInputs();
+
+      let title = '';
+      let release = '';
+      showForm(true);
+
+      let $movie = $("#btn-movie-edit-" + movie_id).closest('.clearfix');
+      console.log("Movie with id: " + movie_id);
+      console.dir($movie);
+
+      title = $movie.find('.pull-left').eq(0).html();
+      release = $movie.parent().find('p').eq(0).html();
+      console.log('Release ' + release);
+
+      $('input[name="movie-id"]').val(movie_id);
+      $('input[name="movie-title"]').val(title);
+      $('input[name="movie-release"]').val(release);
+
+      $('#btn-movie-send').html('Update');
+      $('#link-movie-data')[0].click();
+    }
+
+    function freeInputs() {
+      $('input[name="movie-id"]').val('');
+      $('input[name="movie-title"]').val('');
+      $('input[name="movie-release"]').val(''); 
     }
 
     function addEvents() {
@@ -225,6 +279,11 @@
       $('body').on('click', 'span[id^="btn-movie-delete-"]', function() {
         let id = $(this).attr('id').split('-')[3];
         deleteMovie(id);
+      });
+
+      $('body').on('click', 'span[id^="btn-movie-edit-"]', function() {
+        let id = $(this).attr('id').split('-')[3];
+        openEdit(id);
       });
     }
   </script>

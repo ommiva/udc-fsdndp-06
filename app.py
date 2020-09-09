@@ -276,10 +276,11 @@ def create_app(test_config=None):
                 if 'title' in body:
                     movie.title = body.get('title')
 
-                if 'release_date' in body:
-
+                if 'release_date' in body and body.get('release_date'):
                     movie.release_date = format_datetime(
                         body.get('release_date'))
+                else:
+                    movie.release_date = None
 
             movie.update()
 
