@@ -14,6 +14,7 @@
   <script>
     $(function() {
       listMovies();
+      addEvents();
     });
 
     function listMovies() {
@@ -26,18 +27,27 @@
       })
       .then(data => data.json())
       .then(json => {
-        formatActors(json.movies);
+        formatMovies(json.movies);
       })
       .catch(function(err){
         console.log(err);
       });
     }
 
-    function formatActors(movies) {
+    function formatMovies(movies) {
       content = movies.map(function(movie) {
         let row = '<div class="thumbnail">';
-        row += "<h4>" + movie.title + "</h4>";
-        row += "<p>" + movie.release_date + "</p>";
+        row += '<div class="clearfix"><h4><div class="pull-left">' 
+          + movie.title + '</div>';
+        if (can('delete:movies')) {
+          row += '<div class="pull-right btn-delete">' 
+              + '<span class="fas fa-trash text-danger" '
+                +'id="btn-actor-delete-' + movie.id + '"></span></div>';
+        }
+        row += '</h4></div>';
+        if(movie.release_date !== null) {
+          row += "<p>" + movie.release_date + "</p>";
+        }
         row += '</div>';
         return row;
       });
@@ -63,6 +73,122 @@
       }
 
       $('#movies-content').html(content);
+      showNewMovie();
+    }
+
+    function showNewMovie() {
+
+      let $content = $('#movies-content');
+      let update_content = "";
+
+      if (can('post:movies')) {
+        console.log("can POST");
+        update_content += '<div class="row">'
+          + '<div class="col-xs-10">'
+          +  '<div class="row hidden" id="new-movie-form">'
+          +   '<div class="col-xs-5">'
+          +    '<input type="text" name="movie-title" placeholder="Title" class="form-control"/>'
+          +   '</div>'
+          +   '<div class="col-xs-4">'
+          +    '<input type="text" name="movie-release" placeholder="mm/dd/yyyy" class="form-control"/>'
+          +   '</div>'
+          +   '<div class="col-xs-2">'
+          +    '<button class="btn btn-block btn-success" id="btn-movie-send">Send</button>'
+          +   '</div>'
+          +   '<div class="col-xs-1">'
+          +    '<button class="btn btn-block btn-danger" id="btn-movie-cancel">X</button>'
+          +   '</div>'
+          + '</div></div>'
+          + '<div class="col-xs-2">'
+          +  '<button class="btn btn-success btn-block" id="btn-new">New movie</button>'
+          + '</div></div>'
+          + '<div class="row">&nbsp;</div>';
+      }
+
+      update_content += $content.html();
+      //console.log("show new actor \n" + update_content);
+      $content.html(update_content);
+    }
+
+    function showForm(show) {
+      let $buttonNew = $('#btn-new');
+      let $form = $('#new-movie-form');
+      if(show) {
+        $buttonNew.prop('disabled', true)
+          .addClass('disabled')
+          .addClass('btn-default')
+          .removeClass('btn-success');
+        $form.removeClass('hidden');
+      }
+      else {
+        $('input[name="movie-title"]').val('');
+        $('input[name="movie-release"]').val('');      
+
+        $buttonNew.prop('disabled', false)
+          .removeClass('disabled')
+          .removeClass('btn-default')
+          .addClass('btn-success');
+        $form.addClass('hidden');
+      }
+    }
+
+    function addMovie() {
+      let $error = $('#error-msg');
+      //console.log("JWT (actors) " + active_jwt());
+
+      let _data = {
+          'title': $('input[name="movie-title"]').val().trim(),
+          'release_date': $('input[name="movie-release"]').val().trim()
+        };
+      console.dir(_data);
+
+      fetch('/movies', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'bearer ' + active_jwt(),
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(_data)
+      })
+      .then(data => data.json())
+      .then(json => {
+        console.dir(json);
+        if (json.success) {
+          $error.addClass('hidden');
+          showForm(false);
+          listMovies();
+        }
+        else {
+          let message = json.message;
+          message = '<div class="alert alert-danger alert-dismissible" role="alert"> '
+            +'<button type="button" class="close" data-dismiss="alert" aria-label="Close">'
+            + '<span aria-hidden="true">&times;</span></button>' + message + '</div>';
+          $error.html(message);
+          $error.removeClass('hidden');
+        }
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+    }
+
+    function addEvents() {
+      $('body').on('click', '#btn-new', function() {
+        showForm(true);
+      });
+
+      $('body').on('click', '#btn-movie-send', function() {
+        addMovie();
+      });
+
+      $('body').on('click', '#btn-movie-cancel', function() {
+        showForm(false);
+      });
+
+      $('body').on('click', 'span[id^="btn-movie-delete-"]', function() {
+        //let id = $(this).attr('id').split('-')[3];
+        //deleteMovie(id);
+      });
     }
   </script>
 {% endblock %}

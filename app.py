@@ -217,6 +217,8 @@ def create_app(test_config=None):
                     new_release,
                     '%m/%d/%Y'
                 )
+            else:
+                new_release = None
 
             movie = Movie(
                 title=new_title,
