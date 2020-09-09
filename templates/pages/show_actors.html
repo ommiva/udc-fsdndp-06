@@ -2,8 +2,8 @@
 {% block title %}Casting Agency: Actors{% endblock %}
 {% block content %}
   <div class="row">
-    <div class="col-xs-12">
-      <h1>Actors</h1>
+    <div class="col-xs-12" style="margin-bottom: 15px;">
+      <h1 id="pag-title">Actors</h1>
     </div>
     <div class="col-xs-12" id="actors-content">
     </div>
@@ -46,12 +46,17 @@
               + '<span class="fas fa-trash text-danger" '
                 +'id="btn-actor-delete-' + actor.id + '"></span></div>';
         }
+        if (can('patch:actors')) {
+          row += '<div class="pull-right btn-delete">' 
+              + '<span class="fas fa-edit text-info" '
+                +'id="btn-actor-edit-' + actor.id + '"></span></div>';
+        }
         row += '</h4></div>';
         row += "<p>" + actor.gender + "</p>";
         if (actor.age > 0) {
           row += "<p>" + actor.age + "</p>";
         }
-        row += '</div>';
+        row += '</div> <!-- /end thumbnail -->';
         return row;
       });
 
@@ -70,6 +75,7 @@
         }
 
         content = rows;
+        content += '<a href="#pag-title" id="link-actor-data"></a>';
       }
       else {
         content = '<div class="alert alert-info">No actors found</div>';
@@ -89,6 +95,7 @@
           + '<div class="col-xs-10">'
           +  '<div class="row hidden" id="new-actor-form">'
           +   '<div class="col-xs-5">'
+          +    '<input type="hidden" name="actor-id" value=""/>'
           +    '<input type="text" name="actor-name" placeholder="Name" class="form-control"/>'
           +   '</div>'
           +   '<div class="col-xs-2">'
@@ -130,24 +137,20 @@
         $form.removeClass('hidden');
       }
       else {
-        $('input[name="actor-name"]').val('');
-        $('input[name="actor-age"]').val('');
-        
-        $('select[name="actor-gender"]').val('');
-        $('select[name="actor-gender"] option').filter(function() { 
-          return ($(this).text() == 'Select');
-        }).prop('selected', true);            
+        freeInputs();
 
         $buttonNew.prop('disabled', false)
           .removeClass('disabled')
           .removeClass('btn-default')
           .addClass('btn-success');
         $form.addClass('hidden');
+        $('#btn-actor-send').html('Send');
       }
     }
 
     function addActor() {
       let $error = $('#error-msg');
+      $error.html('');
       //console.log("JWT (actors) " + active_jwt());
       let gender = $('select[name="actor-gender"]').val().trim();
       if (gender == 'Select') {
@@ -159,10 +162,28 @@
           'gender': gender,
           'age': $('input[name="actor-age"]').val().trim()
         };
-      //console.dir(_data);
 
-      fetch('/actors', {
-        method: 'POST',
+      let url = '/actors';
+      let _method = '';
+      let _message = '';
+      let actor_id = $('input[name="actor-id"]').val().trim();
+
+      if (actor_id == "") {
+        _method = "POST";
+        _message = "Actor added"
+      }
+      else {
+        url += '/' + actor_id;
+        _method = "PATCH";
+        _data.id = actor_id; 
+        _message = "Actor updated";
+      }
+      
+      console.log(_method);
+      console.dir(_data);
+
+      fetch(url, {
+        method: _method,
         headers: {
           'Authorization': 'bearer ' + active_jwt(),
           'Content-Type': 'application/json'
@@ -173,9 +194,12 @@
       .then(json => {
         console.dir(json);
         if (json.success) {
-          $error.addClass('hidden');
           showForm(false);
           listActors();
+          message = '<div class="alert alert-info alert-dismissible" role="alert"> '
+            +'<button type="button" class="close" data-dismiss="alert" aria-label="Close">'
+            + '<span aria-hidden="true">&times;</span></button>' + _message + '</div>';
+          $error.html(message);  
         }
         else {
           let message = json.message;
@@ -183,18 +207,17 @@
             +'<button type="button" class="close" data-dismiss="alert" aria-label="Close">'
             + '<span aria-hidden="true">&times;</span></button>' + message + '</div>';
           $error.html(message);
-          $error.removeClass('hidden');
         }
       })
       .catch(function(err){
         console.log(err);
       });
-      
     }
 
     function deleteActor(actor_id) {
       let $error = $('#error-msg');
       let url = '/actors/' + actor_id;
+      $error.html('');
 
       fetch(url, {
         method: 'DELETE',
@@ -207,28 +230,65 @@
       .then(json => {
         console.dir(json);
         if (json.success) {
-          $error.removeClass('hidden');
           message = '<div class="alert alert-info alert-dismissible" role="alert"> '
             +'<button type="button" class="close" data-dismiss="alert" aria-label="Close">'
             + '<span aria-hidden="true">&times;</span></button>Actor deleted</div>';
           $error.html(message);
-          //setTimeout(() => {
-            listActors();
-          //}, 1500);
+          
+          listActors();
         }
         else {
           let message = json.message;
           message = '<div class="alert alert-danger alert-dismissible" role="alert"> '
             +'<button type="button" class="close" data-dismiss="alert" aria-label="Close">'
             + '<span aria-hidden="true">&times;</span></button>' + message + '</div>';
-          $error.html(message);
-          $error.removeClass('hidden');          
+          $error.html(message);      
         }
       })
       .catch(function(err){
         console.log(err);
       });
+    }
 
+    function openEdit(actor_id) {
+      freeInputs();
+
+      let name = '';
+      let age = 0;
+      let gender = '';
+      showForm(true);
+
+      let $actor = $("#btn-actor-edit-" + actor_id).closest('.clearfix');
+      console.log("Actor with id: " + actor_id);
+      console.dir($actor);
+
+      name = $actor.find('.pull-left').eq(0).html();
+      age = $actor.parent().find('p').eq(1).html();
+      gender = $actor.parent().find('p').eq(0).html();
+      if (gender == "") {
+        gender = "Select";
+      }
+
+      $('input[name="actor-id"]').val(actor_id);
+      $('input[name="actor-name"]').val(name);
+      $('input[name="actor-age"]').val(age);
+      $('select[name="actor-gender"] option').filter(function() { 
+        return ($(this).text() == gender);
+      }).prop('selected', true);
+
+      $('#btn-actor-send').html('Update');
+      $('#link-actor-data')[0].click();
+    }
+
+    function freeInputs() {
+      $('input[name="actor-id"]').val('');
+      $('input[name="actor-name"]').val('');
+      $('input[name="actor-age"]').val('');
+      
+      $('select[name="actor-gender"]').val('');
+      $('select[name="actor-gender"] option').filter(function() { 
+        return ($(this).text() == 'Select');
+      }).prop('selected', true); 
     }
 
     function addEvents() {
@@ -247,6 +307,13 @@
       $('body').on('click', 'span[id^="btn-actor-delete-"]', function() {
         let id = $(this).attr('id').split('-')[3];
         deleteActor(id);
+      });
+
+      $('body').on('click', 'span[id^="btn-actor-edit-"]', function() {
+        let id = $(this).attr('id').split('-')[3];
+        //deleteActor(id);
+        console.log("Edit: " + id);
+        openEdit(id);
       });
     }
   </script>

@@ -153,8 +153,10 @@ def create_app(test_config=None):
                 if 'name' in body:
                     actor.name = body.get('name')
 
-                if 'age' in body:
+                if 'age' in body and body.get('age'):
                     actor.age = body.get('age')
+                else:
+                    actor.age = 0
 
                 if 'gender' in body:
                     actor.gender = body.get('gender')
