@@ -59,18 +59,11 @@
           
         row += '<div class="clearfix"><h4><div class="pull-left">' 
           + casting.movie + '</div>';
-        /*
-        if (can('delete:actors')) {
+        if (can('delete:casting-movie')) {
           row += '<div class="pull-right btn-delete">' 
-              + '<span class="fas fa-trash text-danger" '
-                +'id="btn-actor-delete-' + actor.id + '"></span></div>';
+              + '<span class="fas fa-eraser text-danger" '
+                +'id="btn-movie-delete-' + casting.cast[0].movie_id + '"></span></div>';
         }
-        if (can('patch:actors')) {
-          row += '<div class="pull-right btn-delete">' 
-              + '<span class="fas fa-edit text-info" '
-                +'id="btn-actor-edit-' + actor.id + '"></span></div>';
-        }
-        */
         row += '</h4></div>';
         if (casting.cast[0].movie_release_date !== "") {
           row += "<p>" + casting.cast[0].movie_release_date + "</p>";
@@ -118,10 +111,29 @@
       //showNewCast();  // <===  <<<===   <<<===   <<<===
     }
 
-    function deleteActor(cast_id) {
+    function deleteCast(selector) {
       let $error = $('#error-msg');
-      let url = '/cast/' + cast_id;
       $error.html('');
+
+      let type = selector[1];
+      let id = selector[3];
+      let url = "/cast";
+
+      switch(type) {
+        case "cast":
+          url += "/";
+          break;
+        case "movie":
+          url += "-movie/";
+          break;
+        default:
+          message = '<div class="alert alert-warning alert-dismissible" role="alert"> '
+            +'<button type="button" class="close" data-dismiss="alert" aria-label="Close">'
+            + '<span aria-hidden="true">&times;</span></button>Delete type not found</div>';
+          $error.html(message); 
+          return;
+      }
+      url += id;
 
       fetch(url, {
         method: 'DELETE',
@@ -168,8 +180,13 @@
       });
 
       $('body').on('click', 'span[id^="btn-cast-delete-"]', function() {
-        let id = $(this).attr('id').split('-')[3];
-        deleteActor(id);
+        let btn_id = $(this).attr('id').split('-');
+        deleteCast(btn_id);
+      });
+
+      $('body').on('click', 'span[id^="btn-movie-delete-"]', function() {
+        let btn_id = $(this).attr('id').split('-');
+        deleteCast(btn_id);
       });
     }
   </script>
