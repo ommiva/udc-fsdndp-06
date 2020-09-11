@@ -1,0 +1,143 @@
+{% extends 'layouts/main_logged.html' %}
+{% block title %}Casting Agency: Casting{% endblock %}
+{% block content %}
+  <div class="row">
+    <div class="col-xs-12" style="margin-bottom: 15px;">
+      <h1 id="pag-title">Casting</h1>
+    </div>
+    <div class="col-xs-12" id="cast-content">
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    $(function() {
+      listCasting();
+      //showNewActor();
+      addEvents();
+    });
+
+    function listCasting() {
+      //console.log("JWT (actors) " + active_jwt());
+      fetch('/cast-detail', {
+        headers: {
+          'Authorization': 'bearer ' + active_jwt(),
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(data => data.json())
+      .then(json => {
+        console.dir(json);
+        formatCasting(json.cast);
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+    }
+
+    function formatCasting(casting) {
+      let movies = [];
+      for (let m = 0; m < casting.length; m++) {
+        if (movies.indexOf(casting[m].movie_title) < 0) {
+          movies.push(casting[m].movie_title);
+        }
+      }
+
+      let show_movies = [];
+      for (let m = 0; m < movies.length; m++) {
+        let movie = movies[m];
+        let casted = casting.filter(function(cst) {
+          return cst.movie_title == movie;
+        });
+
+        show_movies.push({movie: movie, cast: casted});
+      }
+
+      content = show_movies.map(function(casting) {
+        let row = '<div class="thumbnail">';
+          
+        row += '<div class="clearfix"><h4><div class="pull-left">' 
+          + casting.movie + '</div>';
+        /*
+        if (can('delete:actors')) {
+          row += '<div class="pull-right btn-delete">' 
+              + '<span class="fas fa-trash text-danger" '
+                +'id="btn-actor-delete-' + actor.id + '"></span></div>';
+        }
+        if (can('patch:actors')) {
+          row += '<div class="pull-right btn-delete">' 
+              + '<span class="fas fa-edit text-info" '
+                +'id="btn-actor-edit-' + actor.id + '"></span></div>';
+        }
+        */
+        row += '</h4></div>';
+        if (casting.cast[0].movie_release_date !== "") {
+          row += "<p>" + casting.cast[0].movie_release_date + "</p>";
+        }
+        row += '<br/>';
+        row += '<ul class="list-unstyled" style="padding-left: 15px;">';
+        for (let y = 0; y < casting.cast.length; y++) {
+          let casted = casting.cast[y];
+          row += '<li class="clearfix">';
+          row +=   '<div class="pull-left">' + casted.actor_name + '</div>';
+          row += '</li>';
+          //row += "<p>" + casted.cast_id + "</p>";
+        }
+        row += '</ul>';
+        row += '</div> <!-- /end thumbnail -->';
+        return row;
+      });
+
+      if (content.length > 0) {
+        let rows = ""; 
+        for(let index = 0; index < content.length ; index++) {
+          if(index % 3 == 0) {
+            rows += '<div class="row">';
+          }
+          rows += '<div class="col-xs-4">';
+          rows += content[index];
+          rows += '</div>';
+          if(index % 3 == 2 || index == (content.length - 1)) {
+            rows += '</div> <!-- /end row -->';
+          }
+        }
+
+        content = rows;
+        content += '<a href="#pag-title" id="link-actor-data"></a>';
+      }
+      else {
+        content = '<div class="alert alert-info">No cast assingation found</div>';
+      }
+
+      $('#cast-content').html(content);
+      //showNewCast();  // <===  <<<===   <<<===   <<<===
+    }
+
+    function addEvents() {
+      $('body').on('click', '#btn-new', function() {
+        showForm(true);
+      });
+
+      $('body').on('click', '#btn-actor-send', function() {
+        addActor();
+      });
+
+      $('body').on('click', '#btn-actor-cancel', function() {
+        showForm(false);
+      });
+
+      $('body').on('click', 'span[id^="btn-actor-delete-"]', function() {
+        let id = $(this).attr('id').split('-')[3];
+        deleteActor(id);
+      });
+
+      $('body').on('click', 'span[id^="btn-actor-edit-"]', function() {
+        let id = $(this).attr('id').split('-')[3];
+        //deleteActor(id);
+        console.log("Edit: " + id);
+        openEdit(id);
+      });
+    }
+  </script>
+{% endblock %}

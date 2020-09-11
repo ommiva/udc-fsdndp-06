@@ -41,6 +41,7 @@
           <ul class="nav navbar-nav">
             <li {% if request.endpoint == 'actors-list' %} class="active" {% endif %}><a href="{{ url_for('actors')}}">Actors</a></li>
             <li {% if request.endpoint == 'movies-list' %} class="active" {% endif %}><a href="{{ url_for('movies')}}">Movies</a></li>
+            <li {% if request.endpoint == 'casting-list' %} class="active" {% endif %}><a href="{{ url_for('casting')}}">Casting</a></li>
             <li><a href="#" onclick="logout();"><span class="fas fa-sign-out-alt" title="logout"></span></a></li>
           </ul>
         </div>

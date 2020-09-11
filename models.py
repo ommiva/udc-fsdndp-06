@@ -152,6 +152,7 @@ class Cast(db.Model):
 
     def format(self):
         return {
+            "cast_id": self.id,
             "movie_id": self.movie.id,
             "movie_title": self.movie.title,
             "movie_release_date":

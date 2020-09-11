@@ -67,6 +67,10 @@ def create_app(test_config=None):
     @app.route('/movies-list')
     def movies():
         return render_template('pages/show_movies.html')
+
+    @app.route('/casting-list')
+    def casting():
+        return render_template('pages/show_casting.html')
     
     @app.route('/logout')
     def logout():
