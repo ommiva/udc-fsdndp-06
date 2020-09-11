@@ -81,8 +81,12 @@
           let casted = casting.cast[y];
           row += '<li class="clearfix">';
           row +=   '<div class="pull-left">' + casted.actor_name + '</div>';
+          if (can('delete:casting-actor')) {
+            row += '<div class="pull-right btn-delete">' 
+                + '<span class="fas fa-user-times text-danger" '
+                  +'id="btn-cast-delete-' + casted.cast_id + '"></span></div>';
+          }
           row += '</li>';
-          //row += "<p>" + casted.cast_id + "</p>";
         }
         row += '</ul>';
         row += '</div> <!-- /end thumbnail -->';
@@ -114,29 +118,58 @@
       //showNewCast();  // <===  <<<===   <<<===   <<<===
     }
 
+    function deleteActor(cast_id) {
+      let $error = $('#error-msg');
+      let url = '/cast/' + cast_id;
+      $error.html('');
+
+      fetch(url, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': 'bearer ' + active_jwt(),
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(data => data.json())
+      .then(json => {
+        console.dir(json);
+        if (json.success) {
+          message = '<div class="alert alert-info alert-dismissible" role="alert"> '
+            +'<button type="button" class="close" data-dismiss="alert" aria-label="Close">'
+            + '<span aria-hidden="true">&times;</span></button>Actor removed</div>';
+          $error.html(message);
+          
+          listCasting();
+        }
+        else {
+          let message = json.message;
+          message = '<div class="alert alert-danger alert-dismissible" role="alert"> '
+            +'<button type="button" class="close" data-dismiss="alert" aria-label="Close">'
+            + '<span aria-hidden="true">&times;</span></button>' + message + '</div>';
+          $error.html(message);      
+        }
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+    }
+
     function addEvents() {
       $('body').on('click', '#btn-new', function() {
         showForm(true);
       });
 
-      $('body').on('click', '#btn-actor-send', function() {
-        addActor();
+      $('body').on('click', '#btn-cast-send', function() {
+        //addCast();
       });
 
-      $('body').on('click', '#btn-actor-cancel', function() {
-        showForm(false);
+      $('body').on('click', '#btn-cast-cancel', function() {
+        //showForm(false);
       });
 
-      $('body').on('click', 'span[id^="btn-actor-delete-"]', function() {
+      $('body').on('click', 'span[id^="btn-cast-delete-"]', function() {
         let id = $(this).attr('id').split('-')[3];
         deleteActor(id);
-      });
-
-      $('body').on('click', 'span[id^="btn-actor-edit-"]', function() {
-        let id = $(this).attr('id').split('-')[3];
-        //deleteActor(id);
-        console.log("Edit: " + id);
-        openEdit(id);
       });
     }
   </script>
