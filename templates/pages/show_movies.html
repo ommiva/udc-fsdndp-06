@@ -87,8 +87,8 @@
       let $content = $('#movies-content');
       let update_content = "";
 
-      if (can('post:movies')) {
-        console.log("can POST");
+      if (can('post:movies') || can('patch:movies')) {
+        console.log("can POST/PATCH");
         update_content += '<div class="row">'
           + '<div class="col-xs-10">'
           +  '<div class="row hidden" id="new-movie-form">'
@@ -106,9 +106,13 @@
           +    '<button class="btn btn-block btn-danger" id="btn-movie-cancel">X</button>'
           +   '</div>'
           + '</div></div>'
-          + '<div class="col-xs-2">'
-          +  '<button class="btn btn-success btn-block" id="btn-new">New movie</button>'
-          + '</div></div>'
+        if(can('post:movies')) {
+        console.log("can POST");
+          update_content += '<div class="col-xs-2">'
+            +  '<button class="btn btn-success btn-block" id="btn-new">New movie</button>'
+            + '</div>'
+        }
+        update_content += '</div>'
           + '<div class="row">&nbsp;</div>';
       }
 
