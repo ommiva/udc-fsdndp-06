@@ -108,7 +108,7 @@
       }
 
       $('#cast-content').html(content);
-      //showNewCast();  // <===  <<<===   <<<===   <<<===
+      showNewCast();
     }
 
     function deleteCast(selector) {
@@ -166,17 +166,206 @@
       });
     }
 
+    function showNewCast() {
+      let $content = $('#cast-content');
+      let update_content = "";
+
+      if (can('post:casting')) {
+        console.log("can POST");
+        update_content += '<div class="row">'
+          + '<div class="col-xs-10">'
+          +  '<div class="row hidden" id="new-cast-form">'
+          +   '<div class="col-xs-4">'
+          +    '<select name="cast-movie" class="form-control">'
+          +     '<option value="Select">Select</option>'
+          +    '</select>'
+          +   '</div>'
+          +   '<div class="col-xs-4">'
+          +    '<select name="cast-actor" class="form-control">'
+          +     '<option value="Select">Select</option>'
+          +    '</select>'
+          +   '</div>'
+          +   '<div class="col-xs-2">'
+          +    '<button class="btn btn-block btn-success" id="btn-cast-send">Send</button>'
+          +   '</div>'
+          +   '<div class="col-xs-1">'
+          +    '<button class="btn btn-block btn-danger" id="btn-cast-cancel">X</button>'
+          +   '</div>'
+          + '</div></div>'
+          + '<div class="col-xs-2">'
+          +  '<button class="btn btn-success btn-block" id="btn-new">New casting</button>'
+          + '</div></div>'
+          + '<div class="row">&nbsp;</div>';
+      }
+
+      update_content += $content.html();
+      //console.log("show new actor \n" + update_content);
+      $content.html(update_content);
+
+      getActors();
+      getMovies();
+    }
+
+    function getActors() {
+      fetch('/actors-detail', {
+        headers: {
+          'Authorization': 'bearer ' + active_jwt(),
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(data => data.json())
+      .then(json => {
+        //console.log('getActors');
+        //console.dir(json.actors);
+        fillSelect("cast-actor", json.actors);
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+    }
+
+    function getMovies() {
+      fetch('/movies-detail', {
+        headers: {
+          'Authorization': 'bearer ' + active_jwt(),
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(data => data.json())
+      .then(json => {
+        //console.log('getMovies');
+        //console.dir(json);
+        fillSelect("cast-movie", json.movies);
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+    }
+
+    function fillSelect(selector, _options) {
+
+      let selectorType = selector.split('-')[1];
+      let $selector = $('select[name="' + selector + '"]');
+      //console.log("fill " + selectorType);
+      let content = _options.map(function(_option) {
+        let optionName = '';
+        switch(selectorType) {
+          case 'actor':
+            optionName = _option.name;
+            break;
+          case 'movie':
+            optionName = _option.title;
+            break;
+          default:
+            return '';
+        }
+        
+        let row = '<option value="' + _option.id + '">' + optionName + '</option>';
+        return row;
+      });
+      content.unshift('<option value="Select">Select</option>');
+      $selector.html(content.join('\n'));
+    }
+
+    function addCast() {
+      let $error = $('#error-msg');
+      $error.html('');
+      //console.log("JWT (actors) " + active_jwt());
+      let actor = $('select[name="cast-actor"]').val().trim();
+      if (actor == 'Select') {
+        actor = '';
+      }
+      let movie = $('select[name="cast-movie"]').val().trim();
+      if (movie == 'Select') {
+        movie = '';
+      }
+
+      let _data = {
+          'movie': movie,
+          'actor': actor
+        };
+
+      let url = '/cast';
+      let _method = 'POST';
+      let _message = 'Cast added';
+      
+      console.log(_method);
+      console.dir(_data);
+
+      fetch(url, {
+        method: _method,
+        headers: {
+          'Authorization': 'bearer ' + active_jwt(),
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(_data)
+      })
+      .then(data => data.json())
+      .then(json => {
+        console.dir(json);
+        if (json.success) {
+          showForm(false);
+          listCasting();
+          message = '<div class="alert alert-info alert-dismissible" role="alert"> '
+            +'<button type="button" class="close" data-dismiss="alert" aria-label="Close">'
+            + '<span aria-hidden="true">&times;</span></button>' + _message + '</div>';
+          $error.html(message);  
+        }
+        else {
+          let message = json.message;
+          message = '<div class="alert alert-danger alert-dismissible" role="alert"> '
+            +'<button type="button" class="close" data-dismiss="alert" aria-label="Close">'
+            + '<span aria-hidden="true">&times;</span></button>' + message + '</div>';
+          $error.html(message);
+        }
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+    }
+
+    function showForm(show) {
+      let $buttonNew = $('#btn-new');
+      let $form = $('#new-cast-form');
+      if(show) {
+        $buttonNew.prop('disabled', true)
+          .addClass('disabled')
+          .addClass('btn-default')
+          .removeClass('btn-success');
+        $form.removeClass('hidden');
+      }
+      else {
+        freeInputs();
+
+        $buttonNew.prop('disabled', false)
+          .removeClass('disabled')
+          .removeClass('btn-default')
+          .addClass('btn-success');
+        $form.addClass('hidden');
+        $('#btn-actor-send').html('Send');
+      }
+    }
+
+    function freeInputs() {
+      $('select[name="cast-actor"] option').filter(function() { 
+        return ($(this).text() == 'Select');
+      }).prop('selected', true); 
+      $('select[name="cast-movie"] option').filter(function() { 
+        return ($(this).text() == 'Select');
+      }).prop('selected', true); 
+    }
+
     function addEvents() {
       $('body').on('click', '#btn-new', function() {
         showForm(true);
       });
 
       $('body').on('click', '#btn-cast-send', function() {
-        //addCast();
+        addCast();
       });
 
       $('body').on('click', '#btn-cast-cancel', function() {
-        //showForm(false);
+        showForm(false);
       });
 
       $('body').on('click', 'span[id^="btn-cast-delete-"]', function() {
