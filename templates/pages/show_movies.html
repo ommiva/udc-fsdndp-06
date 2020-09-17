@@ -27,6 +27,7 @@
       })
       .then(data => data.json())
       .then(json => {
+        hasError(json);
         formatMovies(json.movies);
       })
       .catch(function(err){
@@ -182,6 +183,7 @@
       .then(data => data.json())
       .then(json => {
         console.dir(json);
+        hasError(json);
         if (json.success) {
           showForm(false);
           listMovies();
@@ -218,6 +220,7 @@
       .then(data => data.json())
       .then(json => {
         console.dir(json);
+        hasError(json);
         if (json.success) {
           message = '<div class="alert alert-info alert-dismissible" role="alert"> '
             +'<button type="button" class="close" data-dismiss="alert" aria-label="Close">'
