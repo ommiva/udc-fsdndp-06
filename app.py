@@ -25,12 +25,11 @@ def create_app(test_config=None):
     setup_db(app)
     CORS(app)
 
-    # TODO: Move to env
+    domain = os.environ['AUTH0_DOMAIN']
+    audience = os.environ['AUTH0_AUDIENCE']
+    client_id = os.environ['AUTH0_CLIENT']
+    redirect_url = os.environ['AUTH0_REDIRECT']
 
-    domain = "omv-fsnd-casting.us.auth0.com"
-    audience = "castingagency"
-    client_id = "v13pFbBPOlvhNdvmss6QLe13L2gpz9To"
-    redirect_url = "http://localhost:8080/login-results"
 
     # ROUTES
     # Front-end
