@@ -30,6 +30,14 @@
       .then(json => {
         console.dir(json);
         hasError(json);
+        if (json.error !== undefined 
+            && !json.success
+            && json.error == 404) {
+          let content = '<div class="alert alert-info">'
+            + 'No cast assingation found</div>';
+          $('#cast-content').html(content);
+          return;
+        }
         formatCasting(json.cast);
       })
       .catch(function(err){
