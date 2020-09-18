@@ -2,7 +2,7 @@ function hasError(json) {
   if (json.error !== undefined && !json.success) {
   //if (json.success == false) {
     //alert('error');
-    console.dir(json.error);
+    //console.dir(json.error);
     errorHandler(json.error);
   }
 }

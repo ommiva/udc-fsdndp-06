@@ -41,12 +41,19 @@ python manage.py db upgrade
 - - -
 
 <br/>
-TODO: Remove debug
 
-### DEBUG
+### Local development
 * To install the application
 ```bash
 $ pip install -r requirements.txt
+```
+
+* Required environment variables
+```bash
+export AUTH0_DOMAIN=[Auth0 application domain]
+export AUTH0_AUDIENCE=[Auth0 audience]
+export AUTH0_CLIENT=[Auth0 client id]
+export AUTH0_REDIRECT=[Auth0 allowed callback URL]
 ```
 
 * To run the application run the following command
@@ -80,14 +87,19 @@ psql casting_agency_test < casting.sql
 python test_app.py
 ```
 
+<br/>
+
+### Hosting
+The frontend and API runs at https://fsdn-casting-test.herokuapp.com/
+- - -
+
 
 <br/>
 <br/>
 
 ### API Keys / Authentication
-TODO: It requires no authentication at all.<br/>
 The authentication system used for the project is Auth0.
-
+<br/>
 <br/>
 
 #### Roles
