@@ -30,7 +30,6 @@ def create_app(test_config=None):
     client_id = os.environ['AUTH0_CLIENT']
     redirect_url = os.environ['AUTH0_REDIRECT']
 
-
     # ROUTES
     # Front-end
     @app.route('/', methods=["GET"])
@@ -70,7 +69,7 @@ def create_app(test_config=None):
     @app.route('/casting-list')
     def casting():
         return render_template('pages/show_casting.html')
-    
+
     @app.route('/logout')
     def logout():
         link = f'https://{domain}/v2/'\
@@ -93,10 +92,10 @@ def create_app(test_config=None):
 
             if new_name is None or not new_name:
                 abort(400)
-                
+
             if not new_age:
                 new_age = 0
-            
+
             if new_gender == 'Select':
                 new_gender = ''
 
