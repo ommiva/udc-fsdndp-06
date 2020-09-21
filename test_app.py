@@ -44,13 +44,52 @@ class MoviesTestCase(unittest.TestCase):
         self.total_filtered_empty = 0
 
         assistant_access_jwt = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6I"\
-            + "nIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjMzUxN2VlMGYwMDAzZDhjZDExOSIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTkxNDczNTMsImV4cCI6MTU5OTIzMzc1MywiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0OmNhc3QtZGV0YWlsIiwiZ2V0Om1vdmllcy1kZXRhaWwiXX0.Sqv2MA7k6RNo8taHHrPlxGC2A3muAKSc8LKYEVQt7PRJy9Xs5sPbTbphXFNCvT30rqzUDfLo03j7bCcX-85LtD7BkcHRlZjSrqG3phzFFvRaey48LJ6hbiTOtSFeR5QTQbVxZ8ir6awtqAfXZV8magaEBn86NQZJdFuy42bT6qxC4x9fGPksYVIXWSjFG_uhFon4S2wdCr1ezxC-78AiY2BGHxsU9juSz805zby6OiLx1fqhOUwoSLP-gPT5NlF43mRwizNs4bgUy9OWxUZHNcXMovMNObIQx97Du4bzIWu93u8gzL4oFFI1s64kFF8um57I1TmFM0ims2vea_q1zA"
+            + "nIwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc2"\
+            + "5kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjMzUx"\
+            + "N2VlMGYwMDAzZDhjZDExOSIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOj"\
+            + "E2MDA3MDU2NjQsImV4cCI6MTYwMDc5MjA2NCwiYXpwIjoidjEzcEZiQlBPbHZo"\
+            + "TmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIj"\
+            + "pbImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0OmNhc3QtZGV0YWlsIiwiZ2V0Om1v"\
+            + "dmllcy1kZXRhaWwiXX0.u8LRWdiYstK-TV7z-R6TbQhZzwYjM8myQxVmgQ2Kqi"\
+            + "0Fdivx_Yr1o3kf8hG5j4rgGoJcZ0vtAo7ba4VukkFkrNx4lodpwUfEDZtCBRjl"\
+            + "GGbCQvgC1jtsAg0yA--0QN0jMiyfRHesaEe6AXOHl73yGmfBI9k33N2v-rtHWD"\
+            + "OkaNC8i1rC7YYwBnmFVOuRjZPDdOea7XU95J86pIWkIv7KnrVr9h8r-E5nIhis"\
+            + "0oUK5gvviXa1fpa7JCRwJalGFhzG5m6GOYvpnFxkosngHkmARW1hmQtGv5__OV"\
+            + "eRbT4SbJE-JVe-TuZH7-bj5rFJq0kzhkEFEaKXGiOpYxZBrPOa3Q"
 
         director_access_jwt = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6In"\
-            + "IwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjM2ZhZDJmMWNkMDAzN2VmZDg3NyIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTkxNDc0MzcsImV4cCI6MTU5OTIzMzgzNywiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6Y2FzdGluZy1hY3RvciIsImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0OmNhc3QtZGV0YWlsIiwiZ2V0Om1vdmllcy1kZXRhaWwiLCJwYXRjaDphY3RvcnMiLCJwYXRjaDptb3ZpZXMiLCJwb3N0OmFjdG9ycyIsInBvc3Q6Y2FzdGluZyJdfQ.XvSh01LuH2hYyBJe2dkVdpKjOoBcPetPly8XbQ5cwsoKgnHa2-vxJuWpFN3Qzb4yxje64Ejjedh65IeoElDpfNTBNdDYDmG4bDb7g2grAOyA3fM_H5K-c23nTWJzhi7LLnpi2YAR-bJMzOiM23yDGlhZMP6LHRoxBJGNLlymR7vniRIi6kU0xDIzxV_4QK3QdIIrfWx3WOZ2-_3dhZcARVJa0ODyFKr0qFTV1K_UUzRc4e4JoR337awG1hlh8kPYYRkYesl7nsiTMxOEzo2lceCLWQisqYBoTzFFbNWs1K0-y6IqrQ9n6fUqZwzgICJSBHJ6Dr1lcV6EANPHxS8dYA"
+            + "IwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25"\
+            + "kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjM2ZhZ"\
+            + "DJmMWNkMDAzN2VmZDg3NyIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE"\
+            + "2MDA3MDU4NTcsImV4cCI6MTYwMDc5MjI1NywiYXpwIjoidjEzcEZiQlBPbHZoT"\
+            + "mR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjp"\
+            + "bImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6Y2FzdGluZy1hY3RvciIsImdldDphY"\
+            + "3RvcnMtZGV0YWlsIiwiZ2V0OmNhc3QtZGV0YWlsIiwiZ2V0Om1vdmllcy1kZXR"\
+            + "haWwiLCJwYXRjaDphY3RvcnMiLCJwYXRjaDptb3ZpZXMiLCJwb3N0OmFjdG9yc"\
+            + "yIsInBvc3Q6Y2FzdGluZyJdfQ.S872a-haJZXatPLlV3pC9C7my3pN2KpcMLli"\
+            + "-FrzkDB_B6GoElVYhc5mIVJC6wLFsG-IXgQ-P_xM3XMxnXfUcC0m8MBjwYSjTV"\
+            + "_owGKkEZT7lc-l4e-YrOwo8aK99BtiHF00z-TcbVGvvCHHFiVdl38TRSrpsK5_"\
+            + "6W1nFbhT42OqfHJ3u_rdKyC-5ZkI4Ci7EMeOdkuj-FynUO2aTPFpWOUa7fn87Z"\
+            + "vz7rxarYJcNrUNYDxw7AoeDyX88VA8Kbni4UScBr-03I85WZmgeI6WSsL1EyNK"\
+            + "4Nplp9IX-ulaSCPoH80KAvH1y17_jLX3gQlEJ51D9OHtdLcl4cuvx8KIuw"
 
         producer_access_jwt = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6In"\
-            + "IwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjNDQ4N2Q4YTllMDAzNzcxNjlmZCIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE1OTkxNDc1NjQsImV4cCI6MTU5OTIzMzk2NCwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6Y2FzdGluZy1hY3RvciIsImRlbGV0ZTpjYXN0aW5nLW1vdmllIiwiZGVsZXRlOm1vdmllcyIsImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0OmNhc3QtZGV0YWlsIiwiZ2V0Om1vdmllcy1kZXRhaWwiLCJwYXRjaDphY3RvcnMiLCJwYXRjaDptb3ZpZXMiLCJwb3N0OmFjdG9ycyIsInBvc3Q6Y2FzdGluZyIsInBvc3Q6bW92aWVzIl19.cy2nq7kYKSy-_7neCbfgrA-V_ZTXdu-qb-b0RhDvlgTBoNJDBHPBBszawaDppSgFFlKae5ykyWbcMR3-KuMHhJWveQiaGQVO15OoPBoCXvUY0qhwQQ6sJOCaAg9PbrxPKWE_gGVbpvL7Dg5vAMj-7DIG5oOOku32sNwWLkViMFAugH6iro2GCqtDvvGQAlk7EPwDZo1vw7_dRInhi8k7Bt_fNKXYHgPtX9MOr_-aVqp4HImTD0F5i3LsKrzDYurATl9OPvA4_lXrXxBlxYPVJqW1HNGM_o285jxOsPzDeFUR8Oe_QmCH-nulei7z0AAXOmBHEVpSTYdYBWTNb5jpMA"
+            + "IwVzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25"\
+            + "kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMzFjNDQ4N"\
+            + "2Q4YTllMDAzNzcxNjlmZCIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE"\
+            + "2MDA3MDYwOTQsImV4cCI6MTYwMDc5MjQ5NCwiYXpwIjoidjEzcEZiQlBPbHZoT"\
+            + "mR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjp"\
+            + "bImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6Y2FzdGluZy1hY3RvciIsImRlbGV0Z"\
+            + "TpjYXN0aW5nLW1vdmllIiwiZGVsZXRlOm1vdmllcyIsImdldDphY3RvcnMtZGV"\
+            + "0YWlsIiwiZ2V0OmNhc3QtZGV0YWlsIiwiZ2V0Om1vdmllcy1kZXRhaWwiLCJwY"\
+            + "XRjaDphY3RvcnMiLCJwYXRjaDptb3ZpZXMiLCJwb3N0OmFjdG9ycyIsInBvc3Q"\
+            + "6Y2FzdGluZyIsInBvc3Q6bW92aWVzIl19.H2GS4zpHNqvXqjdCtIctGZj1VfoV"\
+            + "o1FCjT72uYsExtWXLTIh9QHa6HPOR3N41SU_DDDODvA8NjFs4eSRQPsJEfAV7d"\
+            + "JDVfZVbpzKqeieKSbfFTTePyDNIAeo1luNq-Ls7i7hmpji7x_JfO039QyVxopw"\
+            + "SynunBmu4Zzk6G8S8ITMz6UnfU_hq8axdZeeXHpKP6IuOfJenPhyDyD4k6NjTv"\
+            + "VXaINB9Ek-GQgH1TP0fdCuCc7yZJW495Twn0TcA2rB-Dlkm1o_NrcMol00DmgZ"\
+            + "eM3qY7Pej_Bk_OD-G43AOrwhGBCqeKehOPc8zy04ge8HYqojdaIgf-zVnVQQn7"\
+            + "_dlA"
 
         expired_jwt = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIwVzRteH"\
             + "BqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3R"\
@@ -72,7 +111,18 @@ class MoviesTestCase(unittest.TestCase):
             + "SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
 
         claims_error_jwt = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InIw"\
-            + "VzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25kLWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmNDdlM2RmOWM1MTA2MDA2ZGUxNmMxOSIsImF1ZCI6ImNhc3RpbmdhZ2VudHMiLCJpYXQiOjE1OTkxNDcyMzksImV4cCI6MTU5OTIzMzYzOSwiYXpwIjoidjEzcEZiQlBPbHZoTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0OmFnZW50LWRldGFpbCJdfQ.qYVRknmrexNXM1JjpcRq-ncZK0nQYlnvqTNXZmv-vVUHNVL5qWC4dYLNMJChA2-1JYlJPO30-OuyaVh32cT_hSTZ-xI6CtBKqq1LWAslDBdhF9YnPRaXnr6UPq-qSKSUgK8ebuHbsugBtigmx4I-MvLAj2nMLb-hUB5Bx8qedvol5_rRJKiFGfEGd417HR4TBRkVcpSmDGJX5VDolgegIYgpHJYuvfa4v9VEuE0jcr5dOUs4U3oiyMZ7IoywrAtlDPuQ0sR-S5HL-Ft6R3_6-oVqZYhQJNA94sBo8Ucyf0t8U_c9fjtYMnMk4_-AkI-A45hZGIBZIAFEwi2pRSmqJA"
+            + "VzRteHBqWUJIaW9JR0dBZ2xSbiJ9.eyJpc3MiOiJodHRwczovL29tdi1mc25k"\
+            + "LWNhc3RpbmcudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmNDdlM2RmO"\
+            + "WM1MTA2MDA2ZGUxNmMxOSIsImF1ZCI6ImNhc3RpbmdhZ2VudHMiLCJpYXQiOj"\
+            + "E2MDA3MDY3NDMsImV4cCI6MTYwMDc5MzE0MywiYXpwIjoidjEzcEZiQlBPbHZ"\
+            + "oTmR2bXNzNlFMZTEzTDJncHo5VG8iLCJzY29wZSI6IiIsInBlcm1pc3Npb25z"\
+            + "IjpbImdldDphY3RvcnMtZGV0YWlsIiwiZ2V0OmFnZW50LWRldGFpbCJdfQ.w0"\
+            + "A-ZM3FVAXLFqTdjmolsIGfncfrahFsBjR8aFgnkjcWMj4d_cZa5aGSIlY2rIM"\
+            + "C8K_LqFaK-qKDA9yHD8akg3Q6CfFvI70-jSHq0HhHbdIeh2c-uWqCTCDdcy8e"\
+            + "jwFrALFLjFQrd6Al9D2gWR6yMwTDNbLepdZty9M70-0hNcc58Ibguaib4XCZ1"\
+            + "oUM6MurAYNTLREmUN1RvgD4GBaWXZ7_9rvEgrefEKNC1YK9IEnn0GtmNNLNdX"\
+            + "iVUbWb8vxvGyJplaWaJFb3XiAcg99nTVCQFbl7NITKyA7jt8Kjivqw33L7yPI"\
+            + "mZzpO9Q52jZvI1zikkPEi0SJXBSMyNOzt8A"
 
         self.header_full_access = {
             'Authorization': 'Bearer {}'.format(producer_access_jwt)

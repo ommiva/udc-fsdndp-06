@@ -90,7 +90,7 @@ python test_app.py
 <br/>
 
 ### Hosting
-The frontend and API runs at https://fsdn-casting-test.herokuapp.com/
+The frontend and API runs at https://om-fsdn-casting.herokuapp.com/
 - - -
 
 
