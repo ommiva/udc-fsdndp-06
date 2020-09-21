@@ -1294,8 +1294,8 @@
 							"script": {
 								"id": "f5ac86a5-c7fe-481c-8c55-3bffe869cc30",
 								"exec": [
-									"pm.test(\"Status code is 401\", function () {",
-									"    pm.response.to.have.status(401);",
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1336,8 +1336,8 @@
 							"script": {
 								"id": "364ddb90-f3e3-410a-baa5-bffe15b60e2f",
 								"exec": [
-									"pm.test(\"Status code is 401\", function () {",
-									"    pm.response.to.have.status(401);",
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -2394,8 +2394,8 @@
 							"script": {
 								"id": "56497f34-c002-4c82-842d-5c724ae8262d",
 								"exec": [
-									"pm.test(\"Status code is 401\", function () {",
-									"    pm.response.to.have.status(401);",
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -3102,8 +3102,8 @@
 							"script": {
 								"id": "cddc36f7-3c71-44cd-be53-47ddc531a8cb",
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -3197,7 +3197,7 @@
 	],
 	"variable": [
 		{
-			"id": "e3449578-10e1-4890-bd10-944f6296ccaf",
+			"id": "af442909-ce6c-4f06-9daf-d74a0fa650ff",
 			"key": "host",
 			"value": "localhost:5000"
 		}
