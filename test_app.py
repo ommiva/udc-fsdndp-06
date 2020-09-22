@@ -191,7 +191,7 @@ class MoviesTestCase(unittest.TestCase):
         self.assertIsNotNone(data["actor"])
 
     def test_400_if_new_actor_has_no_name(self):
-        print(" >>> test_400_if_new_actor_has_no_name")
+        # print(" >>> test_400_if_new_actor_has_no_name")
         new_actor = {
             "age": 74,
             "gender": "Female"
@@ -207,7 +207,7 @@ class MoviesTestCase(unittest.TestCase):
         self.assertEqual(data["message"], "Bad Request")
 
     def test_403_if_add_new_actor_has_no_permission(self):
-        print(" >>> test_403_if_add_new_actor_has_no_permission")
+        # print(" >>> test_403_if_add_new_actor_has_no_permission")
         res = self.client().post(
             "/actors",
             json=self.new_actor,
@@ -230,7 +230,7 @@ class MoviesTestCase(unittest.TestCase):
         self.assertIsNotNone(data["movie"])
 
     def test_400_if_new_movie_has_no_title(self):
-        print(" >>> test_400_if_new_movie_has_no_title")
+        # print(" >>> test_400_if_new_movie_has_no_title")
         new_movie = {
             "release_date": ""
         }
@@ -245,7 +245,7 @@ class MoviesTestCase(unittest.TestCase):
         self.assertEqual(data["message"], "Bad Request")
 
     def test_403_if_add_new_movie_has_no_permission(self):
-        print(" >>> test_403_if_add_new_movie_has_no_permission")
+        # print(" >>> test_403_if_add_new_movie_has_no_permission")
         res = self.client().post(
             "/movies",
             json=self.new_movie,
@@ -270,7 +270,7 @@ class MoviesTestCase(unittest.TestCase):
         self.assertEqual(actor.name, data["actor"]["name"])
 
     def test_404_if_update_actor_does_not_exist(self):
-        print(" >>> test_404_if_update_actor_does_not_exist")
+        # print(" >>> test_404_if_update_actor_does_not_exist")
         res = self.client().patch(
             "/actors/10000",
             json={"gender": "Female"},
@@ -282,7 +282,7 @@ class MoviesTestCase(unittest.TestCase):
         self.assertEqual(data["message"], "Resource not found")
 
     def test_404_if_update_actor_access_expired(self):
-        print(" >>> test_404_if_update_actor_access_expired")
+        # print(" >>> test_404_if_update_actor_access_expired")
         res = self.client().patch(
             "/actors/1",
             json={"gender": "Female"},
@@ -307,7 +307,7 @@ class MoviesTestCase(unittest.TestCase):
         self.assertEqual(movie.title, data["movie"]["title"])
 
     def test_404_if_update_movie_does_not_exist(self):
-        print(" >>> test_404_if_update_movie_does_not_exist")
+        # print(" >>> test_404_if_update_movie_does_not_exist")
         res = self.client().patch(
             "/movies/10000",
             json={"release_date": "01/01/0001"},
@@ -319,7 +319,7 @@ class MoviesTestCase(unittest.TestCase):
         self.assertEqual(data["message"], "Resource not found")
 
     def test_delete_actor(self):
-        print(" >>> test_delete_actor")
+        # print(" >>> test_delete_actor")
         res = self.client().delete(
             "/actors/1",
             headers=self.header_full_access)
@@ -334,7 +334,7 @@ class MoviesTestCase(unittest.TestCase):
         self.assertEqual(total_cast, self.total_filtered_empty)
 
     def test_404_if_delete_actor_does_not_exist(self):
-        print(" >>> test_404_if_delete_actor_does_not_exist")
+        # print(" >>> test_404_if_delete_actor_does_not_exist")
         res = self.client().delete(
             "/actors/10000",
             headers=self.header_full_access)
@@ -345,7 +345,7 @@ class MoviesTestCase(unittest.TestCase):
         self.assertEqual(data["message"], "Resource not found")
 
     def test_403_if_delete_actor_has_no_permission(self):
-        print("test_403_if_delete_actor_has_no_permission")
+        # print("test_403_if_delete_actor_has_no_permission")
         res = self.client().delete(
             "/actors/1",
             headers=self.header_assistant_access)
@@ -356,7 +356,7 @@ class MoviesTestCase(unittest.TestCase):
         self.assertEqual(data["message"], "Permission not found")
 
     def test_delete_movie(self):
-        print(" >>> test_delete_movie")
+        # print(" >>> test_delete_movie")
         res = self.client().delete(
             "/movies/1",
             headers=self.header_full_access)
@@ -371,7 +371,7 @@ class MoviesTestCase(unittest.TestCase):
         self.assertEqual(total_cast, self.total_filtered_empty)
 
     def test_404_if_delete_movie_does_not_exist(self):
-        print(" >>> test_404_if_delete_movie_does_not_exist")
+        # print(" >>> test_404_if_delete_movie_does_not_exist")
         res = self.client().delete(
             "/movies/10000",
             headers=self.header_full_access)
@@ -382,7 +382,7 @@ class MoviesTestCase(unittest.TestCase):
         self.assertEqual(data["message"], "Resource not found")
 
     def test_403_if_delete_movie_has_no_permission(self):
-        print(" >>> test_404_if_delete_movie_has_no_permission")
+        # print(" >>> test_404_if_delete_movie_has_no_permission")
         res = self.client().delete(
             "/movies/1",
             headers=self.header_director_access)
@@ -393,7 +393,7 @@ class MoviesTestCase(unittest.TestCase):
         self.assertEqual(data["message"], "Permission not found")
 
     def test_get_all_cast(self):
-        print(" >>> test_get_all_cast")
+        # print(" >>> test_get_all_cast")
         res = self.client().get(
             "/cast-detail",
             headers=self.header_full_access)
@@ -403,7 +403,7 @@ class MoviesTestCase(unittest.TestCase):
         self.assertTrue(data["cast"])
 
     def test_401_if_get_all_cast_incorrect_calims(self):
-        print(" >>> test_401_if_get_all_cast_incorrect_calims")
+        # print(" >>> test_401_if_get_all_cast_incorrect_calims")
         res = self.client().get(
             "/cast-detail",
             headers=self.header_claims)
@@ -460,7 +460,7 @@ class MoviesTestCase(unittest.TestCase):
         self.assertEqual(data["message"], "Resource not found")
 
     def test_delete_cast_actor(self):
-        print(" >>> test_delete_cast_actor")
+        # print(" >>> test_delete_cast_actor")
         res = self.client().delete(
             "/cast/4",
             headers=self.header_full_access)
@@ -473,7 +473,7 @@ class MoviesTestCase(unittest.TestCase):
         self.assertEqual(cast, None)
 
     def test_404_if_delete_cast_actor_has_no_cast(self):
-        print(" >>> test_404_if_delete_cast_actor_has_no_cast")
+        # print(" >>> test_404_if_delete_cast_actor_has_no_cast")
         res = self.client().delete(
             "/cast/",
             headers=self.header_full_access)
@@ -484,7 +484,7 @@ class MoviesTestCase(unittest.TestCase):
         self.assertEqual(data["message"], "Resource not found")
 
     def test_404_if_delete_cast_actor_not_found(self):
-        print(" >>> test_404_if_delete_cast_actor_not_found")
+        # print(" >>> test_404_if_delete_cast_actor_not_found")
         res = self.client().delete(
             "/cast/4000",
             headers=self.header_full_access)
@@ -495,7 +495,7 @@ class MoviesTestCase(unittest.TestCase):
         self.assertEqual(data["message"], "Resource not found")
 
     def test_delete_cast_movie(self):
-        print(" >>> test_delete_cast_movie")
+        # print(" >>> test_delete_cast_movie")
         # print("To delete: ", Cast.query.filter_by(movie_id=8).count())
         res = self.client().delete(
             "/cast-movie/8",
@@ -509,7 +509,7 @@ class MoviesTestCase(unittest.TestCase):
         self.assertEqual(total_found, self.total_filtered_empty)
 
     def test_404_if_delete_cast_movie_not_found(self):
-        print(" >>> test_deleted_cast_movie_not_found")
+        # print(" >>> test_deleted_cast_movie_not_found")
         res = self.client().delete(
             "/cast-movie/8000",
             headers=self.header_full_access)
@@ -520,7 +520,7 @@ class MoviesTestCase(unittest.TestCase):
         self.assertEqual(data["message"], "Resource not found")
 
     def test_404_if_delete_cast_movie_has_no_movie_id(self):
-        print(" >>> test_delete_cast_movie_has_no_movie")
+        # print(" >>> test_delete_cast_movie_has_no_movie")
         res = self.client().delete(
             "/cast-movie/",
             headers=self.header_full_access)
@@ -533,7 +533,7 @@ class MoviesTestCase(unittest.TestCase):
 
 def setUp_deleted():
     """ Updates database ton include deleted data """
-    print("Restore deleted rows")
+    # print("Restore deleted rows")
 
     deleted_actor = Actor.query\
         .filter(Actor.id == 1)\

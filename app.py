@@ -50,8 +50,6 @@ def create_app(test_config=None):
 
     @app.route('/login-results', methods=["GET"])
     def login_config():
-        # TODO:
-        print(request.url)
         return render_template('pages/authbridge.html')
 
     @app.route('/intro')
@@ -81,10 +79,10 @@ def create_app(test_config=None):
     @app.route('/actors', methods=["POST"])
     @requires_auth('post:actors')
     def new_actor():
-        print("NEW actor")
+        # print("NEW actor")
 
         body = request.get_json()
-        print("POST /actors | ", body)
+        # print("POST /actors | ", body)
         try:
             new_name = body.get('name', None)
             new_age = body.get('age', 0)
@@ -113,7 +111,7 @@ def create_app(test_config=None):
             }), 201
 
         except exceptions.HTTPException as httpe:
-            print("Error HTTP > ", httpe)
+            # print("Error HTTP > ", httpe)
             raise
         except Exception as e:
             print(sys.exc_info())
@@ -122,7 +120,7 @@ def create_app(test_config=None):
     @app.route('/actors-detail', methods=["GET"])
     @requires_auth('get:actors-detail')
     def list_actors():
-        print("Actors list")
+        # print("Actors list")
 
         try:
             actors = Actor.query\
@@ -141,7 +139,7 @@ def create_app(test_config=None):
     @app.route('/actors/<int:actor_id>', methods=["PATCH"])
     @requires_auth('patch:actors')
     def update_actor(actor_id):
-        print("UPDATE actor")
+        # print("UPDATE actor")
         body = request.get_json()
 
         try:
@@ -171,7 +169,7 @@ def create_app(test_config=None):
                 })
 
         except exceptions.HTTPException as httpe:
-            print("Error HTTP > ", httpe)
+            # print("Error HTTP > ", httpe)
             raise
         except Exception as e:
             print(sys.exc_info())
@@ -180,7 +178,7 @@ def create_app(test_config=None):
     @app.route('/actors/<int:actor_id>', methods=["DELETE"])
     @requires_auth('delete:actors')
     def delete_actor(actor_id):
-        print("DELETE actor")
+        # print("DELETE actor")
 
         try:
             actor = Actor.query.filter_by(id=actor_id).one_or_none()
@@ -196,7 +194,7 @@ def create_app(test_config=None):
                 })
 
         except exceptions.HTTPException as httpe:
-            print("Error HTTP > ", httpe)
+            # print("Error HTTP > ", httpe)
             raise
         except Exception as e:
             print(sys.exc_info())
@@ -205,10 +203,10 @@ def create_app(test_config=None):
     @app.route('/movies', methods=["POST"])
     @requires_auth('post:movies')
     def new_movie():
-        print("NEW movie")
+        # print("NEW movie")
 
         body = request.get_json()
-        print("POST /movies | ", body)
+        # print("POST /movies | ", body)
         try:
             new_title = body.get('title', None)
             new_release = body.get('release_date', None)
@@ -237,17 +235,17 @@ def create_app(test_config=None):
             }), 201
 
         except exceptions.HTTPException as httpe:
-            print("Error HTTP > ", httpe)
+            # print("Error HTTP > ", httpe)
             raise
         except Exception as e:
-            print("Error > ", e)
+            # print("Error > ", e)
             print(sys.exc_info())
             abort(422)
 
     @app.route('/movies-detail', methods=["GET"])
     @requires_auth('get:movies-detail')
     def list_movies():
-        print("Movies list")
+        # print("Movies list")
         try:
             movies = Movie.query\
                 .order_by(Movie.title)\
@@ -265,7 +263,7 @@ def create_app(test_config=None):
     @app.route('/movies/<int:movie_id>', methods=["PATCH"])
     @requires_auth('patch:movies')
     def update_movie(movie_id):
-        print("UPDATE movie")
+        # print("UPDATE movie")
         body = request.get_json()
 
         try:
@@ -292,7 +290,7 @@ def create_app(test_config=None):
             })
 
         except exceptions.HTTPException as httpe:
-            print("Error HTTP > ", httpe)
+            # print("Error HTTP > ", httpe)
             raise
         except Exception as e:
             print(sys.exc_info())
@@ -301,7 +299,7 @@ def create_app(test_config=None):
     @app.route('/movies/<int:movie_id>', methods=["DELETE"])
     @requires_auth('delete:movies')
     def delete_movie(movie_id):
-        print("DELETE movie")
+        # print("DELETE movie")
 
         try:
             movie = Movie.query.filter_by(id=movie_id).one_or_none()
@@ -317,7 +315,7 @@ def create_app(test_config=None):
                 })
 
         except exceptions.HTTPException as httpe:
-            print("Error HTTP > ", httpe)
+            # print("Error HTTP > ", httpe)
             raise
         except Exception as e:
             print(sys.exc_info())
@@ -326,7 +324,7 @@ def create_app(test_config=None):
     @app.route('/cast-detail', methods=["GET"])
     @requires_auth('get:cast-detail')
     def list_cast():
-        print("Cast list")
+        # print("Cast list")
         try:
             data = []
             cast_list = Cast.query.all()
@@ -343,7 +341,7 @@ def create_app(test_config=None):
             })
 
         except exceptions.HTTPException as httpe:
-            print("Error HTTP > ", httpe)
+            # print("Error HTTP > ", httpe)
             raise
         except Exception as e:
             print(sys.exc_info())
@@ -352,7 +350,7 @@ def create_app(test_config=None):
     @app.route('/cast', methods=["POST"])
     @requires_auth('post:casting')
     def new_cast():
-        print("New cast")
+        # print("New cast")
 
         body = request.get_json()
 
@@ -384,7 +382,7 @@ def create_app(test_config=None):
             }), 201
 
         except exceptions.HTTPException as httpe:
-            print("Error HTTP > ", httpe)
+            # print("Error HTTP > ", httpe)
             raise
         except Exception as e:
             print(sys.exc_info())
@@ -408,7 +406,7 @@ def create_app(test_config=None):
             })
 
         except exceptions.HTTPException as httpe:
-            print("Error HTTP > ", httpe)
+            # print("Error HTTP > ", httpe)
             raise
         except Exception as e:
             print(sys.exc_info())
@@ -432,7 +430,7 @@ def create_app(test_config=None):
             })
 
         except exceptions.HTTPException as httpe:
-            print("Error HTTP > ", httpe)
+            # print("Error HTTP > ", httpe)
             raise
         except Exception as e:
             print(sys.exc_info())
@@ -442,7 +440,7 @@ def create_app(test_config=None):
 
     @app.errorhandler(422)
     def unprocessable(error):
-        print(" <<<< Error 422 - ", error)
+        # print(" <<<< Error 422 - ", error)
         return jsonify({
                     "success": False,
                     "error": 422,
@@ -451,7 +449,7 @@ def create_app(test_config=None):
 
     @app.errorhandler(404)
     def not_found(error):
-        print(" <<<< Error 404 - ", error)
+        # print(" <<<< Error 404 - ", error)
         return jsonify({
                     "success": False,
                     "error": 404,
@@ -460,7 +458,7 @@ def create_app(test_config=None):
 
     @app.errorhandler(405)
     def not_allowed(error):
-        print(" <<<< Error 405 - ", error)
+        # print(" <<<< Error 405 - ", error)
         return jsonify({
                     "success": False,
                     "error": 405,
@@ -469,7 +467,7 @@ def create_app(test_config=None):
 
     @app.errorhandler(400)
     def bad_request(error):
-        print(" <<<< Error 400 - ", error)
+        # print(" <<<< Error 400 - ", error)
         return jsonify({
                     "success": False,
                     "error": 400,
@@ -481,7 +479,7 @@ def create_app(test_config=None):
         """
         Implements error handler for AuthError
         """
-        print(" <<<< Error AuthError - ", error)
+        # print(" <<<< Error AuthError - ", error)
         return jsonify({
                     "success": False,
                     "error": error.status_code,
